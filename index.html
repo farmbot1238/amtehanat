@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نظام الامتحانات الإلكتروني</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+            background-image: linear-gradient(to bottom, #f0f4ff, #e6f0ff);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 30px;
+            background: linear-gradient(135deg, #2c3e50, #4a6491);
+            color: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .student-name {
+            text-align: center;
+            margin: 30px 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #27ae60, #2ecc71);
+            color: white;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(39, 174, 96, 0.3);
+            font-size: 2rem;
+            font-weight: bold;
+        }
+        
+        .subjects-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+        
+        .subject-card {
+            background-color: white;
+            border-radius: 15px;
+            padding: 30px 25px;
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            height: 100%;
+        }
+        
+        .subject-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .subject-icon {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            height: 100px;
+            width: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            color: white;
+        }
+        
+        .subject-title {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+        
+        .subject-desc {
+            color: #666;
+            margin-bottom: 20px;
+            font-size: 1rem;
+            flex-grow: 1;
+        }
+        
+        .subject-btn {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-weight: bold;
+            width: 100%;
+            max-width: 200px;
+        }
+        
+        .subject-btn:hover {
+            background-color: #2980b9;
+        }
+        
+        .disabled {
+            background-color: #95a5a6;
+            cursor: not-allowed;
+        }
+        
+        .disabled:hover {
+            background-color: #7f8c8d;
+        }
+        
+        .warning {
+            background-color: #fff8e1;
+            border-right: 5px solid #ffc107;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 15px;
+            font-size: 1rem;
+            color: #856404;
+        }
+        
+        .subject-card.din {
+            border-top: 5px solid #27ae60;
+        }
+        
+        .subject-card.arabic {
+            border-top: 5px solid #e74c3c;
+        }
+        
+        .subject-card.history {
+            border-top: 5px solid #9b59b6;
+        }
+        
+        .subject-card.english {
+            border-top: 5px solid #f39c12;
+        }
+        
+        .din .subject-icon {
+            background-color: #27ae60;
+        }
+        
+        .arabic .subject-icon {
+            background-color: #e74c3c;
+        }
+        
+        .history .subject-icon {
+            background-color: #9b59b6;
+        }
+        
+        .english .subject-icon {
+            background-color: #f39c12;
+        }
+        
+        .notification {
+            background-color: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .whatsapp-contact {
+            text-align: center;
+            margin: 40px 0;
+        }
+        
+        .whatsapp-btn {
+            background-color: #25D366;
+            color: white;
+            border: none;
+            padding: 18px 40px;
+            border-radius: 50px;
+            font-size: 1.4rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
+        }
+        
+        .whatsapp-btn:hover {
+            background-color: #1da851;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(37, 211, 102, 0.4);
+        }
+        
+        .whatsapp-icon {
+            font-size: 2rem;
+        }
+        
+        .contact-info {
+            text-align: center;
+            margin-top: 15px;
+            color: #555;
+            font-size: 1.1rem;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 20px;
+            color: #7f8c8d;
+            border-top: 1px solid #eee;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .student-name {
+                font-size: 1.6rem;
+                padding: 15px;
+            }
+            
+            .subjects-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .subject-card {
+                padding: 25px 20px;
+            }
+            
+            .whatsapp-btn {
+                padding: 15px 30px;
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>نظام الامتحانات الإلكتروني</h1>
+            <p class="subtitle">مرحباً بكم في النظام الإلكتروني للامتحانات. يمكنكم اختيار المادة المراد أداء الامتحان فيها من خلال الأقسام أدناه.</p>
+        </header>
+        
+        <!-- اسم الطالب فقط -->
+        <div class="student-name">
+            <i class="fas fa-user-graduate"></i> الطالب: عبدالرحمن المعايطه
+        </div>
+        
+        <div class="notification">
+            <i class="fas fa-info-circle"></i> يرجى التأكد من اتصال الإنترنت قبل بدء الامتحان. الوقت المخصص لكل امتحان هو 60 دقيقة.
+        </div>
+        
+        <!-- أقسام المواد -->
+        <div class="subjects-container">
+            <!-- مادة الدين -->
+            <div class="subject-card din" onclick="openSubject('din')">
+                <div class="subject-icon">
+                    <i class="fas fa-mosque"></i>
+                </div>
+                <h2 class="subject-title">مادة الدين</h2>
+                <p class="subject-desc">امتحان إلكتروني في مادة الدين الإسلامي. يحتوي على أسئلة متنوعة في الفقه والعقيدة والتفسير.</p>
+                <button class="subject-btn">الدخول إلى الامتحان</button>
+            </div>
+            
+            <!-- مادة العربي -->
+            <div class="subject-card arabic" onclick="openSubject('arabic')">
+                <div class="subject-icon">
+                    <i class="fas fa-book-open"></i>
+                </div>
+                <h2 class="subject-title">مادة العربي</h2>
+                <p class="subject-desc">امتحان إلكتروني في مادة اللغة العربية. يشمل النصوص الأدبية، القواعد النحوية، والإملاء.</p>
+                <button class="subject-btn">الدخول إلى الامتحان</button>
+            </div>
+            
+            <!-- مادة التاريخ -->
+            <div class="subject-card history" onclick="openSubject('history')">
+                <div class="subject-icon">
+                    <i class="fas fa-landmark"></i>
+                </div>
+                <h2 class="subject-title">مادة التاريخ</h2>
+                <p class="subject-desc">امتحان إلكتروني في مادة التاريخ. يتناول الأحداث التاريخية الهامة والشخصيات المؤثرة عبر العصور.</p>
+                <button class="subject-btn">الدخول إلى الامتحان</button>
+            </div>
+            
+            <!-- مادة الانجليزي -->
+            <div class="subject-card english" onclick="openSubject('english')">
+                <div class="subject-icon">
+                    <i class="fas fa-globe-americas"></i>
+                </div>
+                <h2 class="subject-title">مادة الانجليزي</h2>
+                <p class="subject-desc">امتحان إلكتروني في مادة اللغة الإنجليزية. يشمل القواعد والمفردات والقراءة والفهم.</p>
+                <div class="warning">
+                    <i class="fas fa-exclamation-triangle"></i> تعذر حالياً: لا يوجد نظام للغة الإنجليزية بسبب عدم اكمال المادة أو صدور قرار رسمي بشأن حذف الوحدة الخامسة.
+                </div>
+                <button class="subject-btn disabled" disabled>غير متاح حالياً</button>
+            </div>
+        </div>
+        
+        <!-- زر التواصل عبر الواتساب -->
+        <div class="whatsapp-contact">
+            <button class="whatsapp-btn" onclick="contactViaWhatsApp()">
+                <i class="fab fa-whatsapp whatsapp-icon"></i>
+                التواصل عبر الواتساب
+            </button>
+            <p class="contact-info">للتواصل المباشر مع الطالب عبدالرحمن المعايطه</p>
+        </div>
+        
+        <footer>
+            <p>جميع الحقوق محفوظة &copy; نظام الامتحانات الإلكتروني 2023</p>
+        </footer>
+    </div>
+
+    <script>
+        // روابط المواد
+        const subjectLinks = {
+            din: "https://farmbot1238.github.io/DEEN/",
+            arabic: "https://farmbot1238.github.io/Ardic/",
+            history: "https://farmbot1238.github.io/MMMNII/",
+            english: null // غير متاح
+        };
+        
+        // رقم الواتساب
+        const whatsappNumber = "0798688787";
+        
+        // فتح رابط المادة
+        function openSubject(subject) {
+            if (subject === 'english') {
+                alert("نظام اللغة الإنجليزية غير متاح حالياً بسبب عدم اكمال المادة أو صدور قرار رسمي بشأن حذف الوحدة الخامسة.");
+                return;
+            }
+            
+            const link = subjectLinks[subject];
+            if (link) {
+                // تأكيد قبل الانتقال
+                const subjectNames = {
+                    din: "مادة الدين",
+                    arabic: "مادة العربي",
+                    history: "مادة التاريخ"
+                };
+                
+                const confirmMessage = `هل أنت مستعد للانتقال إلى امتحان ${subjectNames[subject]}؟\n\nيرجى التأكد من:\n1- اتصال الإنترنت مستقر\n2- لديك 60 دقيقة كاملة\n3- لن يمكنك إعادة الامتحان مرة أخرى`;
+                
+                if (confirm(confirmMessage)) {
+                    window.open(link, '_blank');
+                }
+            }
+        }
+        
+        // التواصل عبر الواتساب
+        function contactViaWhatsApp() {
+            const message = "مرحباً، أود التواصل مع الطالب عبدالرحمن المعايطه بخصوص نظام الامتحانات الإلكتروني";
+            const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
+        }
+        
+        // إضافة تأثيرات تفاعلية إضافية
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.subject-card:not(.english)');
+            
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    const btn = this.querySelector('.subject-btn');
+                    if (btn) {
+                        btn.style.transform = 'scale(1.05)';
+                    }
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    const btn = this.querySelector('.subject-btn');
+                    if (btn) {
+                        btn.style.transform = 'scale(1)';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
