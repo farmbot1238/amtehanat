@@ -193,42 +193,88 @@
             text-align: center;
         }
         
+        .additional-options {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            margin: 40px 0;
+        }
+        
+        .bank-option {
+            background: linear-gradient(135deg, #9b59b6, #8e44ad);
+            color: white;
+            border: none;
+            padding: 22px 40px;
+            border-radius: 15px;
+            font-size: 1.6rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            box-shadow: 0 8px 20px rgba(155, 89, 182, 0.3);
+        }
+        
+        .bank-option:hover {
+            background: linear-gradient(135deg, #8e44ad, #7d3c98);
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(155, 89, 182, 0.4);
+        }
+        
+        .bank-icon {
+            font-size: 2.5rem;
+        }
+        
         .whatsapp-contact {
             text-align: center;
-            margin: 40px 0;
         }
         
         .whatsapp-btn {
             background-color: #25D366;
             color: white;
             border: none;
-            padding: 18px 40px;
-            border-radius: 50px;
-            font-size: 1.4rem;
+            padding: 22px 40px;
+            border-radius: 15px;
+            font-size: 1.6rem;
             cursor: pointer;
             transition: all 0.3s ease;
             font-weight: bold;
             display: inline-flex;
             align-items: center;
-            gap: 15px;
-            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
+            justify-content: center;
+            gap: 20px;
+            box-shadow: 0 8px 20px rgba(37, 211, 102, 0.3);
+            width: 100%;
         }
         
         .whatsapp-btn:hover {
             background-color: #1da851;
             transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(37, 211, 102, 0.4);
+            box-shadow: 0 12px 25px rgba(37, 211, 102, 0.4);
         }
         
         .whatsapp-icon {
-            font-size: 2rem;
+            font-size: 2.5rem;
         }
         
         .contact-info {
             text-align: center;
             margin-top: 15px;
             color: #555;
-            font-size: 1.1rem;
+            font-size: 1.2rem;
+            padding: 10px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            border: 1px solid #e9ecef;
+        }
+        
+        .phone-number {
+            font-weight: bold;
+            color: #27ae60;
+            font-size: 1.3rem;
         }
         
         footer {
@@ -257,9 +303,13 @@
                 padding: 25px 20px;
             }
             
-            .whatsapp-btn {
-                padding: 15px 30px;
-                font-size: 1.2rem;
+            .bank-option, .whatsapp-btn {
+                padding: 18px 25px;
+                font-size: 1.4rem;
+            }
+            
+            .bank-icon, .whatsapp-icon {
+                font-size: 2rem;
             }
         }
     </style>
@@ -327,13 +377,24 @@
             </div>
         </div>
         
-        <!-- زر التواصل عبر الواتساب -->
-        <div class="whatsapp-contact">
-            <button class="whatsapp-btn" onclick="contactViaWhatsApp()">
-                <i class="fab fa-whatsapp whatsapp-icon"></i>
-                التواصل عبر الواتساب
+        <!-- قسم بنوك المواد الوزارية -->
+        <div class="additional-options">
+            <button class="bank-option" onclick="openBank()">
+                <i class="fas fa-university bank-icon"></i>
+                بنوك للمواد الوزارية الأربعة
             </button>
-            <p class="contact-info">للتواصل المباشر مع الطالب عبدالرحمن المعايطه</p>
+            
+            <!-- زر التواصل عبر الواتساب -->
+            <div class="whatsapp-contact">
+                <button class="whatsapp-btn" onclick="contactViaWhatsApp()">
+                    <i class="fab fa-whatsapp whatsapp-icon"></i>
+                    التواصل عبر الواتساب
+                </button>
+                <p class="contact-info">
+                    <i class="fas fa-phone-alt"></i> للتواصل المباشر مع الطالب عبدالرحمن المعايطه<br>
+                    <span class="phone-number">+962 7 9868 8787</span>
+                </p>
+            </div>
         </div>
         
         <footer>
@@ -349,6 +410,9 @@
             history: "https://farmbot1238.github.io/MMMNII/",
             english: null // غير متاح
         };
+        
+        // رابط بنوك المواد الوزارية
+        const bankLink = "https://farmbot1238.github.io/BNK/";
         
         // رقم الواتساب
         const whatsappNumber = "+962798688787";
@@ -374,6 +438,15 @@
                 if (confirm(confirmMessage)) {
                     window.open(link, '_blank');
                 }
+            }
+        }
+        
+        // فتح بنوك المواد الوزارية
+        function openBank() {
+            const confirmMessage = "هل أنت مستعد للانتقال إلى بنوك المواد الوزارية الأربعة؟\n\nهذا القسم يحتوي على بنوك أسئلة ومراجعات نهائية لجميع المواد.";
+            
+            if (confirm(confirmMessage)) {
+                window.open(bankLink, '_blank');
             }
         }
         
@@ -403,6 +476,30 @@
                     }
                 });
             });
+            
+            // تأثيرات للأزرار الإضافية
+            const bankBtn = document.querySelector('.bank-option');
+            const whatsappBtn = document.querySelector('.whatsapp-btn');
+            
+            if (bankBtn) {
+                bankBtn.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-5px)';
+                });
+                
+                bankBtn.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                });
+            }
+            
+            if (whatsappBtn) {
+                whatsappBtn.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-5px)';
+                });
+                
+                whatsappBtn.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                });
+            }
         });
     </script>
 </body>
