@@ -282,7 +282,31 @@
             box-shadow: 0 12px 25px rgba(231, 76, 60, 0.4);
         }
         
-        .bank-icon, .books-icon {
+        .doctor-option {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            border: none;
+            padding: 22px 40px;
+            border-radius: 15px;
+            font-size: 1.6rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            box-shadow: 0 8px 20px rgba(52, 152, 219, 0.3);
+        }
+        
+        .doctor-option:hover {
+            background: linear-gradient(135deg, #2980b9, #1c5a7d);
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(52, 152, 219, 0.4);
+        }
+        
+        .bank-icon, .books-icon, .doctor-icon {
             font-size: 2.5rem;
         }
         
@@ -387,12 +411,12 @@
                 padding: 25px 20px;
             }
             
-            .bank-option, .books-option, .whatsapp-btn {
+            .bank-option, .books-option, .doctor-option, .whatsapp-btn {
                 padding: 18px 25px;
                 font-size: 1.4rem;
             }
             
-            .bank-icon, .books-icon, .whatsapp-icon {
+            .bank-icon, .books-icon, .doctor-icon, .whatsapp-icon {
                 font-size: 2rem;
             }
             
@@ -489,6 +513,12 @@
                 كتب وزارية فصل أول وثاني
             </button>
             
+            <!-- مواد الدكتور خالد دعجه -->
+            <button class="doctor-option" onclick="openDoctorPage()">
+                <i class="fas fa-user-md doctor-icon"></i>
+                كل شيء خاص بالدكتور خالد دعجه
+            </button>
+            
             <!-- زر التواصل عبر الواتساب -->
             <div class="whatsapp-contact">
                 <button class="whatsapp-btn" onclick="contactViaWhatsApp()">
@@ -522,6 +552,9 @@
         
         // رابط الكتب الوزارية
         const booksLink = "https://farmbot1238.github.io/Book/";
+        
+        // رابط الدكتور خالد دعجه
+        const doctorLink = "https://farmbot1238.github.io/kaled/";
         
         // رقم الواتساب
         const whatsappNumber = "+962798688787";
@@ -568,6 +601,15 @@
             }
         }
         
+        // فتح صفحة الدكتور خالد دعجه
+        function openDoctorPage() {
+            const confirmMessage = "هل أنت مستعد للانتقال إلى صفحة الدكتور خالد دعجه؟\n\nهذا القسم يحتوي على جميع المواد والمراجعات الخاصة بالدكتور.";
+            
+            if (confirm(confirmMessage)) {
+                window.open(doctorLink, '_blank');
+            }
+        }
+        
         // التواصل عبر الواتساب
         function contactViaWhatsApp() {
             const message = "مرحباً، أود التواصل مع الطالب عبدالرحمن المعايطه بخصوص نظام الامتحانات الإلكتروني";
@@ -599,6 +641,7 @@
             // تأثيرات للأزرار الإضافية
             const bankBtn = document.querySelector('.bank-option');
             const booksBtn = document.querySelector('.books-option');
+            const doctorBtn = document.querySelector('.doctor-option');
             const whatsappBtn = document.querySelector('.whatsapp-btn');
             
             // تأثير زر بنوك الأسئلة
@@ -619,6 +662,17 @@
                 });
                 
                 booksBtn.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                });
+            }
+            
+            // تأثير زر الدكتور خالد دعجه
+            if (doctorBtn) {
+                doctorBtn.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-5px)';
+                });
+                
+                doctorBtn.addEventListener('mouseleave', function() {
                     this.style.transform = 'translateY(0)';
                 });
             }
