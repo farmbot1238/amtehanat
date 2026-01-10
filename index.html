@@ -96,6 +96,64 @@
             font-weight: bold;
         }
         
+        /* قسم الامتحانات التجريبية الجديد */
+        .exam-header-section {
+            margin: 30px 0;
+        }
+        
+        .trial-exam-card {
+            background: linear-gradient(135deg, #FF9800, #F57C00);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 10px 25px rgba(255, 152, 0, 0.3);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            margin-bottom: 30px;
+        }
+        
+        .trial-exam-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(255, 152, 0, 0.4);
+        }
+        
+        .trial-exam-card h2 {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+        }
+        
+        .trial-exam-card p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+        
+        .trial-exam-btn {
+            background-color: white;
+            color: #FF9800;
+            border: none;
+            padding: 12px 35px;
+            border-radius: 50px;
+            font-size: 1.3rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: bold;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .trial-exam-btn:hover {
+            background-color: #fff8e1;
+            transform: scale(1.05);
+        }
+        
+        .trial-exam-icon {
+            font-size: 1.5rem;
+        }
+        
         .subjects-container {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -398,6 +456,14 @@
                 padding: 20px;
             }
             
+            .trial-exam-card h2 {
+                font-size: 1.8rem;
+            }
+            
+            .trial-exam-card p {
+                font-size: 1.1rem;
+            }
+            
             .student-name {
                 font-size: 1.6rem;
                 padding: 15px;
@@ -451,8 +517,17 @@
             <i class="fas fa-info-circle"></i> يرجى التأكد من اتصال الإنترنت قبل بدء الامتحان. الوقت المخصص لكل امتحان هو 60 دقيقة.
         </div>
         
-        <!-- أقسام المواد -->
-        <h2 class="section-title">الامتحانات الإلكترونية</h2>
+        <!-- قسم الامتحانات التجريبية الجديد -->
+        <div class="exam-header-section">
+            <div class="trial-exam-card" onclick="openTrialExam()">
+                <h2><i class="fas fa-file-alt trial-exam-icon"></i> امتحانات تجريبي الفصل الأول</h2>
+                <p>مجموعة امتحانات تجريبية شاملة لمواد الفصل الدراسي الأول</p>
+                <button class="trial-exam-btn">الدخول إلى الامتحانات التجريبية</button>
+            </div>
+        </div>
+        
+        <!-- أقسام المواد الأساسية -->
+        <h2 class="section-title">الامتحانات الإلكترونية الأساسية</h2>
         <div class="subjects-container">
             <!-- مادة الدين -->
             <div class="subject-card din" onclick="openSubject('din')">
@@ -539,13 +614,16 @@
     </div>
 
     <script>
-        // روابط المواد
+        // روابط المواد الأساسية
         const subjectLinks = {
             din: "https://farmbot1238.github.io/DEEN/",
             arabic: "https://farmbot1238.github.io/Ardic/",
             history: "https://farmbot1238.github.io/MMMNII/",
             english: null // غير متاح
         };
+        
+        // رابط الامتحانات التجريبية (الرابط الجديد)
+        const trialExamLink = "https://farmbot1238.github.io/TJREPY/";
         
         // رابط بنوك المواد الوزارية
         const bankLink = "https://farmbot1238.github.io/BNK/";
@@ -559,7 +637,16 @@
         // رقم الواتساب
         const whatsappNumber = "+962798688787";
         
-        // فتح رابط المادة
+        // فتح الامتحانات التجريبية
+        function openTrialExam() {
+            const confirmMessage = "هل أنت مستعد للانتقال إلى امتحانات تجريبي الفصل الأول؟\n\nهذه الامتحانات تغطي مواد الفصل الدراسي الأول.";
+            
+            if (confirm(confirmMessage)) {
+                window.open(trialExamLink, '_blank');
+            }
+        }
+        
+        // فتح رابط المادة الأساسية
         function openSubject(subject) {
             if (subject === 'english') {
                 alert("نظام اللغة الإنجليزية غير متاح حالياً بسبب عدم اكمال المادة أو صدور قرار رسمي بشأن حذف الوحدة الخامسة.");
@@ -619,7 +706,7 @@
         
         // إضافة تأثيرات تفاعلية إضافية
         document.addEventListener('DOMContentLoaded', function() {
-            // تأثيرات لأزرار المواد
+            // تأثيرات لأزرار المواد الأساسية
             const cards = document.querySelectorAll('.subject-card:not(.english)');
             
             cards.forEach(card => {
@@ -639,10 +726,22 @@
             });
             
             // تأثيرات للأزرار الإضافية
+            const trialExamCard = document.querySelector('.trial-exam-card');
             const bankBtn = document.querySelector('.bank-option');
             const booksBtn = document.querySelector('.books-option');
             const doctorBtn = document.querySelector('.doctor-option');
             const whatsappBtn = document.querySelector('.whatsapp-btn');
+            
+            // تأثير بطاقة الامتحانات التجريبية
+            if (trialExamCard) {
+                trialExamCard.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-5px)';
+                });
+                
+                trialExamCard.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                });
+            }
             
             // تأثير زر بنوك الأسئلة
             if (bankBtn) {
