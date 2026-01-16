@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>نظام الامتحانات الإلكتروني</title>
     <style>
+        /* جميع الأنماط السابقة تبقى كما هي... */
         * {
             margin: 0;
             padding: 0;
@@ -96,7 +97,7 @@
             font-weight: bold;
         }
         
-        /* قسم الامتحانات التجريبية الجديد */
+        /* قسم الامتحانات التجريبية */
         .exam-header-section {
             margin: 30px 0;
         }
@@ -151,6 +152,64 @@
         }
         
         .trial-exam-icon {
+            font-size: 1.5rem;
+        }
+        
+        /* قسم NoteBookLM الجديد */
+        .notebooklm-section {
+            margin: 30px 0;
+        }
+        
+        .notebooklm-card {
+            background: linear-gradient(135deg, #9C27B0, #7B1FA2);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 10px 25px rgba(156, 39, 176, 0.3);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            margin-bottom: 30px;
+        }
+        
+        .notebooklm-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(156, 39, 176, 0.4);
+        }
+        
+        .notebooklm-card h2 {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+        }
+        
+        .notebooklm-card p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+        
+        .notebooklm-btn {
+            background-color: white;
+            color: #9C27B0;
+            border: none;
+            padding: 12px 35px;
+            border-radius: 50px;
+            font-size: 1.3rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: bold;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .notebooklm-btn:hover {
+            background-color: #f3e5f5;
+            transform: scale(1.05);
+        }
+        
+        .notebooklm-icon {
             font-size: 1.5rem;
         }
         
@@ -456,11 +515,11 @@
                 padding: 20px;
             }
             
-            .trial-exam-card h2 {
+            .trial-exam-card h2, .notebooklm-card h2 {
                 font-size: 1.8rem;
             }
             
-            .trial-exam-card p {
+            .trial-exam-card p, .notebooklm-card p {
                 font-size: 1.1rem;
             }
             
@@ -502,9 +561,7 @@
             
             <!-- إشعار الموقع الخيري -->
             <div class="charity-notice">
-                
                 إنفضوا النوم وهبوا للعلا فالعلا وقف على من لم ينم 
-                
             </div>
         </header>
         
@@ -521,13 +578,21 @@
             <i class="fas fa-info-circle"></i> هذا الموقع خيري وغير مخصص للأرباح او الإعلانات    
         </div>
 
-
-        <!-- قسم الامتحانات التجريبية الجديد -->
+        <!-- قسم الامتحانات التجريبية -->
         <div class="exam-header-section">
             <div class="trial-exam-card" onclick="openTrialExam()">
                 <h2><i class="fas fa-file-alt trial-exam-icon"></i> امتحانات تجريبي الفصل الأول</h2>
                 <p>مجموعة امتحانات تجريبية شاملة لمواد الفصل الدراسي الأول</p>
                 <button class="trial-exam-btn">الدخول إلى الامتحانات التجريبية</button>
+            </div>
+        </div>
+        
+        <!-- قسم NoteBookLM الجديد -->
+        <div class="notebooklm-section">
+            <div class="notebooklm-card" onclick="showNotebookLmInstructions()">
+                <h2><i class="fas fa-brain notebooklm-icon"></i> موقع NoteBookLM</h2>
+                <p>منصة ذكاء اصطناعي لإنشاء خرائط ذهنية، كويزات، وملخصات ذكية من ملفاتك</p>
+                <button class="notebooklm-btn">تعرف على المنصة وكيفية استخدامها</button>
             </div>
         </div>
         
@@ -627,8 +692,11 @@
             english: null // غير متاح
         };
         
-        // رابط الامتحانات التجريبية (الرابط الجديد)
+        // رابط الامتحانات التجريبية
         const trialExamLink = "https://farmbot1238.github.io/TJREPY/";
+        
+        // رابط NoteBookLM
+        const notebookLmLink = "https://notebooklm.google/";
         
         // رابط بنوك المواد الوزارية
         const bankLink = "https://farmbot1238.github.io/BNK/";
@@ -648,6 +716,47 @@
             
             if (confirm(confirmMessage)) {
                 window.open(trialExamLink, '_blank');
+            }
+        }
+        
+        // عرض تعليمات NoteBookLM
+        function showNotebookLmInstructions() {
+            const instructions = `
+                🧠 <b>تعليمات استخدام NoteBookLM</b> 🧠
+
+                <b>ما هو NoteBookLM؟</b>
+                - منصة ذكاء اصطناعي من Google لإنشاء مواد تعليمية ذكية
+                - يحول ملفاتك إلى: خرائط ذهنية، كويزات، ملخصات، أسئلة
+                
+                <b>كيف تعمل؟</b>
+                1. <b>رفع الملف:</b> ترفع ملف PDF أو Word أو نص
+                2. <b>تحليل الذكاء الاصطناعي:</b> يحلل المحتوى تلقائياً
+                3. <b>إنشاء المواد:</b> تختار ما تريد إنشاءه:
+                   • خرائط ذهنية للمفاهيم الرئيسية
+                   • كويزات تفاعلية للاختبار الذاتي
+                   • ملخصات ذكية للمحتوى
+                   • أسئلة وأجوبة للمراجعة
+                
+                <b>ما الذي يقدمه لك؟</b>
+                ✓ توفير وقت الدراسة والمذاكرة
+                ✓ تحويل المحتوى المعقد إلى بسيط
+                ✓ اختبار نفسك قبل الامتحان الحقيقي
+                ✓ تنظيم المعلومات بشكل مرئي
+                
+                <b>نصيحة:</b> ارفع ملفات الدروس أو الملخصات لتحصل على مواد تعليمية مخصصة لك!
+                
+                <b>الرابط:</b> https://notebooklm.google/
+                
+                هل تريد الانتقال إلى الموقع الآن؟
+            `;
+            
+            const userConfirmed = confirm(instructions.replace(/<b>|<\/b>/g, ''));
+            
+            if (userConfirmed) {
+                const finalConfirm = confirm("تأكيد: هل أنت مستعد للانتقال إلى موقع NoteBookLM؟\n\nستحتاج إلى حساب Google للدخول.");
+                if (finalConfirm) {
+                    window.open(notebookLmLink, '_blank');
+                }
             }
         }
         
@@ -732,6 +841,7 @@
             
             // تأثيرات للأزرار الإضافية
             const trialExamCard = document.querySelector('.trial-exam-card');
+            const notebooklmCard = document.querySelector('.notebooklm-card');
             const bankBtn = document.querySelector('.bank-option');
             const booksBtn = document.querySelector('.books-option');
             const doctorBtn = document.querySelector('.doctor-option');
@@ -744,6 +854,17 @@
                 });
                 
                 trialExamCard.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                });
+            }
+            
+            // تأثير بطاقة NoteBookLM
+            if (notebooklmCard) {
+                notebooklmCard.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-5px)';
+                });
+                
+                notebooklmCard.addEventListener('mouseleave', function() {
                     this.style.transform = 'translateY(0)';
                 });
             }
