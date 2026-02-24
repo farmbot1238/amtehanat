@@ -112,6 +112,46 @@
             animation: glow 2s ease-in-out infinite;
         }
         
+        .whatsapp-section {
+            margin-top: 30px;
+            padding: 20px;
+            background: #f0f8f0;
+            border-radius: 15px;
+            border: 2px solid #25D366;
+        }
+        
+        .whatsapp-text {
+            font-size: 1.2em;
+            color: #333;
+            margin-bottom: 15px;
+        }
+        
+        .whatsapp-button {
+            display: inline-block;
+            background: #25D366;
+            color: white;
+            text-decoration: none;
+            padding: 15px 40px;
+            border-radius: 50px;
+            font-size: 1.3em;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
+            border: 2px solid transparent;
+        }
+        
+        .whatsapp-button:hover {
+            transform: scale(1.05);
+            background: #128C7E;
+            box-shadow: 0 8px 20px rgba(18, 140, 126, 0.4);
+            border-color: #fff;
+        }
+        
+        .whatsapp-button i {
+            margin-left: 10px;
+            font-size: 1.2em;
+        }
+        
         @keyframes glow {
             0%, 100% { opacity: 1; }
             50% { opacity: 0.8; }
@@ -130,8 +170,15 @@
                 font-size: 1.5em;
                 padding: 20px;
             }
+            
+            .whatsapp-button {
+                padding: 12px 25px;
+                font-size: 1.1em;
+            }
         }
     </style>
+    <!-- إضافة Font Awesome للأيقونات -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
     <div class="container">
@@ -151,6 +198,18 @@
             </div>
         </div>
         
+        <!-- قسم التواصل عبر الواتساب -->
+        <div class="whatsapp-section">
+            <div class="whatsapp-text">
+                <i class="fab fa-whatsapp" style="color: #25D366; font-size: 1.5em;"></i>
+                للتواصل مع الطالب
+            </div>
+            <a href="https://wa.me/962798688787" class="whatsapp-button" target="_blank" rel="noopener noreferrer">
+                <i class="fab fa-whatsapp"></i>
+                راسلنا على واتساب
+            </a>
+        </div>
+        
         <div class="note">
             <p>تم التصميم بواسطة:</p>
             <p class="creator">عبدالرحمن المعايطه</p>
@@ -161,6 +220,7 @@
         // الروابط المحدثة
         const firstSemesterLink = "https://farmbot1238.github.io/s1/";
         const secondSemesterLink = "https://farmbot1238.github.io/s2/";
+        const whatsappNumber = "962798688787";
         
         // تحديث الروابط تلقائياً
         document.querySelector('.option:first-child a').href = firstSemesterLink;
