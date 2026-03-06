@@ -4,9 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="google-site-verification" content="NT0SMG2FY2Shk66u_xwqFMBBrWqExgPw9BoD6BYgB4E" />
-    <title>متعاونين على التفوق</title>
+    <title>متعاونين على التفوق - الوضع الليلي</title>
     <!-- إضافة خط Noto Nastaliq Urdu -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         * {
             margin: 0;
@@ -15,42 +16,79 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         
+        /* المتغيرات للألوان - الوضع الصباحي (الافتراضي) */
+        :root {
+            --bg-gradient-start: #667eea;
+            --bg-gradient-end: #764ba2;
+            --container-bg: white;
+            --text-primary: #333;
+            --text-gradient-1: #1e2b5e;
+            --text-gradient-2: #4a1e5e;
+            --text-gradient-3: #b12a5e;
+            --name-color: #4a1e5e;
+            --motivation-bg: linear-gradient(135deg, #fef9e7, #fef3d9);
+            --motivation-text: #333;
+            --shadow-color: rgba(0,0,0,0.3);
+            --hover-shadow: rgba(102, 126, 234, 0.4);
+            --border-gradient: linear-gradient(90deg, #667eea, #764ba2, #f1c40f);
+            --signature-color: #666;
+        }
+        
+        /* المتغيرات للألوان - الوضع الليلي */
+        body.night-mode {
+            --bg-gradient-start: #1a1a2e;
+            --bg-gradient-end: #16213e;
+            --container-bg: #1e1e2f;
+            --text-primary: #e0e0e0;
+            --text-gradient-1: #a5b4fc;
+            --text-gradient-2: #c084fc;
+            --text-gradient-3: #f9a8d4;
+            --name-color: #c084fc;
+            --motivation-bg: linear-gradient(135deg, #2d2d44, #1e1e2f);
+            --motivation-text: #e0e0e0;
+            --shadow-color: rgba(0,0,0,0.5);
+            --hover-shadow: rgba(165, 180, 252, 0.3);
+            --border-gradient: linear-gradient(90deg, #818cf8, #c084fc, #f9a8d4);
+            --signature-color: #a0a0a0;
+        }
+        
         body {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
             padding: 15px;
+            transition: background 0.3s ease;
         }
         
         .container {
-            background: white;
+            background: var(--container-bg);
             border-radius: 20px;
             padding: 30px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+            box-shadow: 0 20px 50px var(--shadow-color);
             max-width: 750px;
             width: 100%;
             transition: all 0.3s;
-            border: 1px solid rgba(255,255,255,0.2);
+            border: 1px solid rgba(255,255,255,0.1);
         }
         
         .container:hover {
-            box-shadow: 0 25px 60px rgba(102, 126, 234, 0.4);
+            box-shadow: 0 25px 60px var(--hover-shadow);
             transform: translateY(-5px);
         }
         
-        /* عنوان الموقع - Noto Nastaliq Urdu Bold */
+        /* عنوان الموقع */
         h1 {
             font-family: 'Noto Nastaliq Urdu', serif;
             font-weight: 700;
             font-size: 2.8em;
             text-align: center;
             margin-bottom: 10px;
-            background: linear-gradient(135deg, #1e2b5e, #4a1e5e, #b12a5e);
+            background: linear-gradient(135deg, var(--text-gradient-1), var(--text-gradient-2), var(--text-gradient-3));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            text-shadow: 3px 3px 8px rgba(0,0,0,0.2);
+            text-shadow: 3px 3px 8px var(--shadow-color);
             letter-spacing: 2px;
             position: relative;
             padding-bottom: 15px;
@@ -71,7 +109,7 @@
             transform: translateX(-50%);
             width: 150px;
             height: 3px;
-            background: linear-gradient(90deg, #667eea, #764ba2, #f1c40f);
+            background: var(--border-gradient);
             border-radius: 3px;
             animation: lineWidth 3s ease-in-out infinite;
         }
@@ -81,7 +119,7 @@
             50% { width: 200px; }
         }
         
-        /* اسم عبدالرحمن تحت العنوان مباشرة (بدون مربع) */
+        /* اسم عبدالرحمن */
         .my-name {
             text-align: center;
             margin: 5px 0 20px 0;
@@ -91,11 +129,12 @@
             font-family: 'Noto Nastaliq Urdu', serif;
             font-size: 1.5em;
             font-weight: 600;
-            color: #4a1e5e;
+            color: var(--name-color);
             text-shadow: 1px 1px 3px rgba(102, 126, 234, 0.3);
+            transition: color 0.3s ease;
         }
         
-        /* العبارة في مربع */
+        /* مربع العبارة */
         .motivation-box {
             text-align: center;
             margin: 10px 0 25px 0;
@@ -106,7 +145,7 @@
             font-family: 'Noto Nastaliq Urdu', serif;
             font-size: 1.2em;
             font-weight: 500;
-            background: linear-gradient(135deg, #fef9e7, #fef3d9);
+            background: var(--motivation-bg);
             padding: 12px 30px;
             border-radius: 50px;
             display: inline-block;
@@ -116,11 +155,12 @@
             position: relative;
             transition: all 0.3s;
             animation: phraseGlow 3s ease-in-out infinite;
+            color: var(--motivation-text);
         }
         
         @keyframes phraseGlow {
             0%, 100% { box-shadow: 0 5px 20px rgba(177, 42, 94, 0.2); }
-            50% { box-shadow: 0 8px 30px rgba(102, 126, 234, 0.4); }
+            50% { box-shadow: 0 8px 30px var(--hover-shadow); }
         }
         
         .motivation-box span::before {
@@ -130,7 +170,7 @@
             left: -2px;
             right: -2px;
             bottom: -2px;
-            background: linear-gradient(135deg, #667eea, #764ba2, #b12a5e);
+            background: var(--border-gradient);
             border-radius: 52px;
             z-index: -1;
             animation: borderRotate 4s linear infinite;
@@ -165,7 +205,7 @@
             font-weight: bold;
             text-align: center;
             transition: all 0.4s;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            box-shadow: 0 10px 20px var(--shadow-color);
             border: 2px solid transparent;
             position: relative;
             overflow: hidden;
@@ -178,7 +218,7 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
             transition: left 0.5s;
         }
         
@@ -188,12 +228,18 @@
         
         .semester-card a:hover {
             transform: translateY(-5px) scale(1.02);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
-            border-color: white;
+            box-shadow: 0 15px 30px var(--shadow-color);
+            border-color: rgba(255,255,255,0.5);
         }
         
-        .semester1 a { background: linear-gradient(135deg, #43a047, #1e88e5); }
-        .semester2 a { background: linear-gradient(135deg, #fb8c00, #f4511e); }
+        .semester1 a { 
+            background: linear-gradient(135deg, #43a047, #1e88e5);
+            filter: brightness(var(--card-brightness, 1));
+        }
+        .semester2 a { 
+            background: linear-gradient(135deg, #fb8c00, #f4511e);
+            filter: brightness(var(--card-brightness, 1));
+        }
         
         /* تحدي السرعة */
         .challenge-row {
@@ -216,6 +262,7 @@
             position: relative;
             overflow: hidden;
             animation: challengePulse 2s infinite;
+            filter: brightness(var(--card-brightness, 1));
         }
         
         @keyframes challengePulse {
@@ -231,6 +278,7 @@
             transform: translateY(-50%);
             font-size: 2em;
             animation: lightningMove 3s infinite;
+            opacity: 0.8;
         }
         
         .challenge-card a::after {
@@ -241,6 +289,7 @@
             transform: translateY(-50%);
             font-size: 2em;
             animation: lightningMove 3s infinite 1.5s;
+            opacity: 0.8;
         }
         
         @keyframes lightningMove {
@@ -271,10 +320,11 @@
             font-weight: bold;
             text-align: center;
             transition: all 0.4s;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            box-shadow: 0 10px 25px var(--shadow-color);
             border: 2px solid gold;
             position: relative;
             overflow: hidden;
+            filter: brightness(var(--card-brightness, 1));
         }
         
         .suggestion-card a::before {
@@ -284,7 +334,7 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,215,0,0.3), transparent);
+            background: linear-gradient(90deg, transparent, rgba(255,215,0,0.2), transparent);
             transition: left 0.5s;
         }
         
@@ -328,6 +378,7 @@
             border: 2px solid #25D366;
             position: relative;
             overflow: hidden;
+            filter: brightness(var(--card-brightness, 1));
         }
         
         .whatsapp-card a::before {
@@ -337,7 +388,7 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
             transition: left 0.5s;
         }
         
@@ -360,13 +411,13 @@
             50% { transform: scale(1.1); }
         }
         
-        /* توقيع المصمم في الأسفل */
+        /* توقيع المصمم */
         .designer-signature {
             text-align: center;
             margin-top: 25px;
             padding-top: 15px;
             border-top: 2px solid transparent;
-            border-image: linear-gradient(90deg, #667eea, #764ba2, #f1c40f);
+            border-image: var(--border-gradient);
             border-image-slice: 1;
             animation: borderColor 3s linear infinite;
         }
@@ -377,16 +428,17 @@
         }
         
         .designer-title {
-            color: #666;
+            color: var(--signature-color);
             font-size: 0.9em;
             margin-bottom: 5px;
+            transition: color 0.3s ease;
         }
         
         .designer-name {
             font-family: 'Noto Nastaliq Urdu', serif;
             font-size: 1.5em;
             font-weight: 700;
-            background: linear-gradient(135deg, #667eea, #764ba2);
+            background: linear-gradient(135deg, var(--text-gradient-1), var(--text-gradient-2));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             animation: nameGlow 2s ease-in-out infinite;
@@ -397,16 +449,75 @@
             50% { filter: brightness(1.1); }
         }
         
+        /* زر تبديل الوضع */
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+        }
+        
+        .theme-toggle button {
+            background: var(--container-bg);
+            border: 2px solid var(--border-gradient);
+            border-radius: 50px;
+            padding: 12px 25px;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: bold;
+            color: var(--text-primary);
+            box-shadow: 0 5px 15px var(--shadow-color);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            backdrop-filter: blur(5px);
+        }
+        
+        .theme-toggle button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px var(--hover-shadow);
+        }
+        
+        .theme-toggle i {
+            font-size: 1.2em;
+            transition: transform 0.3s ease;
+        }
+        
+        .theme-toggle button:hover i {
+            transform: rotate(15deg);
+        }
+        
+        /* تعديل سطوع البطاقات في الوضع الليلي */
+        body.night-mode {
+            --card-brightness: 0.9;
+        }
+        
         @media (max-width: 600px) {
             h1 { font-size: 2.2em; }
             .my-name span { font-size: 1.3em; }
             .motivation-box span { font-size: 1em; }
             .challenge-card a { font-size: 1.4em; }
+            .theme-toggle {
+                top: 10px;
+                left: 10px;
+            }
+            .theme-toggle button {
+                padding: 8px 15px;
+                font-size: 0.9em;
+            }
         }
     </style>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
+    <!-- زر تبديل الوضع -->
+    <div class="theme-toggle">
+        <button onclick="toggleTheme()" id="themeToggle">
+            <i class="fas fa-moon"></i>
+            <span>الوضع الليلي</span>
+        </button>
+    </div>
+
     <div class="container">
         <!-- عنوان الموقع -->
         <h1>متعاونين على التفوق</h1>
@@ -468,5 +579,69 @@
             <div class="designer-name">عبدالرحمن المعايطه</div>
         </div>
     </div>
+
+    <script>
+        // التحقق من الوضع المخزن مسبقاً
+        function loadTheme() {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'night') {
+                document.body.classList.add('night-mode');
+                updateToggleButton(true);
+            }
+        }
+
+        // تحديث شكل زر التبديل
+        function updateToggleButton(isNight) {
+            const button = document.getElementById('themeToggle');
+            const icon = button.querySelector('i');
+            const text = button.querySelector('span');
+            
+            if (isNight) {
+                icon.className = 'fas fa-sun';
+                text.textContent = 'الوضع الصباحي';
+            } else {
+                icon.className = 'fas fa-moon';
+                text.textContent = 'الوضع الليلي';
+            }
+        }
+
+        // تبديل الوضع
+        function toggleTheme() {
+            const body = document.body;
+            const isNight = body.classList.contains('night-mode');
+            
+            if (isNight) {
+                body.classList.remove('night-mode');
+                localStorage.setItem('theme', 'day');
+                updateToggleButton(false);
+            } else {
+                body.classList.add('night-mode');
+                localStorage.setItem('theme', 'night');
+                updateToggleButton(true);
+            }
+        }
+
+        // تحميل الوضع عند فتح الصفحة
+        loadTheme();
+
+        // التحقق من تفضيلات النظام
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches && !localStorage.getItem('theme')) {
+            document.body.classList.add('night-mode');
+            updateToggleButton(true);
+        }
+
+        // مراقبة تغيير تفضيلات النظام
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
+            if (!localStorage.getItem('theme')) {
+                if (event.matches) {
+                    document.body.classList.add('night-mode');
+                    updateToggleButton(true);
+                } else {
+                    document.body.classList.remove('night-mode');
+                    updateToggleButton(false);
+                }
+            }
+        });
+    </script>
 </body>
 </html>
