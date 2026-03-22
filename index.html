@@ -101,6 +101,24 @@
             color: #f9b81b;
         }
 
+        /* نص الإيميل */
+        .email-text {
+            padding: 10px 20px;
+            margin: 5px 15px 10px 15px;
+            background: rgba(249, 184, 27, 0.1);
+            border-radius: 12px;
+            font-size: 0.85rem;
+            color: #f9b81b;
+            text-align: center;
+            direction: ltr;
+            border: 1px dashed rgba(249, 184, 27, 0.3);
+        }
+
+        .email-text i {
+            margin-left: 8px;
+            color: #f9b81b;
+        }
+
         /* منطقة المحتوى */
         .content-area {
             margin-right: 300px;
@@ -248,6 +266,9 @@
                 <button class="menu-btn" onclick="window.open('https://wa.me/962798688787', '_blank')">
                     <i class="fab fa-whatsapp"></i> <span>واتساب (تواصل مباشر)</span>
                 </button>
+                <div class="email-text">
+                    <i class="fas fa-envelope"></i> abdalrhmanmaaith1@gmail.com
+                </div>
                 <button class="menu-btn" onclick="window.open('https://docs.google.com/forms/d/e/1FAIpQLSeOP7ow84vcJ-q8tm4YlHsKMCuGdoL-E5OCJw6C66PDrbMpWw/viewform', '_blank')">
                     <i class="fas fa-pray"></i> <span>دعاء للطالب / اقتراح</span>
                 </button>
@@ -274,7 +295,7 @@
             document.querySelectorAll('.menu-btn').forEach(btn => {
                 btn.classList.remove('active');
             });
-            // إضافة active للزر الحالي (event target)
+            // إضافة active للزر الحالي
             if (event && event.target) {
                 let btn = event.target.closest('.menu-btn');
                 if (btn) btn.classList.add('active');
@@ -299,7 +320,7 @@
             }
         }
         
-        // للجوال: إغلاق القائمة بعد الضغط على زر (اختياري)
+        // للجوال: إغلاق القائمة بعد الضغط على زر
         function toggleSidebar() {
             document.getElementById('sidebar').classList.toggle('open');
         }
@@ -316,7 +337,6 @@
         
         // عرض ترحيب أولي
         window.addEventListener('load', () => {
-            // welcome screen
             const container = document.getElementById('iframeContainer');
             container.innerHTML = `
                 <div style="display: flex; justify-content: center; align-items: center; height: 100%; background: linear-gradient(145deg, #1e3c5c, #0f2a3f); color: white; text-align: center; padding: 20px; flex-direction:column;">
