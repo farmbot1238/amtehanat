@@ -173,9 +173,8 @@ h1 {
     100% { filter: hue-rotate(360deg); }
 }
 
-/* ========== نظام الأزرار المتجاوب ========== */
+/* ========== نظام الأزرار ========== */
 
-/* صف بعمودين - على اللاب توب يبقى جنب بعض */
 .row-2col {
     display: flex;
     gap: 15px;
@@ -183,12 +182,10 @@ h1 {
     flex-wrap: wrap;
 }
 
-/* صف بعمود واحد (كامل العرض) */
 .row-full {
     margin-bottom: 20px;
 }
 
-/* الكاردات بشكل عام */
 .card {
     border-radius: 15px;
     text-align: center;
@@ -196,27 +193,22 @@ h1 {
     cursor: pointer;
     color: white;
     font-weight: bold;
-    font-size: 1.2em;
     box-shadow: 0 10px 20px rgba(0,0,0,0.2);
     position: relative;
     overflow: hidden;
     padding: 20px 15px;
 }
 
-/* الكارد اللي ياخد نص العرض (في الصف المكون من عمودين) */
 .card.half {
     flex: 1;
-    min-width: 0; /* مهم عشان يشتغل flex بشكل صحيح */
 }
 
-/* الكارد اللي ياخد العرض كامل */
 .card.full {
     width: 100%;
     padding: 28px 15px;
     font-size: 1.5em;
 }
 
-/* تأثير الضوء عند المرور */
 .card::before {
     content: '';
     position: absolute;
@@ -238,20 +230,20 @@ h1 {
 }
 
 /* ألوان الكاردات */
-.card.half:nth-child(1) { background: linear-gradient(135deg, #43a047, #1e88e5); }
-.card.half:nth-child(2) { background: linear-gradient(135deg, #fb8c00, #f4511e); }
+.fs1-card { background: linear-gradient(135deg, #43a047, #1e88e5); }
+.fs2-card { background: linear-gradient(135deg, #fb8c00, #f4511e); }
+.challenge-card { background: linear-gradient(135deg, #c92a2a, #ff6b6b); animation: challengePulse 2s infinite; }
+.prayer-card { background: linear-gradient(135deg, #1e3c2c, #2e7d5e); }
 
-.challenge-card {
-    background: linear-gradient(135deg, #c92a2a, #ff6b6b);
-    animation: challengePulse 2s infinite;
-}
-
-.prayer-card {
-    background: linear-gradient(135deg, #1e3c2c, #2e7d5e);
-}
-
+/* واتساب - لون أخضر */
 .whatsapp-card {
-    background: linear-gradient(135deg, #075e54, #128c7e);
+    background: #25D366;
+    transition: all 0.3s;
+}
+
+.whatsapp-card:hover {
+    background: #128C7E;
+    transform: translateY(-5px) scale(1.01);
 }
 
 @keyframes challengePulse {
@@ -291,7 +283,7 @@ h1 {
     50% { transform: scale(1.2); }
 }
 
-/* واتساب */
+/* واتساب نبض */
 .whatsapp-card i {
     animation: whatsappPulse 2s infinite;
 }
@@ -324,21 +316,14 @@ h1 {
     50% { filter: brightness(1.1); }
 }
 
-/* ========== الاستجابة للشاشات المختلفة ========== */
+/* ========== الاستجابة للشاشات ========== */
 
-/* للشاشات الكبيرة (لاب توب/كمبيوتر) - الأزرار جنب بعض */
 @media (min-width: 769px) {
     .row-2col {
         flex-direction: row;
     }
-    
-    .card.half {
-        width: auto;
-        min-width: 0;
-    }
 }
 
-/* للأجهزة الصغيرة (تلفون) - الأزرار تحت بعض */
 @media (max-width: 768px) {
     .container {
         padding: 25px;
@@ -357,7 +342,6 @@ h1 {
         padding: 10px 20px;
     }
     
-    /* على التلفون، الأزرار تصير تحت بعض */
     .row-2col {
         flex-direction: column;
     }
@@ -376,16 +360,5 @@ h1 {
         left: 10px;
         padding: 8px 15px;
         font-size: 1em;
-    }
-}
-
-/* للشاشات المتوسطة (تابلت) */
-@media (min-width: 769px) and (max-width: 1024px) {
-    .container {
-        max-width: 85%;
-    }
-    
-    h1 {
-        font-size: 2.8em;
     }
 }
