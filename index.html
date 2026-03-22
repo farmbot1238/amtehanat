@@ -4,108 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>متعاونين على التفوق</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        
-        body {
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
-        
-        .trap-box {
-            background: #0f0f1a;
-            border-radius: 30px;
-            padding: 50px;
-            max-width: 700px;
-            width: 100%;
-            text-align: center;
-            border: 3px solid #ff4444;
-            box-shadow: 0 0 50px rgba(255,68,68,0.3);
-            animation: shake 0.5s ease-in-out infinite;
-        }
-        
-        @keyframes shake {
-            0%, 100% { transform: translateX(0); }
-            25% { transform: translateX(-10px); }
-            75% { transform: translateX(10px); }
-        }
-        
-        .trap-icon {
-            font-size: 6em;
-            animation: spin 2s linear infinite;
-        }
-        
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        
-        .trap-title {
-            font-size: 2.5em;
-            color: #ff4444;
-            margin: 20px 0;
-            font-weight: bold;
-        }
-        
-        .trap-message {
-            font-size: 1.5em;
-            color: #ffaa44;
-            margin: 20px 0;
-            line-height: 1.8;
-        }
-        
-        .trap-warning {
-            font-size: 1.2em;
-            color: #888;
-            margin-top: 30px;
-            padding-top: 20px;
-            border-top: 1px dashed #ff4444;
-        }
-        
-        .blink {
-            animation: blink 1s step-start infinite;
-        }
-        
-        @keyframes blink {
-            50% { opacity: 0; }
-        }
-    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="trap-box">
-        <div class="trap-icon">😂😂😂</div>
-        <div class="trap-title">هههههههههههههههه</div>
-        <div class="trap-message">
-            مفكر حالك قوي؟<br>
-            بتحاول تسرق الموقع؟<br>
-            <span class="blink">ارجع وراك ههههههههههه</span>
-        </div>
-        <div class="trap-warning">
-            ⚠️ هذا مجرد قالب فارغ ⚠️<br>
-            الموقع الحقيقي يحتاج ملفات إضافية لا يمكنك الحصول عليها 😏
-        </div>
-    </div>
-    
-    <script>
-        // تشويش إضافي 😈
-        console.clear();
-        console.log("%c😂😂😂 مفكر حالك قوي؟ بتحاول تسرق الموقع؟ 😂😂😂", "color: red; font-size: 20px;");
-        console.log("%cالملفات المطلوبة: styles.css + content.js", "color: orange; font-size: 16px;");
-        console.log("%cما رح تشوف شي يا فنان 😏", "color: yellow; font-size: 14px;");
-        
-        setInterval(() => {
-            console.clear();
-            console.log("%c🚫 حاول مرة ثانية؟ جيب الملفات التانية 😂🚫", "color: red; font-size: 18px;");
-        }, 3000);
-    </script>
+    <div id="app"></div>
+    <script src="content.js"></script>
 </body>
 </html>
