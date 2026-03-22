@@ -1,33 +1,36 @@
 // ============ المحتوى الحقيقي للموقع ============
 
-// بناء الموقع الحقيقي
+// بناء الموقع
 function buildSite() {
     const app = document.getElementById('app');
-    if (!app) {
-        console.error('❌ ما لقيت عنصر app');
-        return;
-    }
-    
-    console.log('✅ بني الموقع...');
+    if (!app) return;
     
     app.innerHTML = `
+        <button class="theme-toggle" id="themeToggle">
+            🌙 الوضع الليلي
+        </button>
+        
         <div class="container">
             <h1>متعاونين على التفوق</h1>
-            <div class="my-name">عبدالرحمن المعايطه</div>
-            <div class="motivation-box">انفضوا النوم وهبوا للعلا فالعلا وقف على من لم ينم</div>
+            <div class="my-name">
+                <span>عبدالرحمن المعايطه</span>
+            </div>
+            <div class="motivation-box">
+                <span>انفضوا النوم وهبوا للعلا فالعلا وقف على من لم ينم</span>
+            </div>
             
             <div class="sections-grid">
                 <div class="section-card" onclick="window.open('https://farmbot1238.github.io/s1/', '_blank')">
-                    📘 الفصل الأول
+                    <i class="fas fa-book-open"></i> الفصل الأول
                 </div>
                 <div class="section-card" onclick="window.open('https://farmbot1238.github.io/s2/', '_blank')">
-                    📗 الفصل الثاني
+                    <i class="fas fa-book-reader"></i> الفصل الثاني
                 </div>
                 <div class="section-card" onclick="window.open('https://farmbot1238.github.io/thd1/', '_blank')">
-                    ⚡ تحدي السرعة الشامل
+                    ⚡ تحدي السرعة الشامل ⚡
                 </div>
                 <div class="section-card" onclick="window.open('https://docs.google.com/forms/d/e/1FAIpQLSeOP7ow84vcJ-q8tm4YlHsKMCuGdoL-E5OCJw6C66PDrbMpWw/viewform', '_blank')">
-                    🤲 اقتراح / دعاء للطالب
+                    <i class="fas fa-heart"></i> اقتراح / دعاء للطالب <i class="fas fa-pen"></i>
                 </div>
             </div>
             
@@ -42,17 +45,41 @@ function buildSite() {
             </div>
         </div>
     `;
+    
+    // تفعيل الثيم
+    initTheme();
 }
 
-// تشغيل الموقع مباشرة
-buildSite();
-
-// فحص إذا الـ CSS تحمّل
-setTimeout(() => {
-    const container = document.querySelector('.container');
-    if (container) {
-        console.log('✅ الموقع شغال 100%');
-    } else {
-        console.log('⚠️ المشكلة في تحميل CSS');
+// ========== نظام الثيم الصباحي والليلي ==========
+function initTheme() {
+    // نجيب الثيم المخزن
+    const savedTheme = localStorage.getItem('siteTheme');
+    
+    if (savedTheme === 'night') {
+        document.body.classList.add('night-mode');
+        const toggleBtn = document.getElementById('themeToggle');
+        if (toggleBtn) toggleBtn.innerHTML = '☀️ الوضع الصباحي';
     }
-}, 100);
+    
+    // نضيف حدث للزر
+    const toggleBtn = document.getElementById('themeToggle');
+    if (toggleBtn) {
+        toggleBtn.addEventListener('click', toggleTheme);
+    }
+}
+
+function toggleTheme() {
+    const isNight = document.body.classList.toggle('night-mode');
+    const toggleBtn = document.getElementById('themeToggle');
+    
+    if (isNight) {
+        localStorage.setItem('siteTheme', 'night');
+        if (toggleBtn) toggleBtn.innerHTML = '☀️ الوضع الصباحي';
+    } else {
+        localStorage.setItem('siteTheme', 'day');
+        if (toggleBtn) toggleBtn.innerHTML = '🌙 الوضع الليلي';
+    }
+}
+
+// تشغيل الموقع
+buildSite();
