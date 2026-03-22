@@ -91,27 +91,29 @@ body.night-mode .designer-name {
     background: linear-gradient(90deg, #667eea, #764ba2, #f1c40f, #e67e22);
 }
 
-/* عنوان الموقع - Noto Nastaliq Urdu Bold */
+/* عنوان الموقع - LMJO 09 */
 h1 {
-    font-family: 'Noto Nastaliq Urdu', serif;
-    font-weight: 700;
-    font-size: 3.2em;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: 900;
+    font-size: 3.5em;
     text-align: center;
     margin-bottom: 15px;
     background: linear-gradient(135deg, #1e2b5e 0%, #4a1e5e 50%, #b12a5e 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     text-shadow: 5px 5px 15px rgba(0,0,0,0.2);
-    letter-spacing: 2px;
+    letter-spacing: 3px;
     position: relative;
     display: inline-block;
     width: 100%;
     animation: titleGlow 3s ease-in-out infinite;
+    font-style: italic;
+    font-weight: bold;
 }
 
 @keyframes titleGlow {
-    0%, 100% { filter: brightness(1); }
-    50% { filter: brightness(1.05); text-shadow: 0 0 20px rgba(102,126,234,0.5); }
+    0%, 100% { filter: brightness(1); text-shadow: 5px 5px 15px rgba(0,0,0,0.2); }
+    50% { filter: brightness(1.1); text-shadow: 0 0 25px rgba(102,126,234,0.6), 5px 5px 15px rgba(0,0,0,0.2); }
 }
 
 /* نجوم جانبية للعنوان */
@@ -139,16 +141,17 @@ h1::after {
     50% { opacity: 1; transform: translateY(-50%) scale(1.2); }
 }
 
-/* اسم عبدالرحمن تحت العنوان */
+/* اسم عبدالرحمن + LMJO 09 */
 .my-name {
     text-align: center;
     margin: 10px 0 15px;
 }
 
 .my-name span {
-    font-family: 'Noto Nastaliq Urdu', serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-size: 1.6em;
-    font-weight: 600;
+    font-weight: bold;
+    font-style: italic;
     background: linear-gradient(135deg, #2c3e50, #3498db, #9b59b6);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -324,9 +327,10 @@ h1::after {
 }
 
 .designer-name {
-    font-family: 'Noto Nastaliq Urdu', serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-size: 1.5em;
     font-weight: bold;
+    font-style: italic;
     background: linear-gradient(135deg, #667eea, #764ba2);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
