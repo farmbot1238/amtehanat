@@ -19,25 +19,31 @@ function buildSite() {
                 <span>انفضوا النوم وهبوا للعلا فالعلا وقف على من لم ينم</span>
             </div>
             
-            <div class="sections-grid">
-                <div class="section-card" onclick="window.open('https://farmbot1238.github.io/s1/', '_blank')">
+            <!-- الصف الأول: فصل أول + فصل ثاني (بجنب بعض في الكمبيوتر، تحت بعض في التلفون) -->
+            <div class="row-2col">
+                <div class="card half" onclick="window.open('https://farmbot1238.github.io/s1/', '_blank')">
                     <i class="fas fa-book-open"></i> الفصل الأول
                 </div>
-                <div class="section-card" onclick="window.open('https://farmbot1238.github.io/s2/', '_blank')">
+                <div class="card half" onclick="window.open('https://farmbot1238.github.io/s2/', '_blank')">
                     <i class="fas fa-book-reader"></i> الفصل الثاني
-                </div>
-                <div class="section-card" onclick="window.open('https://farmbot1238.github.io/thd1/', '_blank')">
-                    ⚡ تحدي السرعة الشامل ⚡
-                </div>
-                <div class="section-card" onclick="window.open('https://docs.google.com/forms/d/e/1FAIpQLSeOP7ow84vcJ-q8tm4YlHsKMCuGdoL-E5OCJw6C66PDrbMpWw/viewform', '_blank')">
-                    <i class="fas fa-heart"></i> اقتراح / دعاء للطالب <i class="fas fa-pen"></i>
                 </div>
             </div>
             
-            <div style="text-align: center;">
-                <a href="https://wa.me/962798688787" class="whatsapp-btn" target="_blank">
+            <!-- الصف الثاني: تحدي السرعة (كامل العرض) -->
+            <div class="row-full">
+                <div class="card full challenge-card" onclick="window.open('https://farmbot1238.github.io/thd1/', '_blank')">
+                    ⚡ تحدي السرعة الشامل ⚡
+                </div>
+            </div>
+            
+            <!-- الصف الثالث: دعاء + واتساب (بجنب بعض في الكمبيوتر، تحت بعض في التلفون) -->
+            <div class="row-2col">
+                <div class="card half prayer-card" onclick="window.open('https://docs.google.com/forms/d/e/1FAIpQLSeOP7ow84vcJ-q8tm4YlHsKMCuGdoL-E5OCJw6C66PDrbMpWw/viewform', '_blank')">
+                    <i class="fas fa-heart"></i> اقتراح / دعاء للطالب
+                </div>
+                <div class="card half whatsapp-card" onclick="window.open('https://wa.me/962798688787', '_blank')">
                     <i class="fab fa-whatsapp"></i> واتساب
-                </a>
+                </div>
             </div>
             
             <div class="designer-signature">
