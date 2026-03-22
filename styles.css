@@ -5,7 +5,6 @@
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-/* ========== الثيم الصباحي (الافتراضي) ========== */
 body {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     min-height: 100vh;
@@ -16,7 +15,6 @@ body {
     transition: all 0.5s ease;
 }
 
-/* ========== الثيم الليلي ========== */
 body.night-mode {
     background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
 }
@@ -31,17 +29,6 @@ body.night-mode .motivation-box span {
     color: #ffd966;
 }
 
-body.night-mode .section-card {
-    box-shadow: 0 5px 20px rgba(0,0,0,0.5);
-}
-
-body.night-mode .designer-name {
-    background: linear-gradient(135deg, #ffd966, #ffaa44);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
-/* عنوان الموقع في الليل - لون أبيض */
 body.night-mode h1 {
     background: linear-gradient(135deg, #ffffff, #f0f0f0);
     -webkit-background-clip: text;
@@ -49,7 +36,6 @@ body.night-mode h1 {
     text-shadow: 0 0 20px rgba(255,255,255,0.3);
 }
 
-/* زر الثيم */
 .theme-toggle {
     position: fixed;
     top: 20px;
@@ -99,7 +85,6 @@ body.night-mode h1 {
     background: linear-gradient(90deg, #667eea, #764ba2, #f1c40f, #e67e22);
 }
 
-/* عنوان الموقع - LMJO 09 (بدون نجوم) */
 h1 {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-weight: 900;
@@ -120,11 +105,10 @@ h1 {
 }
 
 @keyframes titleGlow {
-    0%, 100% { filter: brightness(1); text-shadow: 5px 5px 15px rgba(0,0,0,0.2); }
-    50% { filter: brightness(1.05); text-shadow: 0 0 20px rgba(102,126,234,0.4), 5px 5px 15px rgba(0,0,0,0.2); }
+    0%, 100% { filter: brightness(1); }
+    50% { filter: brightness(1.05); text-shadow: 0 0 20px rgba(102,126,234,0.4); }
 }
 
-/* اسم عبدالرحمن (بدون اسم الموقع جنبه) */
 .my-name {
     text-align: center;
     margin: 10px 0 15px;
@@ -145,11 +129,10 @@ h1 {
 }
 
 @keyframes namePulse {
-    0%, 100% { transform: scale(1); text-shadow: 0 0 5px rgba(52,152,219,0.3); }
-    50% { transform: scale(1.02); text-shadow: 0 0 15px rgba(52,152,219,0.5); }
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.02); }
 }
 
-/* العبارة في مربع */
 .motivation-box {
     text-align: center;
     margin: 20px 0 30px;
@@ -193,7 +176,6 @@ h1 {
     100% { filter: hue-rotate(360deg); }
 }
 
-/* صف الفصول */
 .sections-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
