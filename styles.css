@@ -102,8 +102,13 @@ h1 {
 }
 
 @keyframes titleGlow {
-    0%, 100% { filter: brightness(1); }
-    50% { filter: brightness(1.05); text-shadow: 0 0 20px rgba(102,126,234,0.4); }
+    0%, 100% {
+        filter: brightness(1);
+    }
+    50% {
+        filter: brightness(1.05);
+        text-shadow: 0 0 20px rgba(102,126,234,0.4);
+    }
 }
 
 .my-name {
@@ -126,8 +131,12 @@ h1 {
 }
 
 @keyframes namePulse {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.02); }
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.02);
+    }
 }
 
 .motivation-box {
@@ -151,8 +160,12 @@ h1 {
 }
 
 @keyframes phraseGlow {
-    0%, 100% { box-shadow: 0 5px 20px rgba(177, 42, 94, 0.2); }
-    50% { box-shadow: 0 8px 30px rgba(102, 126, 234, 0.4); }
+    0%, 100% {
+        box-shadow: 0 5px 20px rgba(177, 42, 94, 0.2);
+    }
+    50% {
+        box-shadow: 0 8px 30px rgba(102, 126, 234, 0.4);
+    }
 }
 
 .motivation-box span::before {
@@ -169,11 +182,13 @@ h1 {
 }
 
 @keyframes borderRotate {
-    0% { filter: hue-rotate(0deg); }
-    100% { filter: hue-rotate(360deg); }
+    0% {
+        filter: hue-rotate(0deg);
+    }
+    100% {
+        filter: hue-rotate(360deg);
+    }
 }
-
-/* ========== نظام الأزرار ========== */
 
 .row-2col {
     display: flex;
@@ -229,13 +244,23 @@ h1 {
     box-shadow: 0 15px 30px rgba(0,0,0,0.3);
 }
 
-/* ألوان الكاردات */
-.fs1-card { background: linear-gradient(135deg, #43a047, #1e88e5); }
-.fs2-card { background: linear-gradient(135deg, #fb8c00, #f4511e); }
-.challenge-card { background: linear-gradient(135deg, #c92a2a, #ff6b6b); animation: challengePulse 2s infinite; }
-.prayer-card { background: linear-gradient(135deg, #1e3c2c, #2e7d5e); }
+.fs1-card {
+    background: linear-gradient(135deg, #43a047, #1e88e5);
+}
 
-/* واتساب - لون أخضر */
+.fs2-card {
+    background: linear-gradient(135deg, #fb8c00, #f4511e);
+}
+
+.challenge-card {
+    background: linear-gradient(135deg, #c92a2a, #ff6b6b);
+    animation: challengePulse 2s infinite;
+}
+
+.prayer-card {
+    background: linear-gradient(135deg, #1e3c2c, #2e7d5e);
+}
+
 .whatsapp-card {
     background: #25D366;
     transition: all 0.3s;
@@ -247,11 +272,14 @@ h1 {
 }
 
 @keyframes challengePulse {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.01); }
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.01);
+    }
 }
 
-/* صاعقة التحدي */
 .challenge-card {
     position: relative;
 }
@@ -268,29 +296,41 @@ h1 {
 }
 
 @keyframes lightning {
-    0%, 100% { opacity: 0.3; transform: translateY(-50%) scale(1); }
-    50% { opacity: 1; transform: translateY(-50%) scale(1.2); }
+    0%, 100% {
+        opacity: 0.3;
+        transform: translateY(-50%) scale(1);
+    }
+    50% {
+        opacity: 1;
+        transform: translateY(-50%) scale(1.2);
+    }
 }
 
-/* قلب الدعاء */
 .prayer-card i {
     animation: heartBeat 1.5s infinite;
     display: inline-block;
 }
 
 @keyframes heartBeat {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.2); }
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.2);
+    }
 }
 
-/* واتساب نبض */
 .whatsapp-card i {
     animation: whatsappPulse 2s infinite;
 }
 
 @keyframes whatsappPulse {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.1); }
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
 }
 
 .designer-signature {
@@ -312,11 +352,13 @@ h1 {
 }
 
 @keyframes nameGlow {
-    0%, 100% { filter: brightness(1); }
-    50% { filter: brightness(1.1); }
+    0%, 100% {
+        filter: brightness(1);
+    }
+    50% {
+        filter: brightness(1.1);
+    }
 }
-
-/* ========== الاستجابة للشاشات ========== */
 
 @media (min-width: 769px) {
     .row-2col {
@@ -328,33 +370,26 @@ h1 {
     .container {
         padding: 25px;
     }
-    
     h1 {
         font-size: 2.2em;
     }
-    
     .my-name span {
         font-size: 1.2em;
     }
-    
     .motivation-box span {
         font-size: 0.95em;
         padding: 10px 20px;
     }
-    
     .row-2col {
         flex-direction: column;
     }
-    
     .card.half {
         width: 100%;
     }
-    
     .card.full {
         font-size: 1.3em;
         padding: 20px;
     }
-    
     .theme-toggle {
         top: 10px;
         left: 10px;
