@@ -1,0 +1,117 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+}
+
+.container {
+    background: white;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+    max-width: 800px;
+    width: 100%;
+}
+
+h1 {
+    font-family: 'Noto Nastaliq Urdu', serif;
+    font-weight: 700;
+    font-size: 2.8em;
+    text-align: center;
+    background: linear-gradient(135deg, #1e2b5e, #4a1e5e, #b12a5e);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 10px;
+}
+
+.my-name {
+    text-align: center;
+    font-size: 1.5em;
+    font-weight: 600;
+    color: #4a1e5e;
+    margin: 10px 0;
+}
+
+.motivation-box {
+    text-align: center;
+    background: linear-gradient(135deg, #fef9e7, #fef3d9);
+    padding: 12px 30px;
+    border-radius: 50px;
+    display: inline-block;
+    width: auto;
+    margin: 10px auto;
+    font-size: 1.2em;
+    border: 2px solid gold;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.sections-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    margin: 30px 0;
+}
+
+.section-card {
+    padding: 20px;
+    border-radius: 15px;
+    text-align: center;
+    transition: 0.3s;
+    cursor: pointer;
+    color: white;
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
+.section-card:hover {
+    transform: translateY(-5px);
+}
+
+.section-card:nth-child(1) { background: linear-gradient(135deg, #43a047, #1e88e5); }
+.section-card:nth-child(2) { background: linear-gradient(135deg, #fb8c00, #f4511e); }
+.section-card:nth-child(3) { background: linear-gradient(135deg, #c92a2a, #ff6b6b); }
+.section-card:nth-child(4) { background: linear-gradient(135deg, #1e3c2c, #2e7d5e); }
+
+.whatsapp-btn {
+    display: inline-block;
+    background: #25D366;
+    color: white;
+    text-decoration: none;
+    padding: 12px 40px;
+    border-radius: 50px;
+    font-size: 1.2em;
+    text-align: center;
+    margin: 20px 0;
+}
+
+.designer-signature {
+    text-align: center;
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 2px dashed #ccc;
+}
+.designer-name {
+    font-family: 'Noto Nastaliq Urdu', serif;
+    font-size: 1.5em;
+    font-weight: bold;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+@media (max-width: 600px) {
+    h1 { font-size: 2.2em; }
+    .sections-grid { grid-template-columns: 1fr; }
+}
