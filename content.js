@@ -11,9 +11,9 @@ function buildSite() {
         </button>
         
         <div class="container">
-            <h1>متعاونين على التفوق</h1>
+            <h1>LMJO 09</h1>
             <div class="my-name">
-                <span>عبدالرحمن المعايطه</span>
+                <span>عبدالرحمن المعايطه | LMJO 09</span>
             </div>
             <div class="motivation-box">
                 <span>انفضوا النوم وهبوا للعلا فالعلا وقف على من لم ينم</span>
@@ -41,7 +41,7 @@ function buildSite() {
             </div>
             
             <div class="designer-signature">
-                <div class="designer-name">عبدالرحمن المعايطه</div>
+                <div class="designer-name">عبدالرحمن المعايطه | LMJO 09</div>
             </div>
         </div>
     `;
@@ -52,7 +52,6 @@ function buildSite() {
 
 // ========== نظام الثيم الصباحي والليلي ==========
 function initTheme() {
-    // نجيب الثيم المخزن
     const savedTheme = localStorage.getItem('siteTheme');
     
     if (savedTheme === 'night') {
@@ -61,7 +60,6 @@ function initTheme() {
         if (toggleBtn) toggleBtn.innerHTML = '☀️ الوضع الصباحي';
     }
     
-    // نضيف حدث للزر
     const toggleBtn = document.getElementById('themeToggle');
     if (toggleBtn) {
         toggleBtn.addEventListener('click', toggleTheme);
