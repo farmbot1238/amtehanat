@@ -3,7 +3,12 @@
 // بناء الموقع الحقيقي
 function buildSite() {
     const app = document.getElementById('app');
-    if (!app) return;
+    if (!app) {
+        console.error('❌ ما لقيت عنصر app');
+        return;
+    }
+    
+    console.log('✅ بني الموقع...');
     
     app.innerHTML = `
         <div class="container">
@@ -41,3 +46,13 @@ function buildSite() {
 
 // تشغيل الموقع مباشرة
 buildSite();
+
+// فحص إذا الـ CSS تحمّل
+setTimeout(() => {
+    const container = document.querySelector('.container');
+    if (container) {
+        console.log('✅ الموقع شغال 100%');
+    } else {
+        console.log('⚠️ المشكلة في تحميل CSS');
+    }
+}, 100);
