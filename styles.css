@@ -35,6 +35,12 @@ body.night-mode .section-card {
     box-shadow: 0 5px 20px rgba(0,0,0,0.5);
 }
 
+body.night-mode .designer-name {
+    background: linear-gradient(135deg, #ffd966, #ffaa44);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
 /* زر الثيم */
 .theme-toggle {
     position: fixed;
@@ -106,6 +112,31 @@ h1 {
 @keyframes titleGlow {
     0%, 100% { filter: brightness(1); }
     50% { filter: brightness(1.05); text-shadow: 0 0 20px rgba(102,126,234,0.5); }
+}
+
+/* نجوم جانبية للعنوان */
+h1::before, h1::after {
+    content: '★';
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #764ba2;
+    font-size: 1.2em;
+    text-shadow: 0 0 10px #764ba2;
+    animation: starTwinkle 2s infinite;
+}
+
+h1::before {
+    left: -30px;
+}
+
+h1::after {
+    right: -30px;
+}
+
+@keyframes starTwinkle {
+    0%, 100% { opacity: 0.5; transform: translateY(-50%) scale(1); }
+    50% { opacity: 1; transform: translateY(-50%) scale(1.2); }
 }
 
 /* اسم عبدالرحمن تحت العنوان */
@@ -198,6 +229,7 @@ h1 {
     overflow: hidden;
 }
 
+/* خطوط ضوئية متحركة */
 .section-card::before {
     content: '';
     position: absolute;
@@ -218,6 +250,7 @@ h1 {
     box-shadow: 0 20px 35px rgba(0,0,0,0.3);
 }
 
+/* ألوان الأقسام */
 .section-card:nth-child(1) { background: linear-gradient(135deg, #43a047, #1e88e5); }
 .section-card:nth-child(2) { background: linear-gradient(135deg, #fb8c00, #f4511e); }
 .section-card:nth-child(3) { background: linear-gradient(135deg, #c92a2a, #ff6b6b); animation: challengePulse 2s infinite; }
@@ -228,12 +261,31 @@ h1 {
     50% { transform: scale(1.01); }
 }
 
-.section-card i {
-    margin: 0 8px;
+/* صواعق جانبية لقسم التحدي */
+.section-card:nth-child(3) {
+    position: relative;
 }
 
+.section-card:nth-child(3)::after {
+    content: '⚡';
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.3em;
+    opacity: 0.7;
+    animation: lightning 1.5s infinite;
+}
+
+@keyframes lightning {
+    0%, 100% { opacity: 0.3; transform: translateY(-50%) scale(1); }
+    50% { opacity: 1; transform: translateY(-50%) scale(1.2); }
+}
+
+/* قلب نابض لقسم الدعاء */
 .section-card:nth-child(4) i {
     animation: heartBeat 1.5s infinite;
+    display: inline-block;
 }
 
 @keyframes heartBeat {
@@ -254,6 +306,7 @@ h1 {
     transition: all 0.3s;
     border: 2px solid white;
     margin: 20px 0;
+    box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
 }
 
 .whatsapp-btn:hover {
@@ -287,7 +340,11 @@ h1 {
 
 /* استجابة للجوال */
 @media (max-width: 600px) {
+    .container { padding: 25px; }
     h1 { font-size: 2.2em; }
+    h1::before, h1::after { font-size: 0.8em; }
+    h1::before { left: -15px; }
+    h1::after { right: -15px; }
     .my-name span { font-size: 1.2em; }
     .motivation-box span { font-size: 0.95em; padding: 10px 20px; }
     .section-card { font-size: 1.1em; padding: 18px; }
