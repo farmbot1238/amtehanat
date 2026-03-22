@@ -175,7 +175,7 @@ h1 {
 
 /* ========== نظام الأزرار المتجاوب ========== */
 
-/* صف بعمودين */
+/* صف بعمودين - على اللاب توب يبقى جنب بعض */
 .row-2col {
     display: flex;
     gap: 15px;
@@ -206,7 +206,7 @@ h1 {
 /* الكارد اللي ياخد نص العرض (في الصف المكون من عمودين) */
 .card.half {
     flex: 1;
-    min-width: 180px;
+    min-width: 0; /* مهم عشان يشتغل flex بشكل صحيح */
 }
 
 /* الكارد اللي ياخد العرض كامل */
@@ -238,8 +238,8 @@ h1 {
 }
 
 /* ألوان الكاردات */
-.card:nth-child(1) { background: linear-gradient(135deg, #43a047, #1e88e5); }
-.card:nth-child(2) { background: linear-gradient(135deg, #fb8c00, #f4511e); }
+.card.half:nth-child(1) { background: linear-gradient(135deg, #43a047, #1e88e5); }
+.card.half:nth-child(2) { background: linear-gradient(135deg, #fb8c00, #f4511e); }
 
 .challenge-card {
     background: linear-gradient(135deg, #c92a2a, #ff6b6b);
@@ -326,7 +326,19 @@ h1 {
 
 /* ========== الاستجابة للشاشات المختلفة ========== */
 
-/* للأجهزة الصغيرة (تلفون) */
+/* للشاشات الكبيرة (لاب توب/كمبيوتر) - الأزرار جنب بعض */
+@media (min-width: 769px) {
+    .row-2col {
+        flex-direction: row;
+    }
+    
+    .card.half {
+        width: auto;
+        min-width: 0;
+    }
+}
+
+/* للأجهزة الصغيرة (تلفون) - الأزرار تحت بعض */
 @media (max-width: 768px) {
     .container {
         padding: 25px;
@@ -352,7 +364,6 @@ h1 {
     
     .card.half {
         width: 100%;
-        min-width: unset;
     }
     
     .card.full {
@@ -376,20 +387,5 @@ h1 {
     
     h1 {
         font-size: 2.8em;
-    }
-    
-    .card.half {
-        min-width: 200px;
-    }
-}
-
-/* للشاشات الكبيرة (لاب توب/كمبيوتر) */
-@media (min-width: 1025px) {
-    .container {
-        max-width: 900px;
-    }
-    
-    .card.half {
-        min-width: 220px;
     }
 }
