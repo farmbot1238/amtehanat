@@ -13,7 +13,7 @@ function buildSite() {
         <div class="container">
             <h1>LMJO 09</h1>
             <div class="my-name">
-                <span>عبدالرحمن المعايطه | LMJO 09</span>
+                <span>عبدالرحمن المعايطه</span>
             </div>
             <div class="motivation-box">
                 <span>انفضوا النوم وهبوا للعلا فالعلا وقف على من لم ينم</span>
@@ -41,7 +41,7 @@ function buildSite() {
             </div>
             
             <div class="designer-signature">
-                <div class="designer-name">عبدالرحمن المعايطه | LMJO 09</div>
+                <div class="designer-name">عبدالرحمن المعايطه</div>
             </div>
         </div>
     `;
