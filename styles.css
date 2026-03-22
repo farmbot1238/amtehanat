@@ -67,7 +67,7 @@ body.night-mode h1 {
     border-radius: 30px;
     padding: 40px;
     box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-    max-width: 800px;
+    max-width: 900px;
     width: 100%;
     text-align: center;
     transition: all 0.3s ease;
@@ -96,12 +96,9 @@ h1 {
     -webkit-text-fill-color: transparent;
     text-shadow: 5px 5px 15px rgba(0,0,0,0.2);
     letter-spacing: 3px;
-    position: relative;
-    display: inline-block;
     width: 100%;
     animation: titleGlow 3s ease-in-out infinite;
     font-style: italic;
-    font-weight: bold;
 }
 
 @keyframes titleGlow {
@@ -176,28 +173,51 @@ h1 {
     100% { filter: hue-rotate(360deg); }
 }
 
-.sections-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+/* ========== نظام الأزرار المتجاوب ========== */
+
+/* صف بعمودين */
+.row-2col {
+    display: flex;
     gap: 15px;
-    margin: 30px 0;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
 }
 
-.section-card {
-    padding: 25px 15px;
+/* صف بعمود واحد (كامل العرض) */
+.row-full {
+    margin-bottom: 20px;
+}
+
+/* الكاردات بشكل عام */
+.card {
     border-radius: 15px;
     text-align: center;
     transition: all 0.3s ease;
     cursor: pointer;
     color: white;
     font-weight: bold;
-    font-size: 1.3em;
+    font-size: 1.2em;
     box-shadow: 0 10px 20px rgba(0,0,0,0.2);
     position: relative;
     overflow: hidden;
+    padding: 20px 15px;
 }
 
-.section-card::before {
+/* الكارد اللي ياخد نص العرض (في الصف المكون من عمودين) */
+.card.half {
+    flex: 1;
+    min-width: 180px;
+}
+
+/* الكارد اللي ياخد العرض كامل */
+.card.full {
+    width: 100%;
+    padding: 28px 15px;
+    font-size: 1.5em;
+}
+
+/* تأثير الضوء عند المرور */
+.card::before {
     content: '';
     position: absolute;
     top: 0;
@@ -208,32 +228,49 @@ h1 {
     transition: left 0.5s;
 }
 
-.section-card:hover::before {
+.card:hover::before {
     left: 100%;
 }
 
-.section-card:hover {
-    transform: translateY(-8px) scale(1.02);
-    box-shadow: 0 20px 35px rgba(0,0,0,0.3);
+.card:hover {
+    transform: translateY(-5px) scale(1.01);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.3);
 }
 
-.section-card:nth-child(1) { background: linear-gradient(135deg, #43a047, #1e88e5); }
-.section-card:nth-child(2) { background: linear-gradient(135deg, #fb8c00, #f4511e); }
-.section-card:nth-child(3) { background: linear-gradient(135deg, #c92a2a, #ff6b6b); animation: challengePulse 2s infinite; }
-.section-card:nth-child(4) { background: linear-gradient(135deg, #1e3c2c, #2e7d5e); }
+/* ألوان الكاردات */
+.card:nth-child(1) { background: linear-gradient(135deg, #43a047, #1e88e5); }
+.card:nth-child(2) { background: linear-gradient(135deg, #fb8c00, #f4511e); }
+
+.challenge-card {
+    background: linear-gradient(135deg, #c92a2a, #ff6b6b);
+    animation: challengePulse 2s infinite;
+}
+
+.prayer-card {
+    background: linear-gradient(135deg, #1e3c2c, #2e7d5e);
+}
+
+.whatsapp-card {
+    background: linear-gradient(135deg, #075e54, #128c7e);
+}
 
 @keyframes challengePulse {
     0%, 100% { transform: scale(1); }
     50% { transform: scale(1.01); }
 }
 
-.section-card:nth-child(3)::after {
+/* صاعقة التحدي */
+.challenge-card {
+    position: relative;
+}
+
+.challenge-card::after {
     content: '⚡';
     position: absolute;
-    right: 15px;
+    right: 20px;
     top: 50%;
     transform: translateY(-50%);
-    font-size: 1.3em;
+    font-size: 1.5em;
     opacity: 0.7;
     animation: lightning 1.5s infinite;
 }
@@ -243,7 +280,8 @@ h1 {
     50% { opacity: 1; transform: translateY(-50%) scale(1.2); }
 }
 
-.section-card:nth-child(4) i {
+/* قلب الدعاء */
+.prayer-card i {
     animation: heartBeat 1.5s infinite;
     display: inline-block;
 }
@@ -253,25 +291,14 @@ h1 {
     50% { transform: scale(1.2); }
 }
 
-.whatsapp-btn {
-    display: inline-block;
-    background: #25D366;
-    color: white;
-    text-decoration: none;
-    padding: 15px 50px;
-    border-radius: 60px;
-    font-size: 1.3em;
-    font-weight: bold;
-    transition: all 0.3s;
-    border: 2px solid white;
-    margin: 20px 0;
-    box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
+/* واتساب */
+.whatsapp-card i {
+    animation: whatsappPulse 2s infinite;
 }
 
-.whatsapp-btn:hover {
-    transform: scale(1.05);
-    background: #128C7E;
-    box-shadow: 0 10px 30px rgba(37, 211, 102, 0.4);
+@keyframes whatsappPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
 }
 
 .designer-signature {
@@ -297,12 +324,72 @@ h1 {
     50% { filter: brightness(1.1); }
 }
 
-@media (max-width: 600px) {
-    .container { padding: 25px; }
-    h1 { font-size: 2.2em; }
-    .my-name span { font-size: 1.2em; }
-    .motivation-box span { font-size: 0.95em; padding: 10px 20px; }
-    .section-card { font-size: 1.1em; padding: 18px; }
-    .whatsapp-btn { font-size: 1.1em; padding: 12px 35px; }
-    .theme-toggle { top: 10px; left: 10px; padding: 8px 15px; font-size: 1em; }
+/* ========== الاستجابة للشاشات المختلفة ========== */
+
+/* للأجهزة الصغيرة (تلفون) */
+@media (max-width: 768px) {
+    .container {
+        padding: 25px;
+    }
+    
+    h1 {
+        font-size: 2.2em;
+    }
+    
+    .my-name span {
+        font-size: 1.2em;
+    }
+    
+    .motivation-box span {
+        font-size: 0.95em;
+        padding: 10px 20px;
+    }
+    
+    /* على التلفون، الأزرار تصير تحت بعض */
+    .row-2col {
+        flex-direction: column;
+    }
+    
+    .card.half {
+        width: 100%;
+        min-width: unset;
+    }
+    
+    .card.full {
+        font-size: 1.3em;
+        padding: 20px;
+    }
+    
+    .theme-toggle {
+        top: 10px;
+        left: 10px;
+        padding: 8px 15px;
+        font-size: 1em;
+    }
+}
+
+/* للشاشات المتوسطة (تابلت) */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .container {
+        max-width: 85%;
+    }
+    
+    h1 {
+        font-size: 2.8em;
+    }
+    
+    .card.half {
+        min-width: 200px;
+    }
+}
+
+/* للشاشات الكبيرة (لاب توب/كمبيوتر) */
+@media (min-width: 1025px) {
+    .container {
+        max-width: 900px;
+    }
+    
+    .card.half {
+        min-width: 220px;
+    }
 }
