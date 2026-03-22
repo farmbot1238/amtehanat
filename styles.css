@@ -41,6 +41,14 @@ body.night-mode .designer-name {
     -webkit-text-fill-color: transparent;
 }
 
+/* عنوان الموقع في الليل - لون أبيض */
+body.night-mode h1 {
+    background: linear-gradient(135deg, #ffffff, #f0f0f0);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 20px rgba(255,255,255,0.3);
+}
+
 /* زر الثيم */
 .theme-toggle {
     position: fixed;
@@ -91,7 +99,7 @@ body.night-mode .designer-name {
     background: linear-gradient(90deg, #667eea, #764ba2, #f1c40f, #e67e22);
 }
 
-/* عنوان الموقع - LMJO 09 */
+/* عنوان الموقع - LMJO 09 (بدون نجوم) */
 h1 {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-weight: 900;
@@ -113,35 +121,10 @@ h1 {
 
 @keyframes titleGlow {
     0%, 100% { filter: brightness(1); text-shadow: 5px 5px 15px rgba(0,0,0,0.2); }
-    50% { filter: brightness(1.1); text-shadow: 0 0 25px rgba(102,126,234,0.6), 5px 5px 15px rgba(0,0,0,0.2); }
+    50% { filter: brightness(1.05); text-shadow: 0 0 20px rgba(102,126,234,0.4), 5px 5px 15px rgba(0,0,0,0.2); }
 }
 
-/* نجوم جانبية للعنوان */
-h1::before, h1::after {
-    content: '★';
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    color: #764ba2;
-    font-size: 1.2em;
-    text-shadow: 0 0 10px #764ba2;
-    animation: starTwinkle 2s infinite;
-}
-
-h1::before {
-    left: -30px;
-}
-
-h1::after {
-    right: -30px;
-}
-
-@keyframes starTwinkle {
-    0%, 100% { opacity: 0.5; transform: translateY(-50%) scale(1); }
-    50% { opacity: 1; transform: translateY(-50%) scale(1.2); }
-}
-
-/* اسم عبدالرحمن + LMJO 09 */
+/* اسم عبدالرحمن (بدون اسم الموقع جنبه) */
 .my-name {
     text-align: center;
     margin: 10px 0 15px;
@@ -232,7 +215,6 @@ h1::after {
     overflow: hidden;
 }
 
-/* خطوط ضوئية متحركة */
 .section-card::before {
     content: '';
     position: absolute;
@@ -253,7 +235,6 @@ h1::after {
     box-shadow: 0 20px 35px rgba(0,0,0,0.3);
 }
 
-/* ألوان الأقسام */
 .section-card:nth-child(1) { background: linear-gradient(135deg, #43a047, #1e88e5); }
 .section-card:nth-child(2) { background: linear-gradient(135deg, #fb8c00, #f4511e); }
 .section-card:nth-child(3) { background: linear-gradient(135deg, #c92a2a, #ff6b6b); animation: challengePulse 2s infinite; }
@@ -262,11 +243,6 @@ h1::after {
 @keyframes challengePulse {
     0%, 100% { transform: scale(1); }
     50% { transform: scale(1.01); }
-}
-
-/* صواعق جانبية لقسم التحدي */
-.section-card:nth-child(3) {
-    position: relative;
 }
 
 .section-card:nth-child(3)::after {
@@ -285,7 +261,6 @@ h1::after {
     50% { opacity: 1; transform: translateY(-50%) scale(1.2); }
 }
 
-/* قلب نابض لقسم الدعاء */
 .section-card:nth-child(4) i {
     animation: heartBeat 1.5s infinite;
     display: inline-block;
@@ -296,7 +271,6 @@ h1::after {
     50% { transform: scale(1.2); }
 }
 
-/* واتساب */
 .whatsapp-btn {
     display: inline-block;
     background: #25D366;
@@ -318,7 +292,6 @@ h1::after {
     box-shadow: 0 10px 30px rgba(37, 211, 102, 0.4);
 }
 
-/* توقيع المصمم */
 .designer-signature {
     text-align: center;
     margin-top: 30px;
@@ -342,13 +315,9 @@ h1::after {
     50% { filter: brightness(1.1); }
 }
 
-/* استجابة للجوال */
 @media (max-width: 600px) {
     .container { padding: 25px; }
     h1 { font-size: 2.2em; }
-    h1::before, h1::after { font-size: 0.8em; }
-    h1::before { left: -15px; }
-    h1::after { right: -15px; }
     .my-name span { font-size: 1.2em; }
     .motivation-box span { font-size: 0.95em; padding: 10px 20px; }
     .section-card { font-size: 1.1em; padding: 18px; }
