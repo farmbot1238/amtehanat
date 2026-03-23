@@ -14,7 +14,6 @@ function buildMenu() {
             // قسم مميز
             const featuredDiv = document.createElement('div');
             featuredDiv.className = 'featured-section';
-            featuredDiv.style.animationDelay = `${index * 0.1}s`;
             
             featuredDiv.innerHTML = `
                 <div class="featured-header">
@@ -37,7 +36,6 @@ function buildMenu() {
             // قسم عادي
             const sectionDiv = document.createElement('div');
             sectionDiv.className = 'menu-section';
-            sectionDiv.style.animationDelay = `${index * 0.1}s`;
             
             sectionDiv.innerHTML = `
                 <div class="menu-section-title">${section.title}</div>
@@ -79,9 +77,6 @@ function handleAction(action, url, buttonElement) {
         case 'link':
             window.open(url, '_blank');
             break;
-        case 'email':
-            window.location.href = `mailto:${url}`;
-            break;
         default:
             console.warn('Unknown action:', action);
     }
@@ -109,25 +104,6 @@ function hideLoading() {
     }
 }
 
-// إنشاء جزيئات متحركة
-function createParticles() {
-    const particlesContainer = document.getElementById('particles');
-    if (!particlesContainer) return;
-    
-    const particleCount = 50;
-    for (let i = 0; i < particleCount; i++) {
-        const particle = document.createElement('div');
-        particle.classList.add('particle');
-        const size = Math.random() * 5 + 2;
-        particle.style.width = size + 'px';
-        particle.style.height = size + 'px';
-        particle.style.left = Math.random() * 100 + '%';
-        particle.style.animationDuration = Math.random() * 10 + 10 + 's';
-        particle.style.animationDelay = Math.random() * 10 + 's';
-        particlesContainer.appendChild(particle);
-    }
-}
-
 // تبديل القائمة للجوال
 function toggleSidebar() {
     document.getElementById('sidebar').classList.toggle('open');
@@ -151,7 +127,7 @@ function showWelcome() {
     
     container.innerHTML = `
         <div style="display: flex; justify-content: center; align-items: center; height: 100%; background: linear-gradient(145deg, #1e3c5c, #0f2a3f); color: white; text-align: center; padding: 20px; flex-direction:column;">
-            <i class="fas fa-graduation-cap" style="font-size: 4rem; color:#f9b81b; margin-bottom:20px; animation: bounce 2s ease infinite;"></i>
+            <i class="fas fa-graduation-cap" style="font-size: 4rem; color:#f9b81b; margin-bottom:20px;"></i>
             <h2>مرحباً بك في منصة ${SITE_CONFIG.siteName}</h2>
             <p style="margin:15px 0; font-size:1.1rem;">${SITE_CONFIG.ownerName} | متعاونين على التفوق</p>
             <div style="margin-top:20px; font-size:0.9rem; opacity:0.8;">اختر القسم المناسب من القائمة الجانبية</div>
@@ -161,7 +137,6 @@ function showWelcome() {
 
 // تهيئة الموقع
 document.addEventListener('DOMContentLoaded', () => {
-    createParticles();
     buildMenu();
     showWelcome();
     
