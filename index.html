@@ -119,6 +119,85 @@
             color: #f9b81b;
         }
 
+        /* قسم متعاونين على التفوق المميز */
+        .featured-section {
+            margin: 20px 15px;
+            background: linear-gradient(135deg, rgba(249, 184, 27, 0.2), rgba(249, 184, 27, 0.05));
+            border-radius: 20px;
+            border: 2px solid #f9b81b;
+            overflow: hidden;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(249, 184, 27, 0.4);
+            }
+            70% {
+                box-shadow: 0 0 0 10px rgba(249, 184, 27, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(249, 184, 27, 0);
+            }
+        }
+
+        .featured-header {
+            background: linear-gradient(135deg, #f9b81b, #e5a00d);
+            padding: 12px;
+            text-align: center;
+            color: #1e3c5c;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .featured-header i {
+            margin: 0 5px;
+        }
+
+        .featured-content {
+            padding: 15px;
+            text-align: center;
+        }
+
+        .discord-btn-special {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #5865F2, #4752c4);
+            border: none;
+            color: white;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+
+        .discord-btn-special i {
+            font-size: 1.5rem;
+        }
+
+        .discord-btn-special:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(88, 101, 242, 0.3);
+        }
+
+        .featured-text {
+            color: white;
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+
+        .featured-text i {
+            color: #f9b81b;
+            margin-left: 5px;
+        }
+
         /* منطقة المحتوى */
         .content-area {
             margin-right: 300px;
@@ -212,6 +291,22 @@
         </div>
         
         <div class="sidebar-menu">
+            <!-- قسم مميز لمتعاونين على التفوق وسيرفر ديسكورد -->
+            <div class="featured-section">
+                <div class="featured-header">
+                    <i class="fas fa-users"></i> متعاونين على التفوق <i class="fas fa-star"></i>
+                </div>
+                <div class="featured-content">
+                    <div class="featured-text">
+                        <i class="fas fa-lightbulb"></i> تعاون - تنفيذ أفكار - مشاريع
+                    </div>
+                    <button class="discord-btn-special" onclick="window.open('https://discord.gg/78NKW84H', '_blank')">
+                        <i class="fab fa-discord"></i>
+                        <span>🚀 سيرفر ديسكورد | المساعدة الدراسية وتنفيذ الأفكار 🚀</span>
+                    </button>
+                </div>
+            </div>
+
             <!-- الفصل الأول -->
             <div class="menu-section">
                 <div class="menu-section-title">📖 الفصل الأول</div>
@@ -342,8 +437,8 @@
                 <div style="display: flex; justify-content: center; align-items: center; height: 100%; background: linear-gradient(145deg, #1e3c5c, #0f2a3f); color: white; text-align: center; padding: 20px; flex-direction:column;">
                     <i class="fas fa-graduation-cap" style="font-size: 4rem; color:#f9b81b; margin-bottom:20px;"></i>
                     <h2>مرحباً بك في منصة LMJO 09</h2>
-                    <p style="margin:15px 0; font-size:1.1rem;">اختر القسم المناسب من القائمة الجانبية</p>
-                    <div style="margin-top:20px; font-size:0.9rem; opacity:0.8;">عبدالرحمن المعايطه | متعاونين على التفوق</div>
+                    <p style="margin:15px 0; font-size:1.1rem;">عبدالرحمن المعايطه | متعاونين على التفوق</p>
+                    <div style="margin-top:20px; font-size:0.9rem; opacity:0.8;">اختر القسم المناسب من القائمة الجانبية</div>
                 </div>
             `;
         });
