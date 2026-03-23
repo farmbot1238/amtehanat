@@ -6,57 +6,9 @@
 }
 
 body {
+    background: linear-gradient(145deg, #f0f4f8 0%, #d9e2ec 100%);
     min-height: 100vh;
     direction: rtl;
-    position: relative;
-    overflow-x: hidden;
-}
-
-/* خلفية متحركة */
-.animated-bg {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -2;
-    background: linear-gradient(145deg, #f0f4f8 0%, #d9e2ec 100%);
-}
-
-/* جزيئات متحركة */
-.particles {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-    overflow: hidden;
-}
-
-.particle {
-    position: absolute;
-    background: rgba(249, 184, 27, 0.3);
-    border-radius: 50%;
-    animation: floatParticle linear infinite;
-    pointer-events: none;
-}
-
-@keyframes floatParticle {
-    0% {
-        transform: translateY(100vh) rotate(0deg);
-        opacity: 0;
-    }
-    10% {
-        opacity: 0.5;
-    }
-    90% {
-        opacity: 0.5;
-    }
-    100% {
-        transform: translateY(-100vh) rotate(360deg);
-        opacity: 0;
-    }
 }
 
 /* القائمة الجانبية */
@@ -70,52 +22,25 @@ body {
     color: white;
     overflow-y: auto;
     z-index: 100;
-    box-shadow: -5px 0 30px rgba(0,0,0,0.3);
+    box-shadow: -5px 0 20px rgba(0,0,0,0.2);
     transition: all 0.3s ease;
-    backdrop-filter: blur(10px);
-    border-left: 1px solid rgba(249, 184, 27, 0.3);
 }
 
 .sidebar-header {
     padding: 25px 20px;
     text-align: center;
     border-bottom: 3px solid #f9b81b;
-    position: relative;
-    overflow: hidden;
-}
-
-.sidebar-header::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: radial-gradient(circle, rgba(249,184,27,0.1) 0%, transparent 70%);
-    animation: rotate 10s linear infinite;
-}
-
-@keyframes rotate {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
 }
 
 .sidebar-header h1 {
     font-size: 1.8rem;
     color: #f9b81b;
-    text-shadow: 0 0 10px rgba(249,184,27,0.5);
-    animation: glow 2s ease-in-out infinite;
-}
-
-@keyframes glow {
-    0%, 100% { text-shadow: 0 0 5px rgba(249,184,27,0.5); }
-    50% { text-shadow: 0 0 20px rgba(249,184,27,0.8); }
 }
 
 .sidebar-header p {
     font-size: 0.85rem;
     margin-top: 8px;
-    opacity: 0.9;
+    opacity: 0.8;
 }
 
 .sidebar-menu {
@@ -124,18 +49,6 @@ body {
 
 .menu-section {
     margin-bottom: 25px;
-    animation: slideInRight 0.5s ease backwards;
-}
-
-@keyframes slideInRight {
-    from {
-        opacity: 0;
-        transform: translateX(50px);
-    }
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
 }
 
 .menu-section-title {
@@ -146,23 +59,6 @@ body {
     border-right: 3px solid #f9b81b;
     margin: 10px 0 5px 0;
     background: rgba(0,0,0,0.2);
-    position: relative;
-    overflow: hidden;
-}
-
-.menu-section-title::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 0;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(249,184,27,0.2), transparent);
-    transition: width 0.5s ease;
-}
-
-.menu-section-title:hover::after {
-    width: 100%;
 }
 
 .menu-btn {
@@ -177,31 +73,18 @@ body {
     font-size: 0.95rem;
     text-align: right;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.2s ease;
     border-right: 3px solid transparent;
-    position: relative;
-    overflow: hidden;
 }
 
-.menu-btn::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    right: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(249,184,27,0.2), transparent);
-    transition: right 0.5s ease;
-}
-
-.menu-btn:hover::before {
-    right: 100%;
+.menu-btn i {
+    width: 28px;
+    font-size: 1.1rem;
 }
 
 .menu-btn:hover {
     background: rgba(249, 184, 27, 0.2);
     border-right-color: #f9b81b;
-    transform: translateX(-5px);
 }
 
 .menu-btn.active {
@@ -221,39 +104,20 @@ body {
     text-align: center;
     direction: ltr;
     border: 1px dashed rgba(249, 184, 27, 0.3);
-    transition: all 0.3s ease;
 }
 
-.email-text:hover {
-    background: rgba(249, 184, 27, 0.2);
-    transform: scale(1.02);
+.email-text i {
+    margin-left: 8px;
+    color: #f9b81b;
 }
 
-/* قسم مميز */
+/* قسم متعاونين على التفوق المميز */
 .featured-section {
     margin: 20px 15px;
     background: linear-gradient(135deg, rgba(249, 184, 27, 0.2), rgba(249, 184, 27, 0.05));
     border-radius: 20px;
     border: 2px solid #f9b81b;
     overflow: hidden;
-    animation: pulse 2s infinite, borderGlow 2s ease-in-out infinite;
-    transition: all 0.3s ease;
-}
-
-@keyframes pulse {
-    0% { box-shadow: 0 0 0 0 rgba(249, 184, 27, 0.4); }
-    70% { box-shadow: 0 0 0 10px rgba(249, 184, 27, 0); }
-    100% { box-shadow: 0 0 0 0 rgba(249, 184, 27, 0); }
-}
-
-@keyframes borderGlow {
-    0%, 100% { border-color: #f9b81b; }
-    50% { border-color: #ffd966; }
-}
-
-.featured-section:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 30px rgba(249,184,27,0.3);
 }
 
 .featured-header {
@@ -263,8 +127,15 @@ body {
     color: #1e3c5c;
     font-weight: bold;
     font-size: 1.2rem;
-    position: relative;
-    overflow: hidden;
+}
+
+.featured-header i {
+    margin: 0 5px;
+}
+
+.featured-content {
+    padding: 15px;
+    text-align: center;
 }
 
 .discord-btn-special {
@@ -283,13 +154,11 @@ body {
     cursor: pointer;
     transition: all 0.3s ease;
     margin-top: 10px;
-    position: relative;
-    overflow: hidden;
 }
 
 .discord-btn-special:hover {
-    transform: translateY(-3px) scale(1.02);
-    box-shadow: 0 10px 30px rgba(88, 101, 242, 0.5);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(88, 101, 242, 0.3);
 }
 
 .featured-text {
@@ -299,36 +168,24 @@ body {
     line-height: 1.6;
 }
 
+.featured-text i {
+    color: #f9b81b;
+    margin-left: 5px;
+}
+
 /* منطقة المحتوى */
 .content-area {
     margin-right: 300px;
     padding: 20px;
     min-height: 100vh;
-    animation: fadeIn 0.8s ease;
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
 }
 
 .iframe-container {
-    background: rgba(255, 255, 255, 0.95);
+    background: white;
     border-radius: 30px;
     overflow: hidden;
-    box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.1);
     height: calc(100vh - 40px);
-    transition: all 0.3s ease;
-}
-
-.iframe-container:hover {
-    box-shadow: 0 20px 50px rgba(0,0,0,0.2);
 }
 
 iframe {
@@ -338,12 +195,13 @@ iframe {
     background: white;
 }
 
+/* زر القائمة للجوال */
 .mobile-menu-btn {
     display: none;
     position: fixed;
     top: 20px;
     right: 20px;
-    background: linear-gradient(135deg, #1e3c5c, #0f2a3f);
+    background: #1e3c5c;
     color: #f9b81b;
     border: none;
     width: 50px;
@@ -352,8 +210,7 @@ iframe {
     font-size: 1.5rem;
     cursor: pointer;
     z-index: 200;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.3);
-    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
 }
 
 .loading {
@@ -375,6 +232,7 @@ iframe {
     to { transform: rotate(360deg); }
 }
 
+/* للجوال */
 @media (max-width: 768px) {
     .sidebar {
         right: -300px;
