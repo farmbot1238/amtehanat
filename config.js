@@ -40,7 +40,7 @@ const SITE_CONFIG = {
 
 const MENU_STRUCTURE = [
     {
-        title: "🚀 متعاونين على التفوق",
+        title: "متعاونين على التفوق",
         type: "featured",
         items: [
             {
@@ -86,7 +86,6 @@ const MENU_STRUCTURE = [
         type: "normal",
         items: [
             { icon: "fab fa-whatsapp", text: "واتساب (تواصل مباشر)", action: "link", url: SITE_CONFIG.whatsapp },
-            { icon: "fas fa-envelope", text: SITE_CONFIG.email, action: "email", email: SITE_CONFIG.email },
             { icon: "fas fa-pray", text: "دعاء للطالب / اقتراح", action: "link", url: SITE_CONFIG.suggestionForm }
         ]
     }
