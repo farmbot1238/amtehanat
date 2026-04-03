@@ -11,7 +11,6 @@ body {
     direction: rtl;
 }
 
-/* القائمة الجانبية */
 .sidebar {
     position: fixed;
     right: 0;
@@ -93,7 +92,23 @@ body {
     color: #f9b81b;
 }
 
-/* نص الإيميل */
+.new-badge {
+    background: #ff4757;
+    color: white;
+    font-size: 0.65rem;
+    font-weight: bold;
+    padding: 2px 8px;
+    border-radius: 20px;
+    margin-right: 8px;
+    display: inline-block;
+    animation: pulse 1.2s ease infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); background: #ff4757; }
+    50% { opacity: 0.8; transform: scale(1.05); background: #ff6b81; }
+}
+
 .email-text {
     padding: 10px 20px;
     margin: 5px 15px 10px 15px;
@@ -106,74 +121,6 @@ body {
     border: 1px dashed rgba(249, 184, 27, 0.3);
 }
 
-.email-text i {
-    margin-left: 8px;
-    color: #f9b81b;
-}
-
-/* قسم متعاونين على التفوق المميز */
-.featured-section {
-    margin: 20px 15px;
-    background: linear-gradient(135deg, rgba(249, 184, 27, 0.2), rgba(249, 184, 27, 0.05));
-    border-radius: 20px;
-    border: 2px solid #f9b81b;
-    overflow: hidden;
-}
-
-.featured-header {
-    background: linear-gradient(135deg, #f9b81b, #e5a00d);
-    padding: 12px;
-    text-align: center;
-    color: #1e3c5c;
-    font-weight: bold;
-    font-size: 1.2rem;
-}
-
-.featured-header i {
-    margin: 0 5px;
-}
-
-.featured-content {
-    padding: 15px;
-    text-align: center;
-}
-
-.discord-btn-special {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 12px;
-    width: 100%;
-    padding: 15px;
-    background: linear-gradient(135deg, #5865F2, #4752c4);
-    border: none;
-    color: white;
-    font-size: 1rem;
-    font-weight: bold;
-    border-radius: 15px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    margin-top: 10px;
-}
-
-.discord-btn-special:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(88, 101, 242, 0.3);
-}
-
-.featured-text {
-    color: white;
-    font-size: 0.9rem;
-    margin-bottom: 10px;
-    line-height: 1.6;
-}
-
-.featured-text i {
-    color: #f9b81b;
-    margin-left: 5px;
-}
-
-/* منطقة المحتوى */
 .content-area {
     margin-right: 300px;
     padding: 20px;
@@ -183,7 +130,7 @@ body {
 .iframe-container {
     background: white;
     border-radius: 30px;
-    overflow: hidden;
+    overflow: auto;
     box-shadow: 0 15px 30px rgba(0,0,0,0.1);
     height: calc(100vh - 40px);
 }
@@ -192,10 +139,8 @@ iframe {
     width: 100%;
     height: 100%;
     border: none;
-    background: white;
 }
 
-/* زر القائمة للجوال */
 .mobile-menu-btn {
     display: none;
     position: fixed;
@@ -232,11 +177,137 @@ iframe {
     to { transform: rotate(360deg); }
 }
 
-/* للجوال */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.8);
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background: white;
+    padding: 30px;
+    border-radius: 30px;
+    max-width: 450px;
+    width: 90%;
+    text-align: center;
+    direction: rtl;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.modal-content input {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #e0e0e0;
+    border-radius: 15px;
+    margin-bottom: 15px;
+    text-align: center;
+    font-size: 1rem;
+}
+
+.subscribe-btn {
+    background: linear-gradient(135deg, #f9b81b, #e5a00d);
+    border: none;
+    padding: 12px 30px;
+    border-radius: 30px;
+    color: #1e3c5c;
+    font-weight: bold;
+    cursor: pointer;
+    width: 100%;
+}
+
+.cancel-btn {
+    background: transparent;
+    border: none;
+    color: #999;
+    margin-top: 15px;
+    cursor: pointer;
+    width: 100%;
+}
+
+.unsubscribe-section {
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid #eee;
+}
+
+.unsubscribe-section p {
+    font-size: 0.8rem;
+    color: #666;
+    margin-bottom: 8px;
+}
+
+.unsubscribe-btn {
+    background: #c62828;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 30px;
+    cursor: pointer;
+    width: 100%;
+    font-weight: bold;
+    margin-top: 5px;
+}
+
+.unsubscribe-btn:hover {
+    background: #b71c1c;
+}
+
+.status-message {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    right: 20px;
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 12px 20px;
+    border-radius: 12px;
+    text-align: center;
+    z-index: 1100;
+    display: none;
+    animation: slideUp 0.3s ease;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+    font-weight: bold;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(100px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.status-message.success {
+    background: #2e7d32;
+    color: white;
+    border-right: 4px solid #f9b81b;
+}
+
+.status-message.error {
+    background: #c62828;
+    color: white;
+    border-right: 4px solid #f9b81b;
+}
+
+.status-message.info {
+    background: #f9b81b;
+    color: #1e3c5c;
+}
+
 @media (max-width: 768px) {
     .sidebar {
         right: -300px;
-        transition: right 0.3s ease;
         width: 280px;
     }
     .sidebar.open {
