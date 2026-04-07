@@ -135,7 +135,8 @@ function showWelcome() {
                 <h2 style="margin-bottom: 15px;">مرحباً بك في منصة ${SITE_CONFIG.siteName}</h2>
                 <p style="margin-bottom: 30px; font-size: 1.1rem;">✨ متعاونون على التفوق ✨</p>
                 
-                <div style="margin: 30px auto; padding: 25px; background: rgba(255,255,255,0.1); border-radius: 30px; border-right: 4px solid #f9b81b;">
+                <!-- مقولة الدكتور خالد دعجه (باهتة) -->
+                <div style="margin: 30px auto; padding: 25px; background: rgba(255,255,255,0.1); border-radius: 30px; border-right: 4px solid #f9b81b; opacity: 0.7;">
                     <i class="fas fa-quote-right" style="color: #f9b81b; font-size: 1.5rem;"></i>
                     <p style="margin: 20px 0; line-height: 1.8; font-size: 1.1rem;">${quoteLines}</p>
                     <div style="margin-top: 10px;">الدكتور خالد دعجه</div>
