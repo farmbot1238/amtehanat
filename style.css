@@ -117,9 +117,9 @@ body {
     min-height: 100vh;
 }
 
-/* زر القائمة ☰ - يظهر على جميع الأجهزة */
+/* زر القائمة ☰ - يظهر على جميع الأجهزة (بدون أي شرط) */
 .mobile-menu-btn {
-    display: flex;
+    display: flex !important;
     align-items: center;
     justify-content: center;
     position: fixed;
@@ -305,7 +305,7 @@ iframe {
     color: #1e3c5c;
 }
 
-/* للشاشات الصغيرة */
+/* للشاشات الصغيرة - فقط تعديل الحجم */
 @media (max-width: 768px) {
     .mobile-menu-btn {
         width: 45px;
