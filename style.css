@@ -118,7 +118,7 @@ body {
     transition: margin-right 0.3s ease;
 }
 
-/* زر القائمة ☰ - يظهر على جميع الأجهزة */
+/* زر القائمة ☰ */
 .mobile-menu-btn {
     display: block;
     position: fixed;
