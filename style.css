@@ -11,7 +11,7 @@ body {
     direction: rtl;
 }
 
-/* القائمة الجانبية - تبدأ مخفية */
+/* القائمة الجانبية - تبدأ مخفية على جميع الأجهزة */
 .sidebar {
     position: fixed;
     right: -300px;
@@ -115,12 +115,13 @@ body {
     margin-right: 0;
     padding: 20px;
     min-height: 100vh;
-    transition: margin-right 0.3s ease;
 }
 
-/* زر القائمة ☰ */
+/* زر القائمة ☰ - يظهر على جميع الأجهزة */
 .mobile-menu-btn {
-    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     position: fixed;
     top: 20px;
     right: 20px;
