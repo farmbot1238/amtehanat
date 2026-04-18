@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>مراجعة أخطائي | مدارك جو</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(145deg, #f0f4f8 0%, #d9e2ec 100%);
+            min-height: 100vh;
+            padding: 30px;
+            direction: rtl;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            color: #1e3c5c;
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            color: #4a5f73;
+        }
+
+        .questions-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .question-card {
+            background: white;
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            border-right: 5px solid #f9b81b;
+            transition: all 0.3s;
+        }
+
+        .question-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        .question-text {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #1e3c5c;
+            margin-bottom: 12px;
+        }
+
+        .wrong-answer {
+            background: #ffebee;
+            padding: 8px 12px;
+            border-radius: 12px;
+            margin: 8px 0;
+            color: #c62828;
+            font-size: 0.95rem;
+        }
+
+        .correct-answer {
+            background: #e8f5e9;
+            padding: 8px 12px;
+            border-radius: 12px;
+            margin: 8px 0;
+            color: #2e7d32;
+            font-size: 0.95rem;
+        }
+
+        .subject-badge {
+            display: inline-block;
+            background: #1e3c5c;
+            color: white;
+            font-size: 0.7rem;
+            padding: 4px 12px;
+            border-radius: 20px;
+            margin-top: 10px;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            background: white;
+            border-radius: 30px;
+        }
+
+        .empty-state i {
+            font-size: 4rem;
+            color: #f9b81b;
+            margin-bottom: 20px;
+        }
+
+        .empty-state h3 {
+            color: #1e3c5c;
+            margin-bottom: 10px;
+        }
+
+        .delete-btn {
+            background: #c62828;
+            color: white;
+            border: none;
+            padding: 6px 15px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            margin-top: 10px;
+            transition: all 0.2s;
+        }
+
+        .delete-btn:hover {
+            background: #b71c1c;
+            transform: scale(1.02);
+        }
+
+        .back-btn {
+            display: inline-block;
+            background: #1e3c5c;
+            color: white;
+            text-decoration: none;
+            padding: 10px 25px;
+            border-radius: 40px;
+            margin-top: 30px;
+            transition: all 0.2s;
+        }
+
+        .back-btn:hover {
+            background: #0f2a3f;
+            transform: translateY(-2px);
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            padding: 20px;
+            color: #6c757d;
+            font-size: 0.8rem;
+        }
+
+        @media (max-width: 600px) {
+            body { padding: 15px; }
+            .question-card { padding: 15px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-edit"></i> مراجعة أخطائي</h1>
+            <p>هذه هي الأسئلة التي أجبت عليها بشكل خاطئ في جميع الاختبارات</p>
+        </div>
+
+        <div id="questionsContainer" class="questions-list">
+            <div class="empty-state">
+                <i class="fas fa-check-circle"></i>
+                <h3>لا توجد أخطاء حالياً</h3>
+                <p>ممتاز! استمر على هذا المنوال 🎉</p>
+            </div>
+        </div>
+
+        <div style="text-align: center;">
+            <a href="index.html" class="back-btn"><i class="fas fa-arrow-right"></i> العودة للرئيسية</a>
+        </div>
+
+        <div class="footer">
+            مدارك جو | تذكر أخطائك لتتعلم منها
+        </div>
+    </div>
+
+    <script>
+        // قائمة جميع المواد (نفس الموجودة في الموقع الرئيسي)
+        const subjects = [
+            'deen_f1', 'arabic_f1', 'history_f1', 'bank_f1',
+            'deen_f2', 'arabic_f2', 'history_f2', 'english_f2',
+            'speed_challenge', 'speed_daily', 'timer', 'exams', 'books'
+        ];
+
+        // أسماء المواد للعرض
+        const subjectNames = {
+            deen_f1: "📖 الدين - الفصل الأول",
+            arabic_f1: "📖 العربي - الفصل الأول",
+            history_f1: "📖 التاريخ - الفصل الأول",
+            bank_f1: "📚 بنوك الفصل الأول",
+            deen_f2: "📖 الدين - الفصل الثاني",
+            arabic_f2: "📖 العربي - الفصل الثاني",
+            history_f2: "📖 التاريخ - الفصل الثاني",
+            english_f2: "📖 الانجليزي - الفصل الثاني",
+            speed_challenge: "⚡ تحدي السرعة الشامل",
+            speed_daily: "⚡ تحدي السرعة اليومي",
+            timer: "⏱️ Timer",
+            exams: "📝 امتحانات وزارية",
+            books: "📚 كتب وزارية"
+        };
+
+        function loadWrongQuestions() {
+            const container = document.getElementById('questionsContainer');
+            let allWrong = [];
+            let hasErrors = false;
+
+            for (let sub of subjects) {
+                let data = localStorage.getItem(`wrongQuestions_${sub}`);
+                if (data) {
+                    let list = JSON.parse(data);
+                    if (list.length > 0) {
+                        hasErrors = true;
+                        list.forEach(q => {
+                            allWrong.push({
+                                subject: sub,
+                                subjectName: subjectNames[sub] || sub,
+                                text: q.text,
+                                userAnswer: q.userAnswer,
+                                correctAnswer: q.correctAnswer,
+                                date: q.date
+                            });
+                        });
+                    }
+                }
+            }
+
+            if (!hasErrors) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-check-circle"></i>
+                        <h3>🎉 لا توجد أخطاء حالياً</h3>
+                        <p>ممتاز! استمر على هذا المنوال</p>
+                    </div>
+                `;
+                return;
+            }
+
+            // عرض الأسئلة الخاطئة
+            container.innerHTML = '';
+            allWrong.forEach((q, index) => {
+                const card = document.createElement('div');
+                card.className = 'question-card';
+                card.innerHTML = `
+                    <div class="question-text">
+                        <i class="fas fa-question-circle"></i> ${q.text}
+                    </div>
+                    <div class="wrong-answer">
+                        <i class="fas fa-times-circle"></i> إجابتك: ${q.userAnswer}
+                    </div>
+                    <div class="correct-answer">
+                        <i class="fas fa-check-circle"></i> الإجابة الصحيحة: ${q.correctAnswer}
+                    </div>
+                    <div>
+                        <span class="subject-badge"><i class="fas fa-folder"></i> ${q.subjectName}</span>
+                        <button class="delete-btn" data-subject="${q.subject}" data-question="${q.text.replace(/['"]/g, '\\"')}" onclick="removeQuestion(this)">
+                            <i class="fas fa-trash"></i> أتقنته، احذفه
+                        </button>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function removeQuestion(btn) {
+            const subject = btn.getAttribute('data-subject');
+            const questionText = btn.getAttribute('data-question');
+            
+            let key = `wrongQuestions_${subject}`;
+            let data = localStorage.getItem(key);
+            if (data) {
+                let list = JSON.parse(data);
+                let newList = list.filter(q => q.text !== questionText);
+                localStorage.setItem(key, JSON.stringify(newList));
+                // إعادة تحميل الصفحة لتحديث القائمة
+                loadWrongQuestions();
+            }
+        }
+
+        // تحميل الأسئلة عند فتح الصفحة
+        loadWrongQuestions();
+    </script>
+</body>
+</html>
