@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>قسم التاريخ - الأردن</title>
+    <link rel="stylesheet" href="style.css" id="mainStyle">
+    <style id="antiTheftStyle">
+        /* حماية ضد السرقة - تظهر رسالة الاستهزاء إذا الملفات ناقصة */
+        .anti-theft-message {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #000000 0%, #1a0000 50%, #000000 100%);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            flex-direction: column;
+            font-family: 'Courier New', monospace;
+            animation: bgPulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes bgPulse {
+            0%, 100% { background: linear-gradient(135deg, #000000, #1a0000, #000000); }
+            50% { background: linear-gradient(135deg, #1a0000, #2a0000, #1a0000); }
+        }
+        
+        .anti-theft-message .troll-container {
+            background: rgba(0, 0, 0, 0.9);
+            padding: 60px 80px;
+            border-radius: 70px;
+            border: 4px solid;
+            border-image: linear-gradient(45deg, #ff0000, #ff6600, #ff0000) 1;
+            animation: borderGlow 0.8s ease-in-out infinite;
+            box-shadow: 0 0 80px rgba(255, 0, 0, 0.5);
+            transform: scale(1);
+            animation: containerPulse 0.5s ease-in-out infinite;
+        }
+        
+        @keyframes borderGlow {
+            0%, 100% { border-color: #ff0000; box-shadow: 0 0 60px rgba(255, 0, 0, 0.5); }
+            50% { border-color: #ff6600; box-shadow: 0 0 100px rgba(255, 102, 0, 0.8); }
+        }
+        
+        @keyframes containerPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+        }
+        
+        .anti-theft-message .laugh-emoji {
+            font-size: 7em;
+            display: inline-block;
+            animation: laughBounce 0.6s ease-in-out infinite, glitch 0.3s infinite;
+            filter: drop-shadow(0 0 15px #ff0000);
+        }
+        
+        @keyframes laughBounce {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            25% { transform: translateY(-20px) rotate(-10deg); }
+            75% { transform: translateY(10px) rotate(10deg); }
+        }
+        
+        @keyframes glitch {
+            0%, 100% { text-shadow: -3px 0 #ff0000, 3px 0 #ff6600; }
+            25% { text-shadow: -5px 0 #ff0000, 5px 0 #ff6600; transform: skew(2deg); }
+            75% { text-shadow: -2px 0 #ff0000, 2px 0 #ff6600; transform: skew(-2deg); }
+        }
+        
+        .anti-theft-message h1 {
+            font-size: 4.5em;
+            color: #ff3333;
+            margin: 25px 0;
+            font-family: monospace;
+            letter-spacing: 5px;
+            animation: titleShake 0.2s infinite;
+            text-shadow: 3px 3px 0px #660000;
+        }
+        
+        @keyframes titleShake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-8px); }
+            75% { transform: translateX(8px); }
+        }
+        
+        .anti-theft-message p {
+            font-size: 1.8em;
+            color: #ff8888;
+            margin: 18px 0;
+            font-weight: bold;
+            animation: textFlicker 1s infinite;
+        }
+        
+        @keyframes textFlicker {
+            0%, 100% { opacity: 1; text-shadow: 0 0 5px #ff3333; }
+            50% { opacity: 0.7; text-shadow: 0 0 15px #ff3333; }
+        }
+        
+        .anti-theft-message .second-line {
+            font-size: 2em;
+            color: #ff6666;
+            animation: textFlicker 0.6s infinite;
+        }
+        
+        .anti-theft-message .skull {
+            font-size: 4em;
+            margin: 20px 0;
+            animation: skullSpin 1s ease-in-out infinite;
+            filter: drop-shadow(0 0 10px #ff3300);
+        }
+        
+        @keyframes skullSpin {
+            0%, 100% { transform: rotate(0deg) scale(1); }
+            25% { transform: rotate(15deg) scale(1.1); }
+            75% { transform: rotate(-15deg) scale(1.1); }
+        }
+        
+        .anti-theft-message .blink {
+            font-size: 2.5em;
+            color: #ff6666;
+            margin-top: 20px;
+            animation: blinkCursor 0.8s step-end infinite;
+            font-family: monospace;
+        }
+        
+        @keyframes blinkCursor {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+        
+        .anti-theft-message .decoration-line {
+            color: #ff6633;
+            font-size: 1.5em;
+            margin: 20px 0;
+            letter-spacing: 5px;
+            animation: linePulse 1s infinite;
+        }
+        
+        @keyframes linePulse {
+            0%, 100% { opacity: 0.5; letter-spacing: 5px; }
+            50% { opacity: 1; letter-spacing: 10px; text-shadow: 0 0 10px #ff6633; }
+        }
+        
+        .hidden-content {
+            display: none !important;
+        }
+        
+        /* منع تحديد النص */
+        .anti-theft-message {
+            user-select: none;
+            -webkit-user-select: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- رسالة الاستهزاء - تظهر فقط إذا الملفات ناقصة -->
+    <div id="antiTheftMessage" class="anti-theft-message" style="display: none;">
+        <div class="troll-container">
+            <div>
+                <span class="laugh-emoji">😂😂😂</span>
+                <h1>هههههههههههههههه</h1>
+                <div class="decoration-line">═══════⟠═══════</div>
+                <p>مفكر حالك قوي بتحاول تسرق الموقع؟</p>
+                <p class="second-line">أقول ارجع وراك</p>
+                <div class="decoration-line">═══════⟠═══════</div>
+                <div class="skull">💀😈💀</div>
+                <p style="font-size: 1.3em;">مش بهالسهولة يالحبيب 😎</p>
+                <div class="blink">_</div>
+                <span class="laugh-emoji">🤣🤣🤣</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- المحتوى الحقيقي - يختفي إذا الملفات ناقصة -->
+    <div id="mainContent" class="container hidden-content">
+        <!-- الشاشة الرئيسية -->
+        <div id="menuScreen">
+            <h1>قسم التاريخ الأردني</h1>
+            <h2>اختر الاختبار الذي تريد</h2>
+            <div class="main-menu">
+                <button class="menu-btn" data-unit="political">🏛️ الحياة السياسية</button>
+                <button class="menu-btn" data-unit="economic">💼 الحياة الاقتصادية</button>
+                <button class="menu-btn" data-unit="social">👥 الحياة الاجتماعية</button>
+                <button class="menu-btn" data-unit="education">📖 التعليم والثقافة</button>
+                <button class="menu-btn" data-unit="palestine">🇵🇸 الأردن وفلسطين</button>
+                <button class="menu-btn special" id="comprehensiveBtn">📜 الامتحان الشامل (50 سؤال)</button>
+            </div>
+            <div class="footer-note">كل وحدة تحتوي على 20 سؤالاً | الشامل 50 سؤالاً عشوائياً</div>
+        </div>
+
+        <!-- شاشة الاختبار والنتيجة -->
+        <div id="quizScreen" class="hidden">
+            <div class="unit-header">
+                <button class="back-btn" id="backToMenuBtn">🔙 الرجوع</button>
+                <span class="unit-title" id="unitTitle">الوحدة</span>
+                <span class="unit-stats" id="progressText">سؤال 1 / 20</span>
+            </div>
+
+            <!-- منطقة التحميل -->
+            <div id="loadingArea" class="loading-overlay hidden">
+                <div class="spinner"></div>
+                <p>جاري تحميل الأسئلة...</p>
+            </div>
+
+            <!-- منطقة الاختبار -->
+            <div id="quizArea" class="hidden">
+                <div class="quiz-container">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                    <div class="question-text" id="questionText">جاري التحميل...</div>
+                    <div class="options-grid" id="optionsContainer"></div>
+                    <div class="nav-buttons">
+                        <button class="nav-btn" id="prevBtn">السابق</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- منطقة النتيجة -->
+            <div id="resultArea" class="hidden">
+                <div class="result-card">
+                    <h1>نتيجة الاختبار</h1>
+                    <div class="result-score" id="scoreCard">
+                        <span id="scoreValue">0</span>
+                        <span> / </span>
+                        <span id="totalQuestionsValue">0</span>
+                    </div>
+                    <div class="result-message" id="resultMessage"></div>
+                    <div class="result-percentage" id="resultPercentage"></div>
+                    <button class="back-btn" id="returnToMenuBtn">امتحان جديد</button>
+                    <div class="answers-review">
+                        <h3>✧ مراجعة الإجابات ✧</h3>
+                        <div id="answersReview"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js" id="mainScript"></script>
+    <script>
+        // نظام حماية ضد السرقة - يتحقق من وجود جميع الملفات
+        (function() {
+            const antiTheftMessage = document.getElementById('antiTheftMessage');
+            const mainContent = document.getElementById('mainContent');
+            
+            // التحقق من وجود ملف CSS
+            function isCSSLoaded() {
+                const styleSheets = document.styleSheets;
+                for (let i = 0; i < styleSheets.length; i++) {
+                    if (styleSheets[i].href && styleSheets[i].href.includes('style.css')) {
+                        try {
+                            const rules = styleSheets[i].cssRules;
+                            if (rules && rules.length > 0) {
+                                return true;
+                            }
+                        } catch(e) {
+                            return false;
+                        }
+                    }
+                }
+                return false;
+            }
+            
+            // التحقق من وجود جميع الملفات
+            async function checkAllFiles() {
+                const filesToCheck = ['style.css', 'script.js', 'questions.json'];
+                let allFilesExist = true;
+                
+                for (const file of filesToCheck) {
+                    try {
+                        const response = await fetch(file, { method: 'HEAD' });
+                        if (!response.ok) {
+                            allFilesExist = false;
+                            break;
+                        }
+                    } catch (error) {
+                        allFilesExist = false;
+                        break;
+                    }
+                }
+                
+                return allFilesExist;
+            }
+            
+            // انتظار قليل ثم التحقق
+            setTimeout(async () => {
+                const allFilesExist = await checkAllFiles();
+                const cssLoaded = isCSSLoaded();
+                const scriptLoaded = typeof window.ExamApp !== 'undefined';
+                
+                if (!allFilesExist || !cssLoaded || !scriptLoaded) {
+                    // عرض رسالة الاستهزاء
+                    antiTheftMessage.style.display = 'flex';
+                    mainContent.classList.add('hidden-content');
+                    
+                    // تغيير عنوان الصفحة
+                    document.title = '😂 Nice Try! 😂';
+                    
+                    // منع النقر بزر الماوس الأيمن
+                    document.addEventListener('contextmenu', function(e) {
+                        e.preventDefault();
+                        alert('هههههههههههه مفكر تحفظ الموقع؟ 😂');
+                        return false;
+                    });
+                    
+                    // منع محاولات فتح أدوات المطور
+                    document.addEventListener('keydown', function(e) {
+                        if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && e.key === 'I') || (e.ctrlKey && e.key === 'u')) {
+                            e.preventDefault();
+                            alert('لا لا لا... 😂');
+                        }
+                    });
+                    
+                    // مسح الـ console وإضافة رسائل استهزاء
+                    console.clear();
+                    console.log('%c🚫 ممنوع السرقة 🚫', 'color: red; font-size: 25px; font-weight: bold;');
+                    console.log('%c🤣 شكلك مفكر حالك فاهم ههههههههه', 'color: orange; font-size: 18px;');
+                    console.log('%c😎 ارجع وراك يالحبيب', 'color: red; font-size: 20px; font-weight: bold;');
+                    
+                    // إضافة رموز طائرة في الشاشة
+                    setInterval(() => {
+                        const emojis = ['😂', '🤣', '💀', '😈', 'هههه', 'لا', 'تسرق', '😎', '🤡', '🃏'];
+                        const troll = document.createElement('div');
+                        troll.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+                        troll.style.position = 'fixed';
+                        troll.style.left = Math.random() * window.innerWidth + 'px';
+                        troll.style.top = Math.random() * window.innerHeight + 'px';
+                        troll.style.fontSize = Math.random() * 50 + 25 + 'px';
+                        troll.style.opacity = '0.7';
+                        troll.style.pointerEvents = 'none';
+                        troll.style.zIndex = '10000';
+                        troll.style.animation = 'laughBounce 0.5s ease-out';
+                        troll.style.fontFamily = 'monospace';
+                        document.body.appendChild(troll);
+                        setTimeout(() => troll.remove(), 1500);
+                    }, 400);
+                } else {
+                    // جميع الملفات موجودة، عرض المحتوى الحقيقي
+                    antiTheftMessage.style.display = 'none';
+                    mainContent.classList.remove('hidden-content');
+                    
+                    // تهيئة التطبيق
+                    if (typeof window.ExamApp !== 'undefined' && window.ExamApp.init) {
+                        window.ExamApp.init();
+                    }
+                }
+            }, 1000);
+        })();
+    </script>
+</body>
+</html>
