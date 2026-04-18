@@ -724,8 +724,7 @@
                 { icon: "fas fa-share-alt", text: "📂 مشاركة ملفات الدراسة", action: "iframe", url: SITE_CONFIG.shareFiles },
                 { icon: "fab fa-discord", text: "سيرفر ديسكورد", action: "link", url: SITE_CONFIG.discord },
                 { icon: "fab fa-youtube", text: "📢 تحديثات الموقع أولاً بأول", action: "link", url: SITE_CONFIG.youtubePosts },
-                { icon: "fas fa-brain", text: "📓 NoteBookLM", action: "link", url: SITE_CONFIG.notebookLM },
-                { icon: "fas fa-edit", text: "📝 مراجعة أخطائي", action: "link", url: SITE_CONFIG.reviewPage }
+                { icon: "fas fa-brain", text: "📓 NoteBookLM", action: "link", url: SITE_CONFIG.notebookLM }
             ]},
             { title: "📖 الفصل الأول", items: [
                 { icon: "fas fa-mosque", text: "الدين (الفصل الأول)", action: "iframe", url: SITE_CONFIG.links.deen_f1 },
@@ -750,6 +749,9 @@
                 { icon: "fas fa-bell", text: "📧 اشترك في تحديثات الموقع", action: "subscribe", url: "" },
                 { icon: "fas fa-envelope", text: "📧 البريد الإلكتروني", action: "email", url: SITE_CONFIG.email },
                 { icon: "fas fa-pray", text: "دعاء للطالب / اقتراح", action: "iframe", url: SITE_CONFIG.suggestionForm }
+            ]},
+            { title: "📝 مراجعة الأخطاء", items: [
+                { icon: "fas fa-edit", text: "📝 مراجعة أخطائي", action: "iframe", url: SITE_CONFIG.reviewPage }
             ]}
         ];
 
@@ -803,7 +805,8 @@
             }
             msg += `\n\nهل تريد مراجعة الأسئلة الخاطئة الآن؟`;
             if (confirm(msg)) {
-                window.open(SITE_CONFIG.reviewPage, '_blank');
+                loadIframe(SITE_CONFIG.reviewPage);
+                document.getElementById('sidebar').classList.remove('open');
             }
         }
 
