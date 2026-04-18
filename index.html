@@ -681,7 +681,8 @@
             reward: "reward/index.html",
             shareFiles: "shareFiles/index.html",
             youtubePosts: "https://www.youtube.com/@Pyabd/posts",
-            notebookLM: "notebookLM/index.html",
+            notebookLM: "https://notebooklm.google.com/notebook/20623484-45c7-4f42-9421-655b2b3d2e0d",
+            reviewPage: "review.html",
             links: {
                 deen_f1: "deen_f1/index.html",
                 arabic_f1: "arabic_f1/index.html",
@@ -723,7 +724,8 @@
                 { icon: "fas fa-share-alt", text: "📂 مشاركة ملفات الدراسة", action: "iframe", url: SITE_CONFIG.shareFiles },
                 { icon: "fab fa-discord", text: "سيرفر ديسكورد", action: "link", url: SITE_CONFIG.discord },
                 { icon: "fab fa-youtube", text: "📢 تحديثات الموقع أولاً بأول", action: "link", url: SITE_CONFIG.youtubePosts },
-                { icon: "fas fa-brain", text: "📓 NoteBookLM", action: "iframe", url: SITE_CONFIG.notebookLM }
+                { icon: "fas fa-brain", text: "📓 NoteBookLM", action: "link", url: SITE_CONFIG.notebookLM },
+                { icon: "fas fa-edit", text: "📝 مراجعة أخطائي", action: "link", url: SITE_CONFIG.reviewPage }
             ]},
             { title: "📖 الفصل الأول", items: [
                 { icon: "fas fa-mosque", text: "الدين (الفصل الأول)", action: "iframe", url: SITE_CONFIG.links.deen_f1 },
@@ -769,6 +771,40 @@
         function loadTheme() {
             const saved = localStorage.getItem('selectedTheme');
             applyTheme(saved === 'gray' ? 'gray' : 'default');
+        }
+
+        // ========== نظام مراجعة الأخطاء ==========
+        function checkForWrongQuestions() {
+            const subjects = [
+                'deen_f1', 'arabic_f1', 'history_f1', 'bank_f1',
+                'deen_f2', 'arabic_f2', 'history_f2', 'english_f2',
+                'speed_challenge', 'speed_daily', 'timer', 'exams', 'books'
+            ];
+            let wrongSummary = [];
+            for (let sub of subjects) {
+                let data = localStorage.getItem(`wrongQuestions_${sub}`);
+                if (data) {
+                    let list = JSON.parse(data);
+                    if (list.length > 0) {
+                        wrongSummary.push({ subject: sub, count: list.length });
+                    }
+                }
+            }
+            if (wrongSummary.length > 0) {
+                showWrongNotification(wrongSummary);
+            }
+        }
+
+        function showWrongNotification(summary) {
+            let total = summary.reduce((s, item) => s + item.count, 0);
+            let msg = `📚 لديك ${total} سؤال خاطئ بحاجة إلى مراجعة:\n`;
+            for (let item of summary) {
+                msg += `\n• ${item.subject}: ${item.count} سؤال`;
+            }
+            msg += `\n\nهل تريد مراجعة الأسئلة الخاطئة الآن؟`;
+            if (confirm(msg)) {
+                window.open(SITE_CONFIG.reviewPage, '_blank');
+            }
         }
 
         // Sorting
@@ -947,7 +983,7 @@
         loadTheme();
         loadSectionsOrder();
         loadItemsOrders();
-        document.addEventListener('DOMContentLoaded', () => { buildMenu(); showWelcome(); });
+        document.addEventListener('DOMContentLoaded', () => { buildMenu(); showWelcome(); checkForWrongQuestions(); });
         if ('serviceWorker' in navigator) navigator.serviceWorker.register('/sw.js').catch(e=>console.log);
     </script>
 </body>
