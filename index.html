@@ -137,7 +137,6 @@
             display: flex;
         }
 
-        /* كل خيار داخل الإعدادات */
         .settings-option {
             display: flex;
             align-items: center;
@@ -164,7 +163,6 @@
             background: #374151;
         }
 
-        /* قسم الثيمات داخل الإعدادات */
         .theme-selector {
             display: flex;
             justify-content: space-between;
@@ -200,7 +198,6 @@
             display: inline-block;
         }
 
-        /* وضع الترتيب (sort) */
         .sort-toggle {
             display: flex;
             justify-content: space-between;
@@ -671,32 +668,33 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
     <script>
+        // ========== CONFIG ==========
         const SITE_CONFIG = {
             siteName: "مدارك جو",
             email: "abdalrhmanmaaith1@gmail.com",
             discord: "https://discord.gg/CpF8Uk8Yt",
             suggestionForm: "https://docs.google.com/forms/d/e/1FAIpQLSeOP7ow84vcJ-q8tm4YlHsKMCuGdoL-E5OCJw6C66PDrbMpWw/viewform",
             googleScriptURL: "https://script.google.com/macros/s/AKfycbzT1wNRWEgVeVTtvKXhMpG-rVBPTdG99ubHG3c3mzax1TBHIfvxaHa6AxqnPygfeUkU/exec",
-            timer: "https://farmbot1238.github.io/timer/",
-            chat: "https://cooperate-and-conquer.lovable.app",
-            achievement: "https://my-achievement-buddy.lovable.app",
-            reward: "https://spiritual-boost.lovable.app",
-            shareFiles: "https://unified-login-pal.lovable.app",
+            timer: "timer/index.html",
+            chat: "chat/index.html",
+            achievement: "achievement/index.html",
+            reward: "reward/index.html",
+            shareFiles: "shareFiles/index.html",
             youtubePosts: "https://www.youtube.com/@Pyabd/posts",
-            notebookLM: "https://notebooklm.google.com/notebook/20623484-45c7-4f42-9421-655b2b3d2e0d",
+            notebookLM: "notebookLM/index.html",
             links: {
-                deen_f1: "https://farmbot1238.github.io/DEEN/",
-                arabic_f1: "https://farmbot1238.github.io/Ardic/",
-                history_f1: "https://farmbot1238.github.io/MMMNII/",
-                bank_f1: "https://farmbot1238.github.io/BNK/",
-                deen_f2: "https://farmbot1238.github.io/d1/",
-                arabic_f2: "https://farmbot1238.github.io/a1/",
-                history_f2: "https://farmbot1238.github.io/t1/",
-                english_f2: "https://farmbot1238.github.io/e1/",
-                speed_challenge: "https://farmbot1238.github.io/thd1/",
-                speed_daily: "https://farmbot1238.github.io/thd2/",
-                exams: "https://farmbot1238.github.io/w2/",
-                books: "https://farmbot1238.github.io/Book/"
+                deen_f1: "deen_f1/index.html",
+                arabic_f1: "arabic_f1/index.html",
+                history_f1: "history_f1/index.html",
+                bank_f1: "bank_f1/index.html",
+                deen_f2: "deen_f2/index.html",
+                arabic_f2: "arabic_f2/index.html",
+                history_f2: "history_f2/index.html",
+                english_f2: "english_f2/index.html",
+                speed_challenge: "speed_challenge/index.html",
+                speed_daily: "speed_daily/index.html",
+                exams: "exams/index.html",
+                books: "books/index.html"
             }
         };
 
@@ -717,127 +715,84 @@
         ];
 
         let MENU_STRUCTURE = [
-            {
-                title: "🏠 الرئيسية",
-                items: [
-                    { icon: "fas fa-home", text: "الصفحة الرئيسية", action: "home", url: "welcome" }
-                ]
-            },
-            {
-                title: "✨ خدماتنا",
-                items: [
-                    { icon: "fas fa-trophy", text: "🏆 الإنجاز", action: "iframe", url: SITE_CONFIG.achievement },
-                    { icon: "fas fa-comments", text: "💬 دردشة دراسية", action: "iframe", url: SITE_CONFIG.chat },
-                    { icon: "fas fa-hands-helping", text: "🌿 أجر وثواب", action: "iframe", url: SITE_CONFIG.reward },
-                    { icon: "fas fa-share-alt", text: "📂 مشاركة ملفات الدراسة", action: "iframe", url: SITE_CONFIG.shareFiles },
-                    { icon: "fab fa-discord", text: "سيرفر ديسكورد", action: "link", url: SITE_CONFIG.discord },
-                    { icon: "fab fa-youtube", text: "📢 تحديثات الموقع أولاً بأول", action: "link", url: SITE_CONFIG.youtubePosts },
-                    { icon: "fas fa-brain", text: "📓 NoteBookLM", action: "link", url: SITE_CONFIG.notebookLM }
-                ]
-            },
-            {
-                title: "📖 الفصل الأول",
-                items: [
-                    { icon: "fas fa-mosque", text: "الدين (الفصل الأول)", action: "iframe", url: SITE_CONFIG.links.deen_f1 },
-                    { icon: "fas fa-book", text: "العربي (الفصل الأول)", action: "iframe", url: SITE_CONFIG.links.arabic_f1 },
-                    { icon: "fas fa-landmark", text: "التاريخ (الفصل الأول)", action: "iframe", url: SITE_CONFIG.links.history_f1 },
-                    { icon: "fas fa-database", text: "📚 بنوك الفصل الأول", action: "iframe", url: SITE_CONFIG.links.bank_f1 }
-                ]
-            },
-            {
-                title: "📘 الفصل الثاني",
-                items: [
-                    { icon: "fas fa-mosque", text: "الدين (الفصل الثاني)", action: "iframe", url: SITE_CONFIG.links.deen_f2 },
-                    { icon: "fas fa-book", text: "العربي (الفصل الثاني)", action: "iframe", url: SITE_CONFIG.links.arabic_f2 },
-                    { icon: "fas fa-landmark", text: "التاريخ (الفصل الثاني)", action: "iframe", url: SITE_CONFIG.links.history_f2 },
-                    { icon: "fas fa-language", text: "الانجليزي (الفصل الثاني)", action: "iframe", url: SITE_CONFIG.links.english_f2 }
-                ]
-            },
-            {
-                title: "⚡ إضافات مفيدة",
-                items: [
-                    { icon: "fas fa-bolt", text: "تحدي السرعة الشامل", action: "iframe", url: SITE_CONFIG.links.speed_challenge },
-                    { icon: "fas fa-star", text: "⚡ تحدي السرعة اليومي ⚡", action: "iframe", url: SITE_CONFIG.links.speed_daily },
-                    { icon: "fas fa-hourglass-half", text: "⏱️ Timer", action: "iframe", url: SITE_CONFIG.timer },
-                    { icon: "fas fa-file-alt", text: "امتحانات وزارية سابقة", action: "iframe", url: SITE_CONFIG.links.exams },
-                    { icon: "fas fa-book-open", text: "كتب وزارية", action: "iframe", url: SITE_CONFIG.links.books }
-                ]
-            },
-            {
-                title: "📞 تواصل واقتراحات",
-                items: [
-                    { icon: "fas fa-bell", text: "📧 اشترك في تحديثات الموقع", action: "subscribe", url: "" },
-                    { icon: "fas fa-envelope", text: "📧 البريد الإلكتروني", action: "email", url: SITE_CONFIG.email },
-                    { icon: "fas fa-pray", text: "دعاء للطالب / اقتراح", action: "iframe", url: SITE_CONFIG.suggestionForm }
-                ]
-            }
+            { title: "🏠 الرئيسية", items: [{ icon: "fas fa-home", text: "الصفحة الرئيسية", action: "home", url: "welcome" }] },
+            { title: "✨ خدماتنا", items: [
+                { icon: "fas fa-trophy", text: "🏆 الإنجاز", action: "iframe", url: SITE_CONFIG.achievement },
+                { icon: "fas fa-comments", text: "💬 دردشة دراسية", action: "iframe", url: SITE_CONFIG.chat },
+                { icon: "fas fa-hands-helping", text: "🌿 أجر وثواب", action: "iframe", url: SITE_CONFIG.reward },
+                { icon: "fas fa-share-alt", text: "📂 مشاركة ملفات الدراسة", action: "iframe", url: SITE_CONFIG.shareFiles },
+                { icon: "fab fa-discord", text: "سيرفر ديسكورد", action: "link", url: SITE_CONFIG.discord },
+                { icon: "fab fa-youtube", text: "📢 تحديثات الموقع أولاً بأول", action: "link", url: SITE_CONFIG.youtubePosts },
+                { icon: "fas fa-brain", text: "📓 NoteBookLM", action: "iframe", url: SITE_CONFIG.notebookLM }
+            ]},
+            { title: "📖 الفصل الأول", items: [
+                { icon: "fas fa-mosque", text: "الدين (الفصل الأول)", action: "iframe", url: SITE_CONFIG.links.deen_f1 },
+                { icon: "fas fa-book", text: "العربي (الفصل الأول)", action: "iframe", url: SITE_CONFIG.links.arabic_f1 },
+                { icon: "fas fa-landmark", text: "التاريخ (الفصل الأول)", action: "iframe", url: SITE_CONFIG.links.history_f1 },
+                { icon: "fas fa-database", text: "📚 بنوك الفصل الأول", action: "iframe", url: SITE_CONFIG.links.bank_f1 }
+            ]},
+            { title: "📘 الفصل الثاني", items: [
+                { icon: "fas fa-mosque", text: "الدين (الفصل الثاني)", action: "iframe", url: SITE_CONFIG.links.deen_f2 },
+                { icon: "fas fa-book", text: "العربي (الفصل الثاني)", action: "iframe", url: SITE_CONFIG.links.arabic_f2 },
+                { icon: "fas fa-landmark", text: "التاريخ (الفصل الثاني)", action: "iframe", url: SITE_CONFIG.links.history_f2 },
+                { icon: "fas fa-language", text: "الانجليزي (الفصل الثاني)", action: "iframe", url: SITE_CONFIG.links.english_f2 }
+            ]},
+            { title: "⚡ إضافات مفيدة", items: [
+                { icon: "fas fa-bolt", text: "تحدي السرعة الشامل", action: "iframe", url: SITE_CONFIG.links.speed_challenge },
+                { icon: "fas fa-star", text: "⚡ تحدي السرعة اليومي ⚡", action: "iframe", url: SITE_CONFIG.links.speed_daily },
+                { icon: "fas fa-hourglass-half", text: "⏱️ Timer", action: "iframe", url: SITE_CONFIG.timer },
+                { icon: "fas fa-file-alt", text: "امتحانات وزارية سابقة", action: "iframe", url: SITE_CONFIG.links.exams },
+                { icon: "fas fa-book-open", text: "كتب وزارية", action: "iframe", url: SITE_CONFIG.links.books }
+            ]},
+            { title: "📞 تواصل واقتراحات", items: [
+                { icon: "fas fa-bell", text: "📧 اشترك في تحديثات الموقع", action: "subscribe", url: "" },
+                { icon: "fas fa-envelope", text: "📧 البريد الإلكتروني", action: "email", url: SITE_CONFIG.email },
+                { icon: "fas fa-pray", text: "دعاء للطالب / اقتراح", action: "iframe", url: SITE_CONFIG.suggestionForm }
+            ]}
         ];
 
         let lastQuoteIndex = -1;
         let subscribedEmails = [];
         let sortMode = false;
-        let isFirstTimeSort = true;   // لتحديد أول مرة يتم فيها تفعيل الترتيب
+        let isFirstTimeSort = true;
 
-        // === دوال الثيمات ===
+        // Theme
         function applyTheme(themeName) {
             document.body.classList.remove('theme-gray');
-            if (themeName === 'gray') {
-                document.body.classList.add('theme-gray');
-            }
+            if (themeName === 'gray') document.body.classList.add('theme-gray');
             localStorage.setItem('selectedTheme', themeName);
-            
             document.querySelectorAll('.theme-badge').forEach(badge => {
                 badge.classList.remove('active');
-                if (badge.getAttribute('data-theme') === themeName) {
-                    badge.classList.add('active');
-                }
+                if (badge.getAttribute('data-theme') === themeName) badge.classList.add('active');
             });
         }
-
         function loadTheme() {
-            const savedTheme = localStorage.getItem('selectedTheme');
-            if (savedTheme === 'gray') applyTheme('gray');
-            else applyTheme('default');
+            const saved = localStorage.getItem('selectedTheme');
+            applyTheme(saved === 'gray' ? 'gray' : 'default');
         }
 
-        // === دوال الترتيب ===
+        // Sorting
         function enableSorting() {
-            $("#menuContainer").sortable({
-                items: ".menu-section",
-                cursor: "move",
-                placeholder: "sort-mode-active",
-                tolerance: "pointer",
-                update: function() { saveSectionsOrder(); }
-            });
+            $("#menuContainer").sortable({ items: ".menu-section", cursor: "move", placeholder: "sort-mode-active", tolerance: "pointer", update: saveSectionsOrder });
             $("#menuContainer").sortable("enable");
             $(".menu-section-items").each(function() {
-                $(this).sortable({
-                    items: ".menu-btn",
-                    cursor: "move",
-                    placeholder: "sort-mode-active",
-                    tolerance: "pointer",
-                    update: function(event, ui) {
-                        const sectionTitle = $(this).closest('.menu-section').find('.menu-section-title').text();
-                        saveItemsOrder(sectionTitle);
-                    }
-                });
+                $(this).sortable({ items: ".menu-btn", cursor: "move", placeholder: "sort-mode-active", tolerance: "pointer", update: function(e, ui) {
+                    const sectionTitle = $(this).closest('.menu-section').find('.menu-section-title').text();
+                    saveItemsOrder(sectionTitle);
+                }});
                 $(this).sortable("enable");
             });
         }
-
         function disableSorting() {
             if ($("#menuContainer").hasClass("ui-sortable")) $("#menuContainer").sortable("disable");
-            $(".menu-section-items").each(function() {
-                if ($(this).hasClass("ui-sortable")) $(this).sortable("disable");
-            });
+            $(".menu-section-items").each(function() { if ($(this).hasClass("ui-sortable")) $(this).sortable("disable"); });
         }
-
         function saveSectionsOrder() {
             const sections = [];
             $("#menuContainer .menu-section").each(function() {
                 const title = $(this).find(".menu-section-title").text();
-                const originalSection = MENU_STRUCTURE.find(s => s.title === title);
-                if (originalSection) sections.push(originalSection);
+                const original = MENU_STRUCTURE.find(s => s.title === title);
+                if (original) sections.push(original);
             });
             if (sections.length === MENU_STRUCTURE.length) {
                 MENU_STRUCTURE.length = 0;
@@ -845,104 +800,61 @@
                 localStorage.setItem('menuSectionsOrder', JSON.stringify(MENU_STRUCTURE.map(s => s.title)));
             }
         }
-
         function saveItemsOrder(sectionTitle) {
             const section = MENU_STRUCTURE.find(s => s.title === sectionTitle);
             if (!section) return;
-            const sectionElement = $("#menuContainer .menu-section").filter(function() {
-                return $(this).find(".menu-section-title").text() === sectionTitle;
-            }).first();
-            const orderedItems = [];
-            sectionElement.find(".menu-btn").each(function() {
-                const itemText = $(this).find("span").text();
-                const originalItem = section.items.find(i => i.text === itemText);
-                if (originalItem) orderedItems.push(originalItem);
+            const secEl = $("#menuContainer .menu-section").filter(function() { return $(this).find(".menu-section-title").text() === sectionTitle; }).first();
+            const ordered = [];
+            secEl.find(".menu-btn").each(function() {
+                const txt = $(this).find("span").text();
+                const orig = section.items.find(i => i.text === txt);
+                if (orig) ordered.push(orig);
             });
-            if (orderedItems.length === section.items.length) {
+            if (ordered.length === section.items.length) {
                 section.items.length = 0;
-                orderedItems.forEach(i => section.items.push(i));
+                ordered.forEach(i => section.items.push(i));
                 localStorage.setItem(`menuItemsOrder_${sectionTitle}`, JSON.stringify(section.items.map(i => i.text)));
             }
         }
-
         function loadSectionsOrder() {
-            const savedOrder = localStorage.getItem('menuSectionsOrder');
-            if (savedOrder) {
-                const orderTitles = JSON.parse(savedOrder);
+            const saved = localStorage.getItem('menuSectionsOrder');
+            if (saved) {
+                const titles = JSON.parse(saved);
                 const newOrder = [];
-                for (let title of orderTitles) {
-                    const section = MENU_STRUCTURE.find(s => s.title === title);
-                    if (section) newOrder.push(section);
-                }
-                MENU_STRUCTURE.forEach(section => {
-                    if (!newOrder.includes(section)) newOrder.push(section);
-                });
-                if (newOrder.length === MENU_STRUCTURE.length) {
-                    MENU_STRUCTURE.length = 0;
-                    newOrder.forEach(s => MENU_STRUCTURE.push(s));
-                }
+                for (let t of titles) { const sec = MENU_STRUCTURE.find(s => s.title === t); if (sec) newOrder.push(sec); }
+                MENU_STRUCTURE.forEach(s => { if (!newOrder.includes(s)) newOrder.push(s); });
+                if (newOrder.length === MENU_STRUCTURE.length) { MENU_STRUCTURE.length = 0; newOrder.forEach(s => MENU_STRUCTURE.push(s)); }
             }
         }
-
         function loadItemsOrders() {
             MENU_STRUCTURE.forEach(section => {
-                const savedOrder = localStorage.getItem(`menuItemsOrder_${section.title}`);
-                if (savedOrder) {
-                    const orderTexts = JSON.parse(savedOrder);
+                const saved = localStorage.getItem(`menuItemsOrder_${section.title}`);
+                if (saved) {
+                    const texts = JSON.parse(saved);
                     const newOrder = [];
-                    for (let text of orderTexts) {
-                        const item = section.items.find(i => i.text === text);
-                        if (item) newOrder.push(item);
-                    }
-                    section.items.forEach(item => {
-                        if (!newOrder.includes(item)) newOrder.push(item);
-                    });
-                    if (newOrder.length === section.items.length) {
-                        section.items.length = 0;
-                        newOrder.forEach(i => section.items.push(i));
-                    }
+                    for (let t of texts) { const it = section.items.find(i => i.text === t); if (it) newOrder.push(it); }
+                    section.items.forEach(i => { if (!newOrder.includes(i)) newOrder.push(i); });
+                    if (newOrder.length === section.items.length) { section.items.length = 0; newOrder.forEach(i => section.items.push(i)); }
                 }
             });
         }
-
-        // دالة تفعيل وضع الترتيب مع إظهار التعليمات أول مرة فقط
         function toggleSortMode() {
             if (!sortMode) {
-                // أول مرة يتم تشغيل الترتيب: نظهر التعليمات
                 if (isFirstTimeSort) {
-                    const instructionModal = document.getElementById('sortInstructionModal');
-                    instructionModal.classList.add('open');
-                    // بعد إغلاق التعليمات نكمل تفعيل الوضع
-                    const closeBtn = document.getElementById('closeInstructionBtn');
-                    const originalHandler = () => {
-                        instructionModal.classList.remove('open');
-                        // الآن نفعّل الترتيب بشكل حقيقي
+                    document.getElementById('sortInstructionModal').classList.add('open');
+                    document.getElementById('closeInstructionBtn').onclick = () => {
+                        document.getElementById('sortInstructionModal').classList.remove('open');
                         sortMode = true;
                         buildMenu();
-                        setTimeout(() => {
-                            enableSorting();
-                            document.body.classList.add('sort-mode');
-                            document.getElementById('sortToggleSwitch').classList.add('active');
-                            showMessage("🔄 وضع الترتيب مفعل: اسحب الأقسام أو الخيارات", "info");
-                        }, 50);
-                        closeBtn.removeEventListener('click', originalHandler);
+                        setTimeout(() => { enableSorting(); document.body.classList.add('sort-mode'); document.getElementById('sortToggleSwitch').classList.add('active'); showMessage("🔄 وضع الترتيب مفعل: اسحب الأقسام أو الخيارات", "info"); }, 50);
+                        isFirstTimeSort = false;
                     };
-                    closeBtn.addEventListener('click', originalHandler);
-                    isFirstTimeSort = false;
                     return;
-                } else {
-                    // ليس أول مرة: نفعّل مباشرة
-                    sortMode = true;
-                    buildMenu();
-                    setTimeout(() => {
-                        enableSorting();
-                        document.body.classList.add('sort-mode');
-                        document.getElementById('sortToggleSwitch').classList.add('active');
-                        showMessage("🔄 وضع الترتيب مفعل: اسحب الأقسام أو الخيارات", "info");
-                    }, 50);
                 }
+                sortMode = true;
+                buildMenu();
+                setTimeout(() => { enableSorting(); document.body.classList.add('sort-mode'); document.getElementById('sortToggleSwitch').classList.add('active'); showMessage("🔄 وضع الترتيب مفعل", "info"); }, 50);
             } else {
-                // إيقاف الترتيب
                 sortMode = false;
                 disableSorting();
                 document.body.classList.remove('sort-mode');
@@ -951,21 +863,16 @@
             }
         }
 
-        // === باقي دوال الموقع ===
-        function showMessage(text, type = 'info') {
-            const msgDiv = document.getElementById('statusMessage');
-            msgDiv.textContent = text;
-            msgDiv.className = `status-message ${type}`;
-            msgDiv.style.display = 'block';
-            setTimeout(() => { msgDiv.style.display = 'none'; }, 2500);
+        // Helpers
+        function showMessage(txt, type='info') {
+            const msg = document.getElementById('statusMessage');
+            msg.textContent = txt;
+            msg.className = `status-message ${type}`;
+            msg.style.display = 'block';
+            setTimeout(() => msg.style.display = 'none', 2500);
         }
-
-        function loadSubscribedEmails() {
-            const stored = localStorage.getItem('subscribedEmails');
-            if (stored) subscribedEmails = JSON.parse(stored);
-        }
+        function loadSubscribedEmails() { const st = localStorage.getItem('subscribedEmails'); if (st) subscribedEmails = JSON.parse(st); }
         function saveSubscribedEmails() { localStorage.setItem('subscribedEmails', JSON.stringify(subscribedEmails)); }
-
         function submitSubscription() {
             const email = document.getElementById('subscribeEmail').value;
             if (!email || !email.includes('@')) { showMessage('⚠️ بريد غير صحيح', 'error'); return; }
@@ -977,108 +884,71 @@
         function unsubscribeEmail() {
             const email = document.getElementById('unsubscribeEmail').value;
             if (!email || !email.includes('@')) { showMessage('⚠️ بريد غير صحيح', 'error'); return; }
-            const index = subscribedEmails.indexOf(email);
-            if (index !== -1) { subscribedEmails.splice(index, 1); saveSubscribedEmails(); }
+            const idx = subscribedEmails.indexOf(email);
+            if (idx !== -1) { subscribedEmails.splice(idx,1); saveSubscribedEmails(); }
             fetch(SITE_CONFIG.googleScriptURL, { method: 'POST', mode: 'no-cors', body: JSON.stringify({ email, action: 'unsubscribe' }) })
                 .then(() => { showMessage('✅ تم إلغاء الاشتراك', 'success'); closeSubscribeModal(); })
                 .catch(() => { showMessage('✅ تم إلغاء الاشتراك', 'success'); closeSubscribeModal(); });
         }
         function showSubscribeModal() {
-            const modalHtml = `<div id="subscribeModal" class="modal-overlay"><div class="modal-content"><i class="fas fa-bell" style="font-size:2rem; margin-bottom:15px;"></i><h3>اشترك في التحديثات</h3><p style="margin-bottom:15px;">أدخل بريدك ليصلك كل جديد</p><input type="email" id="subscribeEmail" placeholder="example@email.com"><button class="subscribe-btn" onclick="submitSubscription()">اشتراك</button><button class="cancel-btn" onclick="closeSubscribeModal()">إلغاء</button><div class="unsubscribe-section"><p><i class="fas fa-trash-alt"></i> إلغاء الاشتراك</p><input type="email" id="unsubscribeEmail" placeholder="أدخل بريدك"><button class="unsubscribe-btn" onclick="unsubscribeEmail()">إلغاء</button></div></div></div>`;
-            document.body.insertAdjacentHTML('beforeend', modalHtml);
+            const html = `<div id="subscribeModal" class="modal-overlay"><div class="modal-content"><i class="fas fa-bell" style="font-size:2rem;"></i><h3>اشترك في التحديثات</h3><input type="email" id="subscribeEmail" placeholder="example@email.com"><button class="subscribe-btn" onclick="submitSubscription()">اشتراك</button><button class="cancel-btn" onclick="closeSubscribeModal()">إلغاء</button><div class="unsubscribe-section"><p>إلغاء الاشتراك</p><input type="email" id="unsubscribeEmail" placeholder="بريدك"><button class="unsubscribe-btn" onclick="unsubscribeEmail()">إلغاء</button></div></div></div>`;
+            document.body.insertAdjacentHTML('beforeend', html);
         }
         function closeSubscribeModal() { document.getElementById('subscribeModal')?.remove(); }
-
-        function getRandomQuote() {
-            let newIndex;
-            do { newIndex = Math.floor(Math.random() * QUOTES.length); } while (newIndex === lastQuoteIndex && QUOTES.length > 1);
-            lastQuoteIndex = newIndex;
-            return QUOTES[newIndex];
-        }
-
+        function getRandomQuote() { let n; do { n = Math.floor(Math.random() * QUOTES.length); } while (n === lastQuoteIndex && QUOTES.length>1); lastQuoteIndex = n; return QUOTES[n]; }
         function showWelcome() {
             const container = document.getElementById('iframeContainer');
             if (!container) return;
-            const quote = getRandomQuote();
-            container.innerHTML = `<div style="background: linear-gradient(145deg, #1e3c5c, #0f2a3f); color: white; padding: 40px 30px; min-height: 100%; overflow-y: auto;"><div style="text-align: center; max-width: 700px; margin: 0 auto;"><i class="fas fa-graduation-cap" style="font-size: 4rem; color:#f9b81b; margin-bottom:20px;"></i><h2 style="margin-bottom: 15px;">مرحباً بك في منصة ${SITE_CONFIG.siteName}</h2><p style="margin-bottom: 30px;">✨ منصة التعليم الذكية ✨</p><div style="margin: 30px auto; padding: 25px; background: rgba(255,255,255,0.1); border-radius: 30px; border-right: 4px solid #f9b81b;"><i class="fas fa-quote-right" style="color:#f9b81b;"></i><p style="margin:15px 0; line-height:1.8;">${quote.split('\n').join('<br>')}</p></div><div style="margin: 30px auto; padding: 25px; background: #5865F2; border-radius: 30px;"><i class="fab fa-discord" style="font-size:2.5rem;"></i><h3>✨ ادخل عالم الدراسة الذكي ✨</h3><p>شارك، اسأل، وتحدى نفسك مع زملائك</p><button onclick="window.open('${SITE_CONFIG.discord}','_blank')" style="background:white; color:#5865F2; padding:10px 25px; border-radius:40px; margin-top:10px;">انضم الآن</button></div></div></div>`;
+            const q = getRandomQuote();
+            container.innerHTML = `<div style="background:linear-gradient(145deg,#1e3c5c,#0f2a3f);color:white;padding:40px 30px;min-height:100%;overflow-y:auto;"><div style="text-align:center;max-width:700px;margin:0 auto;"><i class="fas fa-graduation-cap" style="font-size:4rem;color:#f9b81b;margin-bottom:20px;"></i><h2>مرحباً بك في منصة ${SITE_CONFIG.siteName}</h2><p style="margin:15px 0;">✨ منصة التعليم الذكية ✨</p><div style="margin:30px auto;padding:25px;background:rgba(255,255,255,0.1);border-radius:30px;border-right:4px solid #f9b81b;"><i class="fas fa-quote-right"></i><p style="margin:15px 0;line-height:1.8;">${q.split('\n').join('<br>')}</p></div><div style="margin:30px auto;padding:25px;background:#5865F2;border-radius:30px;"><i class="fab fa-discord" style="font-size:2.5rem;"></i><h3>✨ ادخل عالم الدراسة الذكي ✨</h3><p>شارك، اسأل، وتحدى نفسك مع زملائك</p><button onclick="window.open('${SITE_CONFIG.discord}','_blank')" style="background:white;color:#5865F2;padding:10px 25px;border-radius:40px;margin-top:10px;">انضم الآن</button></div></div></div>`;
         }
-
         function buildMenu() {
-            const menuContainer = document.getElementById('menuContainer');
-            if (!menuContainer) return;
-            menuContainer.innerHTML = '';
+            const cont = document.getElementById('menuContainer');
+            if (!cont) return;
+            cont.innerHTML = '';
             MENU_STRUCTURE.forEach(section => {
-                const sectionDiv = document.createElement('div');
-                sectionDiv.className = 'menu-section';
-                const itemsContainer = document.createElement('div');
-                itemsContainer.className = 'menu-section-items';
+                const secDiv = document.createElement('div'); secDiv.className = 'menu-section';
+                const itemsDiv = document.createElement('div'); itemsDiv.className = 'menu-section-items';
                 section.items.forEach(item => {
-                    let actionAttr = '';
-                    if (item.action === 'iframe') actionAttr = `loadIframe('${item.url}')`;
-                    else if (item.action === 'link') actionAttr = `window.open('${item.url}', '_blank')`;
-                    else if (item.action === 'home') actionAttr = `showWelcome()`;
-                    else if (item.action === 'subscribe') actionAttr = `showSubscribeModal()`;
-                    else if (item.action === 'email') actionAttr = `window.location.href = 'mailto:${item.url}'`;
-                    const btn = document.createElement('button');
-                    btn.className = 'menu-btn';
+                    let act = '';
+                    if (item.action === 'iframe') act = `loadIframe('${item.url}')`;
+                    else if (item.action === 'link') act = `window.open('${item.url}', '_blank')`;
+                    else if (item.action === 'home') act = `showWelcome()`;
+                    else if (item.action === 'subscribe') act = `showSubscribeModal()`;
+                    else if (item.action === 'email') act = `window.location.href = 'mailto:${item.url}'`;
+                    const btn = document.createElement('button'); btn.className = 'menu-btn';
                     btn.innerHTML = `<i class="${item.icon}"></i><span>${item.text}</span>`;
-                    btn.onclick = () => eval(actionAttr);
-                    itemsContainer.appendChild(btn);
+                    btn.onclick = () => eval(act);
+                    itemsDiv.appendChild(btn);
                 });
-                sectionDiv.innerHTML = `<div class="menu-section-title">${section.title}</div>`;
-                sectionDiv.appendChild(itemsContainer);
-                menuContainer.appendChild(sectionDiv);
+                secDiv.innerHTML = `<div class="menu-section-title">${section.title}</div>`;
+                secDiv.appendChild(itemsDiv);
+                cont.appendChild(secDiv);
             });
-            const emailDiv = document.createElement('div');
-            emailDiv.className = 'email-text';
+            const emailDiv = document.createElement('div'); emailDiv.className = 'email-text';
             emailDiv.innerHTML = `<i class="fas fa-envelope"></i> ${SITE_CONFIG.email}`;
-            menuContainer.appendChild(emailDiv);
+            cont.appendChild(emailDiv);
             if (sortMode) setTimeout(() => enableSorting(), 50);
         }
-
         function loadIframe(url) {
-            const container = document.getElementById('iframeContainer');
-            container.innerHTML = `<div class="loading" id="loadingIndicator"><i class="fas fa-spinner"></i> جاري التحميل...</div><iframe id="contentFrame" src="${url}" style="width:100%; height:100%; display:none;" onload="hideLoading()"></iframe>`;
+            const cont = document.getElementById('iframeContainer');
+            cont.innerHTML = `<div class="loading" id="loadingIndicator"><i class="fas fa-spinner"></i> جاري التحميل...</div><iframe id="contentFrame" src="${url}" style="width:100%; height:100%; display:none;" onload="hideLoading()"></iframe>`;
         }
-        function hideLoading() {
-            const loading = document.getElementById('loadingIndicator');
-            const iframe = document.getElementById('contentFrame');
-            if (loading && iframe) { loading.style.display = 'none'; iframe.style.display = 'block'; }
-        }
+        function hideLoading() { const ld = document.getElementById('loadingIndicator'); const fr = document.getElementById('contentFrame'); if(ld && fr) { ld.style.display='none'; fr.style.display='block'; } }
         function toggleSidebar() { document.getElementById('sidebar').classList.toggle('open'); }
 
-        // === أحداث الإعدادات الموحدة ===
-        const settingsBtn = document.getElementById('settingsMainBtn');
-        const settingsModal = document.getElementById('settingsModal');
-        const sortToggleSwitch = document.getElementById('sortToggleSwitch');
-
-        settingsBtn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            settingsModal.classList.toggle('open');
-        });
-        document.addEventListener('click', (e) => {
-            if (!settingsBtn.contains(e.target) && !settingsModal.contains(e.target)) {
-                settingsModal.classList.remove('open');
-            }
-        });
-        sortToggleSwitch.addEventListener('click', (e) => {
-            e.stopPropagation();
-            toggleSortMode();
-        });
-        document.querySelectorAll('.theme-badge').forEach(badge => {
-            badge.addEventListener('click', (e) => {
-                const theme = badge.getAttribute('data-theme');
-                applyTheme(theme);
-                settingsModal.classList.remove('open');
-            });
-        });
+        // Events
+        document.getElementById('settingsMainBtn').addEventListener('click', (e) => { e.stopPropagation(); document.getElementById('settingsModal').classList.toggle('open'); });
+        document.addEventListener('click', (e) => { if (!e.target.closest('#settingsMainBtn') && !e.target.closest('#settingsModal')) document.getElementById('settingsModal').classList.remove('open'); });
+        document.getElementById('sortToggleSwitch').addEventListener('click', (e) => { e.stopPropagation(); toggleSortMode(); });
+        document.querySelectorAll('.theme-badge').forEach(b => { b.addEventListener('click', () => { applyTheme(b.getAttribute('data-theme')); document.getElementById('settingsModal').classList.remove('open'); }); });
 
         loadSubscribedEmails();
         loadTheme();
         loadSectionsOrder();
         loadItemsOrders();
         document.addEventListener('DOMContentLoaded', () => { buildMenu(); showWelcome(); });
-        if ('serviceWorker' in navigator) navigator.serviceWorker.register('/sw.js').catch(e => console.log);
+        if ('serviceWorker' in navigator) navigator.serviceWorker.register('/sw.js').catch(e=>console.log);
     </script>
 </body>
 </html>
