@@ -1,0 +1,1982 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>بنك أسئلة التربية الإسلامية</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        :root {
+            --primary-color: #2c5f2d;
+            --secondary-color: #339966;
+            --accent-color: #ffcc00;
+            --light-color: #f8f9fa;
+            --dark-color: #1a3c1e;
+            --danger-color: #dc3545;
+            --success-color: #28a745;
+            --warning-color: #ffc107;
+            --info-color: #17a2b8;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+            background-image: linear-gradient(to bottom, rgba(44, 95, 45, 0.05), rgba(51, 153, 102, 0.03));
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* رأس الصفحة */
+        .header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header::before {
+            content: "﷽";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 120px;
+            opacity: 0.07;
+            color: white;
+            font-weight: bold;
+        }
+        
+        .header-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .header h1 {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        .header h2 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            font-weight: 400;
+        }
+        
+        .student-info {
+            background-color: rgba(255, 255, 255, 0.15);
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 15px;
+            display: inline-block;
+            font-size: 1.1rem;
+        }
+        
+        /* قسم الوحدات */
+        .units-section {
+            margin-bottom: 40px;
+        }
+        
+        .units-section h3 {
+            font-size: 1.8rem;
+            color: var(--dark-color);
+            margin-bottom: 20px;
+            text-align: center;
+            border-bottom: 3px solid var(--accent-color);
+            padding-bottom: 10px;
+            position: relative;
+        }
+        
+        .units-section h3::after {
+            content: "";
+            position: absolute;
+            bottom: -3px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background-color: var(--primary-color);
+        }
+        
+        .units-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .unit-card {
+            background-color: white;
+            border-radius: 12px;
+            padding: 25px 20px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .unit-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
+            border-color: var(--primary-color);
+        }
+        
+        .unit-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 5px;
+            height: 100%;
+            background-color: var(--accent-color);
+        }
+        
+        .unit-icon {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+        
+        .unit-card h4 {
+            font-size: 1.4rem;
+            color: var(--dark-color);
+            margin-bottom: 10px;
+        }
+        
+        .unit-card p {
+            color: #666;
+            margin-bottom: 15px;
+        }
+        
+        .unit-stats {
+            background-color: #f8f9fa;
+            padding: 8px;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            color: var(--primary-color);
+        }
+        
+        /* مؤقت */
+        .timer-container {
+            background-color: white;
+            border-radius: 12px;
+            padding: 15px 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .timer {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+        
+        .timer-warning {
+            color: var(--danger-color);
+        }
+        
+        .timer-label {
+            font-size: 1.2rem;
+            color: #666;
+        }
+        
+        /* واجهة الاختبار */
+        .test-container {
+            background-color: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            display: none;
+            margin-bottom: 30px;
+        }
+        
+        .test-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        
+        .test-title {
+            font-size: 1.5rem;
+            color: var(--dark-color);
+        }
+        
+        .progress-bar {
+            height: 8px;
+            background-color: #eee;
+            border-radius: 4px;
+            margin-top: 10px;
+            overflow: hidden;
+        }
+        
+        .progress {
+            height: 100%;
+            background-color: var(--secondary-color);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+        
+        .question-number {
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 5px;
+        }
+        
+        .question-container {
+            margin-bottom: 30px;
+        }
+        
+        .question-text {
+            font-size: 1.3rem;
+            line-height: 1.8;
+            margin-bottom: 25px;
+            color: #333;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            border-right: 4px solid var(--primary-color);
+        }
+        
+        .options-container {
+            margin-bottom: 30px;
+        }
+        
+        .option {
+            background-color: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+        }
+        
+        .option:hover {
+            background-color: #e9ecef;
+            border-color: #ced4da;
+        }
+        
+        .option.selected {
+            background-color: rgba(51, 153, 102, 0.1);
+            border-color: var(--secondary-color);
+        }
+        
+        .option.correct {
+            background-color: rgba(40, 167, 69, 0.15);
+            border-color: var(--success-color);
+        }
+        
+        .option.incorrect {
+            background-color: rgba(220, 53, 69, 0.1);
+            border-color: var(--danger-color);
+        }
+        
+        .option-letter {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            margin-left: 10px;
+            font-weight: bold;
+        }
+        
+        .option-text {
+            flex-grow: 1;
+        }
+        
+        /* أزرار التنقل */
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        
+        .btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--dark-color);
+        }
+        
+        .btn-secondary {
+            background-color: #6c757d;
+            color: white;
+        }
+        
+        .btn-secondary:hover {
+            background-color: #5a6268;
+        }
+        
+        .btn-success {
+            background-color: var(--success-color);
+            color: white;
+        }
+        
+        .btn-success:hover {
+            background-color: #218838;
+        }
+        
+        .btn-warning {
+            background-color: var(--warning-color);
+            color: #333;
+        }
+        
+        .btn-warning:hover {
+            background-color: #e0a800;
+        }
+        
+        .btn-danger {
+            background-color: var(--danger-color);
+            color: white;
+        }
+        
+        .btn-danger:hover {
+            background-color: #c82333;
+        }
+        
+        .btn i {
+            margin-left: 8px;
+        }
+        
+        .btn[disabled] {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+        
+        /* نتيجة الاختبار */
+        .results-container {
+            background-color: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            display: none;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .results-header {
+            margin-bottom: 30px;
+        }
+        
+        .results-title {
+            font-size: 2rem;
+            color: var(--dark-color);
+            margin-bottom: 15px;
+        }
+        
+        .score-circle {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            margin: 0 auto 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            box-shadow: 0 8px 20px rgba(44, 95, 45, 0.3);
+        }
+        
+        .score-percent {
+            font-size: 3rem;
+            font-weight: bold;
+        }
+        
+        .score-text {
+            font-size: 1.2rem;
+        }
+        
+        .results-details {
+            margin-top: 30px;
+        }
+        
+        .result-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px;
+            margin-bottom: 10px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            border-right: 4px solid var(--accent-color);
+        }
+        
+        .result-item.correct {
+            background-color: rgba(40, 167, 69, 0.1);
+        }
+        
+        .result-item.incorrect {
+            background-color: rgba(220, 53, 69, 0.1);
+        }
+        
+        .question-review {
+            margin-top: 30px;
+            text-align: right;
+        }
+        
+        .review-item {
+            background-color: #f8f9fa;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            border: 1px solid #e9ecef;
+        }
+        
+        .review-question {
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: var(--dark-color);
+        }
+        
+        .review-answer {
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 5px;
+        }
+        
+        .review-answer.correct {
+            background-color: rgba(40, 167, 69, 0.15);
+            color: var(--success-color);
+            border-right: 3px solid var(--success-color);
+        }
+        
+        .review-answer.incorrect {
+            background-color: rgba(220, 53, 69, 0.1);
+            color: var(--danger-color);
+            border-right: 3px solid var(--danger-color);
+        }
+        
+        /* التذييل */
+        .footer {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+            font-size: 0.9rem;
+            margin-top: 30px;
+            border-top: 1px solid #eee;
+        }
+        
+        /* التكيف مع الشاشات الصغيرة */
+        @media (max-width: 768px) {
+            .units-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .timer-container {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .test-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .navigation-buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- الصفحة الرئيسية -->
+        <header class="header">
+            <div class="header-content">
+                <h1><i class="fas fa-book-quran"></i> بنك أسئلة التربية الإسلامية</h1>
+                <h2>تم إعداد هذا التطبيق للتدريب على اختبارات التربية الإسلامية</h2>
+                <div class="student-info">
+                    <i class="fas fa-user-graduate"></i> الطالب: عبدالرحمن المعايطه
+                </div>
+            </div>
+        </header>
+        
+        <!-- مؤقت الاختبار -->
+        <div class="timer-container">
+            <div class="timer-label">
+                <i class="fas fa-clock"></i> مدة الاختبار:
+            </div>
+            <div class="timer" id="timer">20:00</div>
+        </div>
+        
+        <!-- قسم اختيار الوحدة -->
+        <div class="units-section" id="unitsSection">
+            <h3><i class="fas fa-layer-group"></i> اختر الوحدة التي تريد اختبارها</h3>
+            <div class="units-container">
+                <div class="unit-card" data-unit="1">
+                    <div class="unit-icon">
+                        <i class="fas fa-quran"></i>
+                    </div>
+                    <h4>الوحدة الأولى</h4>
+                    <p>سورة آل عمران (الآيات 102-105)</p>
+                    <div class="unit-stats">
+                        <i class="fas fa-question-circle"></i> 20 سؤال
+                    </div>
+                </div>
+                
+                <div class="unit-card" data-unit="2">
+                    <div class="unit-icon">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <h4>الوحدة الثانية</h4>
+                    <p>الحديث الشريف: اتقاء الشبهات</p>
+                    <div class="unit-stats">
+                        <i class="fas fa-question-circle"></i> 20 سؤال
+                    </div>
+                </div>
+                
+                <div class="unit-card" data-unit="3">
+                    <div class="unit-icon">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </div>
+                    <h4>الوحدة الثالثة</h4>
+                    <p>من صور الضلال</p>
+                    <div class="unit-stats">
+                        <i class="fas fa-question-circle"></i> 20 سؤال
+                    </div>
+                </div>
+                
+                <div class="unit-card" data-unit="4">
+                    <div class="unit-icon">
+                        <i class="fas fa-user-shield"></i>
+                    </div>
+                    <h4>الوحدة الرابعة</h4>
+                    <p>كرامة الإنسان في الإسلام</p>
+                    <div class="unit-stats">
+                        <i class="fas fa-question-circle"></i> 20 سؤال
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- واجهة الاختبار -->
+        <div class="test-container" id="testContainer">
+            <div class="test-header">
+                <div>
+                    <div class="test-title" id="testTitle">اختبار الوحدة الأولى</div>
+                    <div class="progress-bar">
+                        <div class="progress" id="progressBar"></div>
+                    </div>
+                    <div class="question-number" id="questionNumber">السؤال 1 من 20</div>
+                </div>
+                <div class="timer" id="testTimer">20:00</div>
+            </div>
+            
+            <div class="question-container">
+                <div class="question-text" id="questionText"></div>
+                <div class="options-container" id="optionsContainer"></div>
+            </div>
+            
+            <div class="navigation-buttons">
+                <button class="btn btn-secondary" id="prevBtn" disabled>
+                    <i class="fas fa-arrow-right"></i> السابق
+                </button>
+                <button class="btn btn-success" id="endTestBtn" style="display: none;">
+                    <i class="fas fa-flag-checkered"></i> إنهاء الاختبار
+                </button>
+            </div>
+        </div>
+        
+        <!-- نتيجة الاختبار -->
+        <div class="results-container" id="resultsContainer">
+            <div class="results-header">
+                <h2 class="results-title">نتيجة الاختبار</h2>
+                <div class="score-circle" id="scoreCircle">
+                    <div class="score-percent" id="scorePercent">0%</div>
+                    <div class="score-text">الدرجة النهائية</div>
+                </div>
+            </div>
+            
+            <div class="results-details">
+                <div class="result-item">
+                    <span>عدد الأسئلة:</span>
+                    <span id="totalQuestions">20</span>
+                </div>
+                <div class="result-item correct">
+                    <span>الإجابات الصحيحة:</span>
+                    <span id="correctAnswers">0</span>
+                </div>
+                <div class="result-item incorrect">
+                    <span>الإجابات الخاطئة:</span>
+                    <span id="incorrectAnswers">0</span>
+                </div>
+                <div class="result-item">
+                    <span>المستوى:</span>
+                    <span id="performanceLevel">ضعيف</span>
+                </div>
+            </div>
+            
+            <div class="question-review" id="questionReview"></div>
+            
+            <div style="margin-top: 30px;">
+                <button class="btn btn-primary" id="restartBtn">
+                    <i class="fas fa-redo"></i> اختبار جديد
+                </button>
+                <button class="btn btn-secondary" id="backToUnitsBtn" style="margin-right: 10px;">
+                    <i class="fas fa-home"></i> العودة للوحدات
+                </button>
+            </div>
+        </div>
+        
+        <!-- التذييل -->
+        <footer class="footer">
+            <p>© بنك أسئلة التربية الإسلامية - إعداد الطالب عبدالرحمن المعايطه</p>
+            <p>جميع الأسئلة مأخوذة من منهج التربية الإسلامية</p>
+        </footer>
+    </div>
+
+    <script>
+        // بيانات الأسئلة لكل وحدة
+        const questionsData = {
+            1: [
+                {
+                    id: 1,
+                    question: "معنى قوله تعالى: (واعتصموا بحبل الله جميعًا)",
+                    options: [
+                        "تمسكوا بدين الله",
+                        "تمسكوا بأموالكم", 
+                        "اتبعوا العادات",
+                        "اجتمعوا على الدنيا"
+                    ],
+                    correctAnswer: 0,
+                    userAnswer: null
+                },
+                {
+                    id: 2,
+                    question: "المقصود بحبل الله هو:",
+                    options: [
+                        "العلماء",
+                        "القرآن الكريم",
+                        "المسجد", 
+                        "السنة فقط"
+                    ],
+                    correctAnswer: 1,
+                    userAnswer: null
+                },
+                {
+                    id: 3,
+                    question: "من أسباب قوة الأمة الإسلامية:",
+                    options: [
+                        "التفرق",
+                        "التمسك بالإسلام",
+                        "العصبية",
+                        "كثرة المال"
+                    ],
+                    correctAnswer: 1,
+                    userAnswer: null
+                },
+                {
+                    id: 4,
+                    question: "النعمة المقصودة بقوله تعالى (فأصبحتم بنعمته إخوانا):",
+                    options: [
+                        "المال",
+                        "النسب",
+                        "الإيمان",
+                        "القوة"
+                    ],
+                    correctAnswer: 2,
+                    userAnswer: null
+                },
+                {
+                    id: 5,
+                    question: "من نتائج الاختلاف بعد مجيء البينات:",
+                    options: [
+                        "القوة",
+                        "الوحدة",
+                        "الضعف",
+                        "الرحمة"
+                    ],
+                    correctAnswer: 2,
+                    userAnswer: null
+                },
+                {
+                    id: 6,
+                    question: "حكم الأمر بالمعروف والنهي عن المنكر:",
+                    options: [
+                        "مباح",
+                        "فرض كفاية", 
+                        "مستحب",
+                        "مكروه"
+                    ],
+                    correctAnswer: 1,
+                    userAnswer: null
+                },
+                {
+                    id: 7,
+                    question: "من شروط من يقوم بالأمر بالمعروف:",
+                    options: [
+                        "القوة البدنية",
+                        "العلم",
+                        "الغنى",
+                        "الشهرة"
+                    ],
+                    correctAnswer: 1,
+                    userAnswer: null
+                },
+                {
+                    id: 8,
+                    question: "جمع النبي ﷺ بين المهاجرين والأنصار لتحقيق:",
+                    options: [
+                        "المال",
+                        "القوة العسكرية",
+                        "الأخوة",
+                        "التجارة"
+                    ],
+                    correctAnswer: 2,
+                    userAnswer: null
+                },
+                {
+                    id: 9,
+                    question: "سبب بناء المسجد النبوي:",
+                    options: [
+                        "العبادة وتنظيم المجتمع",
+                        "التجارة",
+                        "السكن",
+                        "التعليم فقط"
+                    ],
+                    correctAnswer: 0,
+                    userAnswer: null
+                },
+                {
+                    id: 10,
+                    question: "معنى (شفا حفرة):",
+                    options: [
+                        "وسط الشيء",
+                        "أسفل الشيء",
+                        "حافة الشيء",
+                        "عمق الشيء"
+                    ],
+                    correctAnswer: 2,
+                    userAnswer: null
+                },
+                {
+                    id: 11,
+                    question: "من عوامل قوة الأمة:",
+                    options: [
+                        "الدعوة إلى الخير",
+                        "الحسد",
+                        "الظلم",
+                        "الكبر"
+                    ],
+                    correctAnswer: 0,
+                    userAnswer: null
+                },
+                {
+                    id: 12,
+                    question: "سورة آل عمران من:",
+                    options: [
+                        "السور القصيرة",
+                        "السور المدنية",
+                        "السور المكية",
+                        "جزء عم"
+                    ],
+                    correctAnswer: 1,
+                    userAnswer: null
+                },
+                {
+                    id: 13,
+                    question: "عدد آيات سورة آل عمران:",
+                    options: [
+                        "170",
+                        "200",
+                        "286",
+                        "300"
+                    ],
+                    correctAnswer: 1,
+                    userAnswer: null
+                },
+                {
+                    id: 14,
+                    question: "معنى (الزهراوين):",
+                    options: [
+                        "البقرة وآل عمران",
+                        "الفلق والناس",
+                        "الإخلاص والناس",
+                        "النساء والمائدة"
+                    ],
+                    correctAnswer: 0,
+                    userAnswer: null
+                },
+                {
+                    id: 15,
+                    question: "من أسباب ضعف الأمم:",
+                    options: [
+                        "الوحدة",
+                        "الاختلاف",
+                        "العدل",
+                        "التعاون"
+                    ],
+                    correctAnswer: 1,
+                    userAnswer: null
+                },
+                {
+                    id: 16,
+                    question: "وثيقة المدينة هدفت إلى:",
+                    options: [
+                        "تنظيم شؤون المجتمع",
+                        "جمع المال",
+                        "إعلان الحرب",
+                        "التجارة"
+                    ],
+                    correctAnswer: 0,
+                    userAnswer: null
+                },
+                {
+                    id: 17,
+                    question: "تقوى الله تعني:",
+                    options: [
+                        "الخوف فقط",
+                        "طاعة الله واجتناب معصيته",
+                        "العبادة دون عمل",
+                        "العلم فقط"
+                    ],
+                    correctAnswer: 1,
+                    userAnswer: null
+                },
+                {
+                    id: 18,
+                    question: "من نتائج الأخوة الإيمانية:",
+                    options: [
+                        "النزاع",
+                        "التعاون",
+                        "التفرق",
+                        "الظلم"
+                    ],
+                    correctAnswer: 1,
+                    userAnswer: null
+                },
+                {
+                    id: 19,
+                    question: "الخطاب في (ولتكن منكم أمة):",
+                    options: [
+                        "جميع الناس",
+                        "طائفة من المؤمنين",
+                        "غير المسلمين",
+                        "الأطفال"
+                    ],
+                    correctAnswer: 1,
+                    userAnswer: null
+                },
+                {
+                    id: 20,
+                    question: "سبب نزول آية (واعتصموا):",
+                    options: [
+                        "غزوة بدر",
+                        "فتنة بين الأوس والخزرج",
+                        "فتح مكة",
+                        "الهجرة"
+                    ],
+                    correctAnswer: 1,
+                    userAnswer: null
+                }
+            ],
+            2: [
+                {
+                    id: 21,
+                    question: "معنى كلمة (مضغة):",
+                    options: [
+                        "قطعة لحم",
+                        "عظم",
+                        "دم",
+                        "جلد"
+                    ],
+                    correctAnswer: 0,
+                    userAnswer: null
+                },
+                {
+                    id: 22,
+                    question: "المشتبهات هي:",
+                    options: [
+                        "المحرمات",
+                        "الأمور غير الواضحة الحكم",
+                        "المباحات",
+                        "الواجبات"
+                    ],
+                    correctAnswer: 1,
+                    userAnswer: null
+                },
+                {
+                    id: 23,
+                    question: "الموقف الصحيح من الشبهات:",
+                    options: [
+                        "فعلها",
+                        "تركها",
+                        "الإكثار منها",
+                        "تجاهلها"
+                    ],
+                    correctAnswer: 1,
+                    userAnswer: null
+                },
+                {
+                    id: 24,
+                    question: "راوي حديث (إن الحلال بين):",
+                    options: [
+                        "أبو هريرة",
+                        "عمر بن الخطاب",
+                        "النعمان بن بشير",
+                        "علي بن أبي طالب"
+                    ],
+                    correctAnswer: 2,
+                    userAnswer: null
+                },
+                {
+                    id: 25,
+                    question: "من نتائج اتقاء الشبهات:",
+                    options: [
+                        "الوقوع في الحرام",
+                        "سلامة الدين",
+                        "ضعف الإيمان",
+                        "كثرة الذنوب"
+                    ],
+                    correctAnswer: 1,
+                    userAnswer: null
+                },
+                {
+                    id: 26,
+                    question: "معنى كلمة (استبرأ):",
+                    options: [
+                        "طلب السلامة",
+                        "تكاسل",
+                        "تجاهل",
+                        "تشدد"
+                    ],
+                    correctAnswer: 0,
+                    userAnswer: null
+                },
+                {
+                    id: 27,
+                    question: "إذا صلح القلب:",
+                    options: [
+                        "فسد الجسد",
+                        "صلح الجسد كله",
+                        "ضعف الإيمان",
+                        "كثرت المعاصي"
+                    ],
+                    correctAnswer: 1,
+                    userAnswer: null
+                },
+                {
+                    id: 28,
+                    question: "مثال على الحرام الواضح:",
+                    options: [
+                        "البيع",
+                        "الزواج",
+                        "شرب الخمر",
+                        "الإجارة"
+                    ],
+                    correctAnswer: 2,
+                    userAnswer: null
+                },
+                {
+                    id: 29,
+                    question: "من أسباب فساد القلب:",
+                    options: [
+                        "ذكر الله",
+                        "المعاصي",
+                        "الدعاء",
+                        "الصدقة"
+                    ],
+                    correctAnswer: 1,
+                    userAnswer: null
+                },
+                {
+                    id: 30,
+                    question: "معنى كلمة (يوشك):",
+                    options: [
+                        "يجب",
+                        "يكاد",
+                        "يمتنع",
+                        "يستحيل"
+                    ],
+                    correctAnswer: 1,
+                    userAnswer: null
+                },
+                {
+                    id: 31,
+                    question: "من وسائل صلاح القلب:",
+                    options: [
+                        "مجالسة الصالحين",
+                        "الغيبة",
+                        "الحسد",
+                        "الكبر"
+                    ],
+                    correctAnswer: 0,
+                    userAnswer: null
+                },
+                {
+                    id: 32,
+                    question: "أقسام أفعال الإنسان:",
+                    options: [
+                        "حلال فقط",
+                        "حرام فقط",
+                        "حلال وحرام ومشتبه",
+                        "مكروه فقط"
+                    ],
+                    correctAnswer: 2,
+                    userAnswer: null
+                },
+                {
+                    id: 33,
+                    question: "سؤال أهل العلم عن الشبهات:",
+                    options: [
+                        "مكروه",
+                        "واجب",
+                        "محرم",
+                        "مباح"
+                    ],
+                    correctAnswer: 1,
+                    userAnswer: null
+                },
+                {
+                    id: 34,
+                    question: "من آثار الابتعاد عن الشبهات:",
+                    options: [
+                        "الطعن في السمعة",
+                        "الوقوع في الحرام",
+                        "حفظ العرض",
+                        "ضعف الدين"
+                    ],
+                    correctAnswer: 2,
+                    userAnswer: null
+                },
+                {
+                    id: 35,
+                    question: "معنى (الحمى) في الحديث:",
+                    options: [
+                        "قطعه من اللحم ",
+                        "الارض المحميه يمنع الناس من دخولها الا بإذن  ",
+                        "يكاد ",
+                        "المعاصي التي حرمها الله"
+                    ],
+                    correctAnswer: 1,
+                    userAnswer: null
+                },
+                {
+                    id: 36,
+                    question: "من أمثلة الورع:",
+                    options: [
+                        "فعل الشبهات",
+                        "ترك المشتبه",
+                        "تجاهل الحكم",
+                        "الإصرار"
+                    ],
+                    correctAnswer: 1,
+                    userAnswer: null
+                },
+                {
+                    id: 37,
+                    question: "المسلم مطالب بـ:",
+                    options: [
+                        "اتباع الهوى",
+                        "صلاح القلب",
+                        "كثرة الكلام",
+                        "الجدل"
+                    ],
+                    correctAnswer: 1,
+                    userAnswer: null
+                },
+                {
+                    id: 38,
+                    question: "ما يطمئن القلب:",
+                    options: [
+                        "المال",
+                        "ذكر الله",
+                        "الجدل",
+                        "الغضب"
+                    ],
+                    correctAnswer: 1,
+                    userAnswer: null
+                },
+                {
+                    id: 39,
+                    question: "الحلال الواضح هو:",
+                    options: [
+                        "ما خفي حكمه",
+                        "ما لا دليل عليه",
+                        "ما ثبت حله",
+                        "ما اختلف فيه"
+                    ],
+                    correctAnswer: 2,
+                    userAnswer: null
+                },
+                {
+                    id: 40,
+                    question: "التهاون في الشبهات يؤدي إلى:",
+                    options: [
+                        "السلامة",
+                        "الوقوع في الحرام",
+                        "قوة الإيمان",
+                        "التقوى"
+                    ],
+                    correctAnswer: 1,
+                    userAnswer: null
+                }
+            ],
+            3: [
+                {
+                    id: 41,
+                    question: "أعظم نعمة أنعم الله بها على الإنسان:",
+                    options: [
+                        "المال",
+                        "الصحة",
+                        "الإسلام",
+                        "القوة"
+                    ],
+                    correctAnswer: 2,
+                    userAnswer: null
+                },
+                {
+                    id: 42,
+                    question: "الشرك الأكبر هو:",
+                    options: [
+                        "الرياء",
+                        "الحلف بغير الله",
+                        "عبادة غير الله",
+                        "الكذب"
+                    ],
+                    correctAnswer: 2,
+                    userAnswer: null
+                },
+                {
+                    id: 43,
+                    question: "الرياء يُعد من:",
+                    options: [
+                        "الشرك الأكبر",
+                        "الشرك الأصغر",
+                        "الكفر",
+                        "النفاق الاعتقادي"
+                    ],
+                    correctAnswer: 1,
+                    userAnswer: null
+                },
+                {
+                    id: 44,
+                    question: "النفاق الاعتقادي يعني:",
+                    options: [
+                        "إظهار الإيمان وإخفاء الكفر",
+                        "الكذب في الحديث",
+                        "إخلاف الوعد",
+                        "الخيانة"
+                    ],
+                    correctAnswer: 0,
+                    userAnswer: null
+                },
+                {
+                    id: 45,
+                    question: "أول مراتب الدين:",
+                    options: [
+                        "الإحسان",
+                        "الإيمان",
+                        "الإسلام",
+                        "التقوى"
+                    ],
+                    correctAnswer: 2,
+                    userAnswer: null
+                },
+                {
+                    id: 46,
+                    question: "عدد مراتب الدين:",
+                    options: [
+                        "اثنتان",
+                        "ثلاث",
+                        "أربع",
+                        "خمس"
+                    ],
+                    correctAnswer: 1,
+                    userAnswer: null
+                },
+                {
+                    id: 47,
+                    question: "البدعة السيئة هي:",
+                    options: [
+                        "جمع القرآن",
+                        "صلاة بلا دليل شرعي",
+                        "الأذان",
+                        "صلاة التراويح"
+                    ],
+                    correctAnswer: 1,
+                    userAnswer: null
+                },
+                {
+                    id: 48,
+                    question: "تعليق التمائم بقصد الحماية يُعد:",
+                    options: [
+                        "مباح",
+                        "شرك أصغر",
+                        "شرك أكبر",
+                        "سنة"
+                    ],
+                    correctAnswer: 1,
+                    userAnswer: null
+                },
+                {
+                    id: 49,
+                    question: "الكفر الاعتقادي يُخرج من:",
+                    options: [
+                        "الأخلاق",
+                        "الطاعة",
+                        "الإسلام",
+                        "الأدب"
+                    ],
+                    correctAnswer: 2,
+                    userAnswer: null
+                },
+                {
+                    id: 50,
+                    question: "إنكار فرضية الصلاة يُعد:",
+                    options: [
+                        "معصية",
+                        "كفر",
+                        "مكروه",
+                        "بدعة"
+                    ],
+                    correctAnswer: 1,
+                    userAnswer: null
+                },
+                {
+                    id: 51,
+                    question: "جمع القرآن في مصحف واحد كان في عهد:",
+                    options: [
+                        "عمر بن الخطاب",
+                        "عثمان بن عفان",
+                        "علي بن أبي طالب",
+                        "أبي بكر الصديق"
+                    ],
+                    correctAnswer: 3,
+                    userAnswer: null
+                },
+                {
+                    id: 52,
+                    question: "أخطر الذنوب عند الله:",
+                    options: [
+                        "السرقة",
+                        "القتل",
+                        "الشرك",
+                        "الزنا"
+                    ],
+                    correctAnswer: 2,
+                    userAnswer: null
+                },
+                {
+                    id: 53,
+                    question: "سب المسلم يُعد:",
+                    options: [
+                        "كفر اعتقادي",
+                        "كفر عملي",
+                        "شرك",
+                        "نفاق"
+                    ],
+                    correctAnswer: 1,
+                    userAnswer: null
+                },
+                {
+                    id: 54,
+                    question: "زعيم المنافقين في المدينة:",
+                    options: [
+                        "أبو لهب",
+                        "أبو جهل",
+                        "عبد الله بن أبي",
+                        "شاس بن قيس"
+                    ],
+                    correctAnswer: 2,
+                    userAnswer: null
+                },
+                {
+                    id: 55,
+                    question: "الشرك الأصغر يُسمى:",
+                    options: [
+                        "الظاهر",
+                        "الخفي",
+                        "الأكبر",
+                        "العملي"
+                    ],
+                    correctAnswer: 1,
+                    userAnswer: null
+                },
+                {
+                    id: 56,
+                    question: "من أمثلة الشرك الأصغر:",
+                    options: [
+                        "السجود للصنم",
+                        "الدعاء لغير الله",
+                        "الرياء",
+                        "إنكار الله"
+                    ],
+                    correctAnswer: 2,
+                    userAnswer: null
+                },
+                {
+                    id: 57,
+                    question: "الرياء يؤدي إلى:",
+                    options: [
+                        "قبول العمل",
+                        "بطلان العمل",
+                        "زيادة الأجر",
+                        "الإخلاص"
+                    ],
+                    correctAnswer: 1,
+                    userAnswer: null
+                },
+                {
+                    id: 58,
+                    question: "الحلف بغير الله حكمه:",
+                    options: [
+                        "مباح",
+                        "مستحب",
+                        "شرك أصغر",
+                        "كفر"
+                    ],
+                    correctAnswer: 2,
+                    userAnswer: null
+                },
+                {
+                    id: 59,
+                    question: "إنكار حكم معلوم من الدين بالضرورة:",
+                    options: [
+                        "معصية",
+                        "مكروه",
+                        "كفر",
+                        "سنة"
+                    ],
+                    correctAnswer: 2,
+                    userAnswer: null
+                },
+                {
+                    id: 60,
+                    question: "البدعة في الدين تعني:",
+                    options: [
+                        "الاجتهاد",
+                        "إحداث أمر بلا دليل شرعي",
+                        "التطوير",
+                        "السنة"
+                    ],
+                    correctAnswer: 1,
+                    userAnswer: null
+                }
+            ],
+            4: [
+                {
+                    id: 61,
+                    question: "من مظاهر تكريم الله للإنسان:",
+                    options: [
+                        "المال",
+                        "العقل",
+                        "الجاه",
+                        "القوة"
+                    ],
+                    correctAnswer: 1,
+                    userAnswer: null
+                },
+                {
+                    id: 62,
+                    question: "الإسلام حفظ للإنسان:",
+                    options: [
+                        "ماله فقط",
+                        "جسده فقط",
+                        "دينه وعقله وماله ونفسه",
+                        "نسبه فقط"
+                    ],
+                    correctAnswer: 2,
+                    userAnswer: null
+                },
+                {
+                    id: 63,
+                    question: "تحريم القتل يدل على:",
+                    options: [
+                        "إهانة الإنسان",
+                        "حفظ النفس",
+                        "ضعف المجتمع",
+                        "الفوضى"
+                    ],
+                    correctAnswer: 1,
+                    userAnswer: null
+                },
+                {
+                    id: 64,
+                    question: "الكرامة في الإسلام تشمل:",
+                    options: [
+                        "المسلم فقط",
+                        "الإنسان كله",
+                        "الغني فقط",
+                        "القوي فقط"
+                    ],
+                    correctAnswer: 1,
+                    userAnswer: null
+                },
+                {
+                    id: 65,
+                    question: "تحريم الظلم يحقق:",
+                    options: [
+                        "الفوضى",
+                        "العدل",
+                        "الضعف",
+                        "النزاع"
+                    ],
+                    correctAnswer: 1,
+                    userAnswer: null
+                },
+                {
+                    id: 66,
+                    question: "من حقوق الإنسان في الإسلام:",
+                    options: [
+                        "الحرية المسؤولة",
+                        "الفوضى",
+                        "الظلم",
+                        "الاعتداء"
+                    ],
+                    correctAnswer: 0,
+                    userAnswer: null
+                },
+                {
+                    id: 67,
+                    question: "حفظ العقل يكون بـ:",
+                    options: [
+                        "شرب الخمر",
+                        "تحريم المخدرات",
+                        "الجهل",
+                        "التقليد الأعمى"
+                    ],
+                    correctAnswer: 1,
+                    userAnswer: null
+                },
+                {
+                    id: 68,
+                    question: "من مقاصد الشريعة:",
+                    options: [
+                        "المشقة",
+                        "الضرر",
+                        "حفظ الكرامة",
+                        "الظلم"
+                    ],
+                    correctAnswer: 2,
+                    userAnswer: null
+                },
+                {
+                    id: 69,
+                    question: "تحريم الغيبة يهدف إلى:",
+                    options: [
+                        "الإهانة",
+                        "حفظ العرض",
+                        "التسلية",
+                        "الجدال"
+                    ],
+                    correctAnswer: 1,
+                    userAnswer: null
+                },
+                {
+                    id: 70,
+                    question: "حفظ المال يكون بـ:",
+                    options: [
+                        "السرقة",
+                        "الربا",
+                        "تحريم الاعتداء عليه",
+                        "التبذير"
+                    ],
+                    correctAnswer: 2,
+                    userAnswer: null
+                },
+                {
+                    id: 71,
+                    question: "سبب تكريم الإنسان في الإسلام:",
+                    options: [
+                        "غناه",
+                        "قوته",
+                        "كونه مخلوقًا مكرمًا",
+                        "شهرته"
+                    ],
+                    correctAnswer: 2,
+                    userAnswer: null
+                },
+                {
+                    id: 72,
+                    question: "المساواة في الإسلام تعني:",
+                    options: [
+                        "الظلم",
+                        "العدالة",
+                        "التفرقة",
+                        "العنصرية"
+                    ],
+                    correctAnswer: 1,
+                    userAnswer: null
+                },
+                {
+                    id: 73,
+                    question: "تحريم التعذيب يدل على:",
+                    options: [
+                        "القسوة",
+                        "الرحمة",
+                        "الإهانة",
+                        "الظلم"
+                    ],
+                    correctAnswer: 1,
+                    userAnswer: null
+                },
+                {
+                    id: 74,
+                    question: "من صور تكريم الإنسان:",
+                    options: [
+                        "احترام جسده",
+                        "الاعتداء عليه",
+                        "إهانته",
+                        "ظلمه"
+                    ],
+                    correctAnswer: 0,
+                    userAnswer: null
+                },
+                {
+                    id: 75,
+                    question: "حفظ الدين يكون بـ:",
+                    options: [
+                        "الإكراه",
+                        "الدعوة بالحكمة",
+                        "العنف",
+                        "الإهمال"
+                    ],
+                    correctAnswer: 1,
+                    userAnswer: null
+                },
+                {
+                    id: 76,
+                    question: "الإسلام يحفظ حقوق:",
+                    options: [
+                        "الرجال فقط",
+                        "النساء فقط",
+                        "جميع البشر",
+                        "الأغنياء فقط"
+                    ],
+                    correctAnswer: 2,
+                    userAnswer: null
+                },
+                {
+                    id: 77,
+                    question: "كرامة الإنسان ثابتة:",
+                    options: [
+                        "بالمال",
+                        "بالنسب",
+                        "بإنسانيته",
+                        "بالقوة"
+                    ],
+                    correctAnswer: 2,
+                    userAnswer: null
+                },
+                {
+                    id: 78,
+                    question: "تحريم السخرية يهدف إلى:",
+                    options: [
+                        "التسلية",
+                        "حفظ الكرامة",
+                        "الإهانة",
+                        "الفوضى"
+                    ],
+                    correctAnswer: 1,
+                    userAnswer: null
+                },
+                {
+                    id: 79,
+                    question: "من نتائج احترام كرامة الإنسان:",
+                    options: [
+                        "الفوضى",
+                        "الأمن",
+                        "الظلم",
+                        "الفتنة"
+                    ],
+                    correctAnswer: 1,
+                    userAnswer: null
+                },
+                {
+                    id: 80,
+                    question: "الإسلام دين:",
+                    options: [
+                        "قسوة",
+                        "عدل وكرامة",
+                        "تفرقة",
+                        "إهانة"
+                    ],
+                    correctAnswer: 1,
+                    userAnswer: null
+                }
+            ]
+        };
+
+        // أسماء الوحدات
+        const unitNames = {
+            1: "الوحدة الأولى: سورة آل عمران (الآيات 102-105)",
+            2: "الوحدة الثانية: الحديث الشريف - اتقاء الشبهات",
+            3: "الوحدة الثالثة: صور من الضلال",
+            4: "الوحدة الرابعة: كرامة الإنسان في الإسلام"
+        };
+
+        // المتغيرات العامة
+        let currentUnit = 1;
+        let currentQuestionIndex = 0;
+        let timerInterval;
+        let timeLeft = 20 * 60; // 20 دقيقة بالثواني
+        let testStarted = false;
+        let questions = [];
+
+        // عناصر DOM
+        const unitsSection = document.getElementById('unitsSection');
+        const testContainer = document.getElementById('testContainer');
+        const resultsContainer = document.getElementById('resultsContainer');
+        const testTitle = document.getElementById('testTitle');
+        const questionText = document.getElementById('questionText');
+        const optionsContainer = document.getElementById('optionsContainer');
+        const prevBtn = document.getElementById('prevBtn');
+        const endTestBtn = document.getElementById('endTestBtn');
+        const progressBar = document.getElementById('progressBar');
+        const questionNumber = document.getElementById('questionNumber');
+        const testTimer = document.getElementById('testTimer');
+        const mainTimer = document.getElementById('timer');
+        
+        // عناصر النتائج
+        const scorePercent = document.getElementById('scorePercent');
+        const totalQuestions = document.getElementById('totalQuestions');
+        const correctAnswers = document.getElementById('correctAnswers');
+        const incorrectAnswers = document.getElementById('incorrectAnswers');
+        const performanceLevel = document.getElementById('performanceLevel');
+        const questionReview = document.getElementById('questionReview');
+        const restartBtn = document.getElementById('restartBtn');
+        const backToUnitsBtn = document.getElementById('backToUnitsBtn');
+        const scoreCircle = document.getElementById('scoreCircle');
+
+        // تهيئة الأحداث
+        document.addEventListener('DOMContentLoaded', function() {
+            // أحداث اختيار الوحدة
+            document.querySelectorAll('.unit-card').forEach(card => {
+                card.addEventListener('click', function() {
+                    const unit = parseInt(this.getAttribute('data-unit'));
+                    startTest(unit);
+                });
+            });
+
+            // أحداث الأزرار
+            prevBtn.addEventListener('click', showPreviousQuestion);
+            endTestBtn.addEventListener('click', endTest);
+            restartBtn.addEventListener('click', restartTest);
+            backToUnitsBtn.addEventListener('click', backToUnits);
+            
+            // تحديث المؤقت الرئيسي
+            updateMainTimer();
+        });
+
+        // بدء الاختبار
+        function startTest(unit) {
+            currentUnit = unit;
+            currentQuestionIndex = 0;
+            timeLeft = 20 * 60;
+            testStarted = true;
+            
+            // إخفاء قسم الوحدات وإظهار واجهة الاختبار
+            unitsSection.style.display = 'none';
+            testContainer.style.display = 'block';
+            resultsContainer.style.display = 'none';
+            
+            // تعيين عنوان الاختبار
+            testTitle.textContent = `اختبار ${unitNames[unit]}`;
+            
+            // تحميل أسئلة الوحدة
+            questions = [...questionsData[unit]];
+            
+            // عرض السؤال الأول
+            showQuestion();
+            
+            // بدء المؤقت
+            startTimer();
+        }
+
+        // عرض السؤال الحالي
+        function showQuestion() {
+            const question = questions[currentQuestionIndex];
+            
+            // تحديث نص السؤال
+            questionText.textContent = question.question;
+            
+            // تحديث رقم السؤال وشريط التقدم
+            questionNumber.textContent = `السؤال ${currentQuestionIndex + 1} من ${questions.length}`;
+            const progress = ((currentQuestionIndex + 1) / questions.length) * 100;
+            progressBar.style.width = `${progress}%`;
+            
+            // مسح الخيارات السابقة
+            optionsContainer.innerHTML = '';
+            
+            // إضافة الخيارات الجديدة
+            const optionLetters = ['أ', 'ب', 'ج', 'د'];
+            question.options.forEach((option, index) => {
+                const optionElement = document.createElement('div');
+                optionElement.className = 'option';
+                if (question.userAnswer === index) {
+                    optionElement.classList.add('selected');
+                }
+                
+                optionElement.innerHTML = `
+                    <div class="option-letter">${optionLetters[index]}</div>
+                    <div class="option-text">${option}</div>
+                `;
+                
+                optionElement.addEventListener('click', () => selectOption(index));
+                optionsContainer.appendChild(optionElement);
+            });
+            
+            // تحديث حالة أزرار التنقل
+            prevBtn.disabled = currentQuestionIndex === 0;
+            
+            // إظهار زر إنهاء الاختبار في السؤال الأخير فقط
+            if (currentQuestionIndex === questions.length - 1) {
+                endTestBtn.style.display = 'block';
+            } else {
+                endTestBtn.style.display = 'none';
+            }
+        }
+
+        // اختيار إجابة
+        function selectOption(optionIndex) {
+            // إزالة التحديد من جميع الخيارات
+            document.querySelectorAll('.option').forEach(opt => {
+                opt.classList.remove('selected');
+            });
+            
+            // تحديد الخيار المختار
+            document.querySelectorAll('.option')[optionIndex].classList.add('selected');
+            
+            // حفظ إجابة المستخدم
+            questions[currentQuestionIndex].userAnswer = optionIndex;
+            
+            // الانتقال للسؤال التالي تلقائياً (ماعدا السؤال الأخير)
+            if (currentQuestionIndex < questions.length - 1) {
+                currentQuestionIndex++;
+                setTimeout(() => {
+                    showQuestion();
+                }, 300); // تأخير بسيط لراحة المستخدم
+            }
+        }
+
+        // العودة للسؤال السابق
+        function showPreviousQuestion() {
+            if (currentQuestionIndex > 0) {
+                currentQuestionIndex--;
+                showQuestion();
+            }
+        }
+
+        // بدء المؤقت
+        function startTimer() {
+            // إيقاف المؤقت السابق إذا كان يعمل
+            if (timerInterval) {
+                clearInterval(timerInterval);
+            }
+            
+            // تحديث المؤقت على الفور
+            updateTestTimer();
+            
+            // بدء المؤقت
+            timerInterval = setInterval(() => {
+                timeLeft--;
+                updateTestTimer();
+                
+                // إذا انتهى الوقت، إنهاء الاختبار تلقائياً
+                if (timeLeft <= 0) {
+                    clearInterval(timerInterval);
+                    endTest();
+                }
+            }, 1000);
+        }
+
+        // تحديث مؤقت الاختبار
+        function updateTestTimer() {
+            const minutes = Math.floor(timeLeft / 60);
+            const seconds = timeLeft % 60;
+            testTimer.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            
+            // تغيير اللون عندما يقل الوقت عن 5 دقائق
+            if (timeLeft <= 5 * 60) {
+                testTimer.classList.add('timer-warning');
+            } else {
+                testTimer.classList.remove('timer-warning');
+            }
+        }
+
+        // تحديث المؤقت الرئيسي
+        function updateMainTimer() {
+            const now = new Date();
+            const hours = now.getHours().toString().padStart(2, '0');
+            const minutes = now.getMinutes().toString().padStart(2, '0');
+            mainTimer.textContent = `${hours}:${minutes}`;
+            
+            // تحديث كل دقيقة
+            setTimeout(updateMainTimer, 60000);
+        }
+
+        // إنهاء الاختبار وعرض النتائج
+        function endTest() {
+            // إيقاف المؤقت
+            clearInterval(timerInterval);
+            
+            // إخفاء واجهة الاختبار وإظهار النتائج
+            testContainer.style.display = 'none';
+            resultsContainer.style.display = 'block';
+            
+            // حساب النتائج
+            let correctCount = 0;
+            questions.forEach(question => {
+                if (question.userAnswer === question.correctAnswer) {
+                    correctCount++;
+                }
+            });
+            
+            const total = questions.length;
+            const incorrectCount = total - correctCount;
+            const scorePercentage = Math.round((correctCount / total) * 100);
+            
+            // تحديث النتائج
+            scorePercent.textContent = `${scorePercentage}%`;
+            totalQuestions.textContent = total;
+            correctAnswers.textContent = correctCount;
+            incorrectAnswers.textContent = incorrectCount;
+            
+            // تحديد مستوى الأداء
+            let level = "";
+            let levelColor = "";
+            
+            if (scorePercentage >= 90) {
+                level = "ممتاز";
+                levelColor = "#28a745";
+            } else if (scorePercentage >= 80) {
+                level = "جيد جداً";
+                levelColor = "#20c997";
+            } else if (scorePercentage >= 70) {
+                level = "جيد";
+                levelColor = "#17a2b8";
+            } else if (scorePercentage >= 60) {
+                level = "مقبول";
+                levelColor = "#ffc107";
+            } else {
+                level = "ضعيف";
+                levelColor = "#dc3545";
+            }
+            
+            performanceLevel.textContent = level;
+            performanceLevel.style.color = levelColor;
+            
+            // تحديث لون دائرة النتيجة
+            scoreCircle.style.background = `linear-gradient(135deg, ${levelColor}, ${levelColor}99)`;
+            
+            // عرض مراجعة الأسئلة
+            displayQuestionReview();
+        }
+
+        // عرض مراجعة الأسئلة
+        function displayQuestionReview() {
+            questionReview.innerHTML = '<h3 style="margin-bottom: 20px; color: var(--dark-color);">مراجعة الأسئلة:</h3>';
+            
+            const optionLetters = ['أ', 'ب', 'ج', 'د'];
+            
+            questions.forEach((question, index) => {
+                const reviewItem = document.createElement('div');
+                reviewItem.className = 'review-item';
+                
+                let answerStatus = '';
+                let userAnswerText = '';
+                let correctAnswerText = '';
+                
+                if (question.userAnswer === null) {
+                    answerStatus = 'غير مجاب';
+                    userAnswerText = 'لم يتم الإجابة';
+                } else if (question.userAnswer === question.correctAnswer) {
+                    answerStatus = 'صحيح';
+                    userAnswerText = question.options[question.userAnswer];
+                } else {
+                    answerStatus = 'خاطئ';
+                    userAnswerText = question.options[question.userAnswer];
+                    correctAnswerText = question.options[question.correctAnswer];
+                }
+                
+                reviewItem.innerHTML = `
+                    <div class="review-question">${index + 1}. ${question.question}</div>
+                    <div class="review-answer ${question.userAnswer === question.correctAnswer ? 'correct' : 'incorrect'}">
+                        <strong>إجابتك:</strong> ${userAnswerText} ${answerStatus === 'صحيح' ? '✓' : '✗'}
+                    </div>
+                    ${answerStatus === 'خاطئ' ? `
+                        <div class="review-answer correct">
+                            <strong>الإجابة الصحيحة:</strong> ${correctAnswerText} ✓
+                        </div>
+                    ` : ''}
+                `;
+                
+                questionReview.appendChild(reviewItem);
+            });
+        }
+
+        // إعادة بدء الاختبار
+        function restartTest() {
+            startTest(currentUnit);
+        }
+
+        // العودة لقائمة الوحدات
+        function backToUnits() {
+            // إيقاف المؤقت
+            clearInterval(timerInterval);
+            
+            // إعادة تعيين المتغيرات
+            testStarted = false;
+            
+            // إخفاء النتائج وإظهار قسم الوحدات
+            resultsContainer.style.display = 'none';
+            unitsSection.style.display = 'block';
+        }
+    </script>
+</body>
+</html>
