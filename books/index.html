@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>كتب مدرسية وزارية - أول ثانوي</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            background: linear-gradient(135deg, #1a2a6c, #2a3b8f, #3a4cb2);
+            color: #fff;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            padding: 30px 0;
+            margin-bottom: 30px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .logo i {
+            font-size: 2.5rem;
+            color: #FFD700;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            color: #FFD700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .subtitle {
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+            color: #FFD700;
+        }
+
+        .tagline {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto 15px;
+        }
+
+        .developers {
+            font-size: 1.1rem;
+            color: #FFD700;
+            margin-top: 10px;
+            padding: 8px 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 30px;
+            display: inline-block;
+            border: 1px solid rgba(255, 215, 0, 0.3);
+        }
+
+        .semester-sections {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(550px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        @media (max-width: 768px) {
+            .semester-sections {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .semester-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .semester-header {
+            text-align: center;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid rgba(255, 215, 0, 0.3);
+        }
+
+        .semester-header h2 {
+            font-size: 2rem;
+            color: #FFD700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .semester-header h2 i {
+            font-size: 1.8rem;
+        }
+
+        .semester1 .semester-header h2 i {
+            color: #4CAF50;
+        }
+
+        .semester2 .semester-header h2 i {
+            color: #2196F3;
+        }
+
+        .subjects-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        @media (max-width: 600px) {
+            .subjects-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .subject-card {
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .subject-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.12);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .subject-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            height: 70px;
+            width: 70px;
+            line-height: 70px;
+            border-radius: 50%;
+            margin: 0 auto 15px;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .arabic .subject-icon {
+            color: #4CAF50;
+            background: rgba(76, 175, 80, 0.15);
+        }
+
+        .religion .subject-icon {
+            color: #9C27B0;
+            background: rgba(156, 39, 176, 0.15);
+        }
+
+        .english .subject-icon {
+            color: #FF9800;
+            background: rgba(255, 152, 0, 0.15);
+        }
+
+        .history .subject-icon {
+            color: #2196F3;
+            background: rgba(33, 150, 243, 0.15);
+        }
+
+        .subject-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+            min-height: 45px;
+        }
+
+        .subject-card p {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-bottom: 15px;
+            min-height: 40px;
+        }
+
+        .download-btn {
+            display: inline-block;
+            background: linear-gradient(to right, #FFD700, #FFA500);
+            color: #333;
+            padding: 12px 25px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(255, 215, 0, 0.3);
+            width: 100%;
+        }
+
+        .download-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 15px rgba(255, 215, 0, 0.4);
+            color: #000;
+        }
+
+        .download-btn i {
+            margin-left: 8px;
+        }
+
+        .file-size {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 6px 10px;
+            border-radius: 5px;
+            font-size: 0.8rem;
+            margin-top: 8px;
+            display: inline-block;
+        }
+
+        .direct-link {
+            margin-top: 10px;
+            font-size: 0.8rem;
+            opacity: 0.7;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px 0;
+            margin-top: 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        .features {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .feature {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255, 255, 255, 0.08);
+            padding: 10px 20px;
+            border-radius: 30px;
+        }
+
+        .feature i {
+            color: #FFD700;
+        }
+
+        /* تصميم متجاوب */
+        @media (max-width: 768px) {
+            .semester-card {
+                padding: 20px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .semester-header h2 {
+                font-size: 1.7rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .subject-icon {
+                font-size: 2rem;
+                height: 60px;
+                width: 60px;
+                line-height: 60px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <i class="fas fa-book"></i>
+            </div>
+            <h1>كتب مدرسية وزارية</h1>
+            <div class="subtitle">للصف الأول الثانوي - المنهج الأردني</div>
+            <p class="tagline">موقع شامل لتحميل الكتب المدرسية الوزارية مباشرة من موقع الوزارة</p>
+            <div class="developers">
+                <i class="fas fa-user-graduate"></i> إعداد الطالبين: عبدالرحمن المعايطه وعلي الدرابكه
+            </div>
+            
+            <div class="features">
+                <div class="feature">
+                    <i class="fas fa-link"></i>
+                    <span>روابط مباشرة من موقع الوزارة</span>
+                </div>
+                <div class="feature">
+                    <i class="fas fa-download"></i>
+                    <span>تحميل مباشر وسريع</span>
+                </div>
+                <div class="feature">
+                    <i class="fas fa-check-circle"></i>
+                    <span>نسخ أصلية ومعتمدة</span>
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <div class="semester-sections">
+                <!-- الفصل الأول -->
+                <div class="semester-card semester1">
+                    <div class="semester-header">
+                        <h2><i class="fas fa-sun"></i> الفصل الدراسي الأول</h2>
+                    </div>
+                    
+                    <div class="subjects-grid">
+                        <!-- اللغة العربية - الفصل الأول -->
+                        <div class="subject-card arabic">
+                            <div class="subject-icon">
+                                <i class="fas fa-book-open"></i>
+                            </div>
+                            <h3>اللغة العربية</h3>
+                            <p>كتاب اللغة العربية للفصل الأول - الحادي عشر علمي وأدبي</p>
+                            <div class="file-size">
+                                <i class="fas fa-hdd"></i> حجم كبير (يفتح في نافذة جديدة)
+                            </div>
+                            <a href="https://www.nccd.gov.jo/EBV4.0/Root_Storage/AR/Arabic/2025/%D8%B9%D8%B1%D8%A8%D9%8A%206.7.2025/11/%D9%83%D8%AA%D8%A7%D8%A8%20%D8%A7%D9%84%D8%AD%D8%A7%D8%AF%D9%8A%20%D8%B9%D8%B4%D8%B1%20%D9%811%20%D8%A7%D8%B9%D8%A7%D8%AF%D8%A9%20%D8%B7%D8%A8%D8%A7%D8%B9%D8%A9%2025-5.pdf" 
+                               class="download-btn" target="_blank">
+                                فتح الكتاب <i class="fas fa-external-link-alt"></i>
+                            </a>
+                            <div class="direct-link">
+                                <i class="fas fa-link"></i>
+                                <span>رابط مباشر من وزارة التربية</span>
+                            </div>
+                        </div>
+
+                        <!-- التربية الإسلامية - الفصل الأول -->
+                        <div class="subject-card religion">
+                            <div class="subject-icon">
+                                <i class="fas fa-mosque"></i>
+                            </div>
+                            <h3>التربية الإسلامية</h3>
+                            <p>كتاب التربية الإسلامية للفصل الأول - جميع الفروع</p>
+                            <div class="file-size">
+                                <i class="fas fa-hdd"></i> حجم كبير (يفتح في نافذة جديدة)
+                            </div>
+                            <a href="https://www.nccd.gov.jo/EBV4.0/Root_Storage/AR/Islam/Islam/2025/G11/1/islamic%20C11%20P1%20all%20Branches%20.pdf" 
+                               class="download-btn" target="_blank">
+                                فتح الكتاب <i class="fas fa-external-link-alt"></i>
+                            </a>
+                            <div class="direct-link">
+                                <i class="fas fa-link"></i>
+                                <span>رابط مباشر من وزارة التربية</span>
+                            </div>
+                        </div>
+
+                        <!-- اللغة الإنجليزية - الفصل الأول -->
+                        <div class="subject-card english">
+                            <div class="subject-icon">
+                                <i class="fas fa-globe"></i>
+                            </div>
+                            <h3>اللغة الإنجليزية</h3>
+                            <p>كتاب اللغة الإنجليزية للفصل الأول - High Note G11</p>
+                            <div class="file-size">
+                                <i class="fas fa-hdd"></i> حجم كبير (يفتح في نافذة جديدة)
+                            </div>
+                            <a href="https://www.nccd.gov.jo/EBV4.0/Root_Storage/EN/2024/G11/JOR_HN_G11_Student's_Book_Print.pdf" 
+                               class="download-btn" target="_blank">
+                                فتح الكتاب <i class="fas fa-external-link-alt"></i>
+                            </a>
+                            <div class="direct-link">
+                                <i class="fas fa-link"></i>
+                                <span>رابط مباشر من وزارة التربية</span>
+                            </div>
+                        </div>
+
+                        <!-- التاريخ - الفصل الأول -->
+                        <div class="subject-card history">
+                            <div class="subject-icon">
+                                <i class="fas fa-landmark"></i>
+                            </div>
+                            <h3>التاريخ</h3>
+                            <p>كتاب تاريخ الأردن للفصل الأول - الحادي عشر أكاديمي</p>
+                            <div class="file-size">
+                                <i class="fas fa-hdd"></i> حجم كبير (يفتح في نافذة جديدة)
+                            </div>
+                            <a href="https://www.nccd.gov.jo/EBV4.0/Root_Storage/AR/SS/G11/1/%D8%AA%D8%A7%D8%B1%D9%8A%D8%AE%20%D8%A7%D9%84%D8%A7%D8%B1%D8%AF%D9%86%20%D8%A7%D9%84%D8%A7%D9%83%D8%A7%D8%AF%D9%8A%D9%85%D9%8A-%D9%811.pdf" 
+                               class="download-btn" target="_blank">
+                                فتح الكتاب <i class="fas fa-external-link-alt"></i>
+                            </a>
+                            <div class="direct-link">
+                                <i class="fas fa-link"></i>
+                                <span>رابط مباشر من وزارة التربية</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- الفصل الثاني -->
+                <div class="semester-card semester2">
+                    <div class="semester-header">
+                        <h2><i class="fas fa-moon"></i> الفصل الدراسي الثاني</h2>
+                    </div>
+                    
+                    <div class="subjects-grid">
+                        <!-- اللغة العربية - الفصل الثاني -->
+                        <div class="subject-card arabic">
+                            <div class="subject-icon">
+                                <i class="fas fa-book-open"></i>
+                            </div>
+                            <h3>اللغة العربية</h3>
+                            <p>كتاب اللغة العربية للفصل الثاني - الحادي عشر الجزء الثاني</p>
+                            <div class="file-size">
+                                <i class="fas fa-hdd"></i> حجم كبير (يفتح في نافذة جديدة)
+                            </div>
+                            <a href="https://www.nccd.gov.jo/EBV4.0/Root_Storage/AR/Arabic/2025/%D8%B9%D8%B1%D8%A8%D9%8A%206.7.2025/11/PART2/AR11P2.pdf" 
+                               class="download-btn" target="_blank">
+                                فتح الكتاب <i class="fas fa-external-link-alt"></i>
+                            </a>
+                            <div class="direct-link">
+                                <i class="fas fa-link"></i>
+                                <span>رابط مباشر من وزارة التربية</span>
+                            </div>
+                        </div>
+
+                        <!-- التربية الإسلامية - الفصل الثاني -->
+                        <div class="subject-card religion">
+                            <div class="subject-icon">
+                                <i class="fas fa-mosque"></i>
+                            </div>
+                            <h3>التربية الإسلامية</h3>
+                            <p>كتاب التربية الإسلامية للفصل الثاني - الحادي عشر</p>
+                            <div class="file-size">
+                                <i class="fas fa-hdd"></i> حجم كبير (يفتح في نافذة جديدة)
+                            </div>
+                            <a href="https://www.nccd.gov.jo/EBV4.0/Root_Storage/AR/Islam/Islam/2025/G11/2/islamic%20C11%20P2%20.pdf" 
+                               class="download-btn" target="_blank">
+                                فتح الكتاب <i class="fas fa-external-link-alt"></i>
+                            </a>
+                            <div class="direct-link">
+                                <i class="fas fa-link"></i>
+                                <span>رابط مباشر من وزارة التربية</span>
+                            </div>
+                        </div>
+
+                        <!-- اللغة الإنجليزية - الفصل الثاني -->
+                        <div class="subject-card english">
+                            <div class="subject-icon">
+                                <i class="fas fa-globe"></i>
+                            </div>
+                            <h3>اللغة الإنجليزية</h3>
+                            <p>كتاب اللغة الإنجليزية للفصل الثاني - High Note G11 S2</p>
+                            <div class="file-size">
+                                <i class="fas fa-hdd"></i> حجم كبير (يفتح في نافذة جديدة)
+                            </div>
+                            <a href="https://www.nccd.gov.jo/EBV4.0/Root_Storage/EN/2024/G11/part%202/Jordan_High_Note_G11_S2_Student's_Book_Final_Print_Updated.pdf" 
+                               class="download-btn" target="_blank">
+                                فتح الكتاب <i class="fas fa-external-link-alt"></i>
+                            </a>
+                            <div class="direct-link">
+                                <i class="fas fa-link"></i>
+                                <span>رابط مباشر من وزارة التربية</span>
+                            </div>
+                        </div>
+
+                        <!-- التاريخ - الفصل الثاني -->
+                        <div class="subject-card history">
+                            <div class="subject-icon">
+                                <i class="fas fa-landmark"></i>
+                            </div>
+                            <h3>التاريخ</h3>
+                            <p>كتاب تاريخ الأردن للفصل الثاني - الحادي عشر أكاديمي</p>
+                            <div class="file-size">
+                                <i class="fas fa-hdd"></i> حجم كبير (يفتح في نافذة جديدة)
+                            </div>
+                            <a href="https://www.nccd.gov.jo/EBV4.0/Root_Storage/AR/SS/G11/2/%D8%AA%D8%A7%D8%B1%D9%8A%D8%AE%20%D8%A7%D9%84%D8%A7%D9%94%D8%B1%D8%AF%D9%86-%D8%A7%D9%84%D8%AD%D8%A7%D8%AF%D9%8A%20%D8%B9%D8%B4%D8%B1%20%D8%A7%D9%94%D9%83%D8%A7%D8%AF%D9%8A%D9%85%D9%8A-%20%D8%A7%D9%84%D9%81%D8%B5%D9%84%20%D8%A7%D9%84%D8%AB%D8%A7%D9%86%D9%8A-%D9%84%D9%84%D9%85%D9%88%D9%82%D8%B9-2025-.pdf" 
+                               class="download-btn" target="_blank">
+                                فتح الكتاب <i class="fas fa-external-link-alt"></i>
+                            </a>
+                            <div class="direct-link">
+                                <i class="fas fa-link"></i>
+                                <span>رابط مباشر من وزارة التربية</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ملاحظة هامة -->
+            <div style="background: rgba(255, 215, 0, 0.1); border-radius: 10px; padding: 20px; margin-top: 30px; border-right: 4px solid #FFD700;">
+                <h3 style="color: #FFD700; margin-bottom: 10px; display: flex; align-items: center; gap: 10px;">
+                    <i class="fas fa-info-circle"></i> ملاحظة هامة
+                </h3>
+                <p style="opacity: 0.9;">
+                    جميع الكتب مدرجة عبر روابط مباشرة من الموقع الرسمي لوزارة التربية والتعليم الأردنية. 
+                    قد تكون الملفات كبيرة الحجم لذا ننصح باستخدام اتصال إنترنت سريع. 
+                    عند النقر على أي زر "فتح الكتاب" سيتم فتح الملف في نافذة جديدة حيث يمكنك معاينته أو تحميله.
+                </p>
+            </div>
+        </main>
+
+        <footer>
+            <p>جميع حقوق الكتب محفوظة لوزارة التربية والتعليم الأردنية &copy; 2025</p>
+            <p>تم تصميم وتطوير الموقع بواسطة الطالبين: عبدالرحمن المعايطه وعلي الدرابكه</p>
+            <p style="margin-top: 10px; opacity: 0.7;">الموقع يوجه إلى الروابط الرسمية فقط ولا يخزن أي ملفات</p>
+        </footer>
+    </div>
+
+    <script>
+        // إضافة تأثيرات تفاعلية
+        document.addEventListener('DOMContentLoaded', function() {
+            // إضافة تأثيرات تفاعلية للبطاقات
+            document.querySelectorAll('.subject-card').forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-5px)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                });
+            });
+            
+            // رسالة تحذير للملفات الكبيرة
+            document.querySelectorAll('.download-btn').forEach(button => {
+                button.addEventListener('click', function(e) {
+                    // لا نوقف الحدث لأننا نريد فتح الرابط
+                    // فقط نعطي رسالة معلومات
+                    console.log('جاري فتح الكتاب من موقع الوزارة الرسمي...');
+                });
+            });
+            
+            // إضافة رسالة ترحيب
+            console.log("موقع الكتب المدرسية الوزارية - إعداد عبدالرحمن المعايطه وعلي الدرابكه");
+            console.log("جميع الروابط مباشرة من موقع وزارة التربية والتعليم الأردنية");
+        });
+    </script>
+</body>
+</html>
