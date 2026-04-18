@@ -130,22 +130,6 @@
             transform: scale(1.02);
         }
 
-        .back-btn {
-            display: inline-block;
-            background: #1e3c5c;
-            color: white;
-            text-decoration: none;
-            padding: 10px 25px;
-            border-radius: 40px;
-            margin-top: 30px;
-            transition: all 0.2s;
-        }
-
-        .back-btn:hover {
-            background: #0f2a3f;
-            transform: translateY(-2px);
-        }
-
         .footer {
             text-align: center;
             margin-top: 30px;
@@ -170,13 +154,9 @@
         <div id="questionsContainer" class="questions-list">
             <div class="empty-state">
                 <i class="fas fa-check-circle"></i>
-                <h3>لا توجد أخطاء حالياً</h3>
-                <p>ممتاز! استمر على هذا المنوال 🎉</p>
+                <h3>🎉 لا توجد أخطاء حالياً</h3>
+                <p>ممتاز! استمر على هذا المنوال</p>
             </div>
-        </div>
-
-        <div style="text-align: center;">
-            <a href="index.html" class="back-btn"><i class="fas fa-arrow-right"></i> العودة للرئيسية</a>
         </div>
 
         <div class="footer">
@@ -281,7 +261,7 @@
                 let list = JSON.parse(data);
                 let newList = list.filter(q => q.text !== questionText);
                 localStorage.setItem(key, JSON.stringify(newList));
-                // إعادة تحميل الصفحة لتحديث القائمة
+                // إعادة تحميل القائمة
                 loadWrongQuestions();
             }
         }
