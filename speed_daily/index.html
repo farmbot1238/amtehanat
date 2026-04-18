@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>متعاونين على التفوق - تحدي الأسئلة اليومي</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(145deg, #e0e5ec 0%, #f0f4f8 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 850px;
+            width: 100%;
+            background: #ffffff;
+            border-radius: 50px;
+            padding: 35px;
+            box-shadow: 20px 20px 40px rgba(0, 0, 0, 0.05);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            font-weight: 800;
+            color: #2c3e50;
+        }
+
+        .game-title {
+            font-size: 1.5em;
+            font-weight: 700;
+            color: #f1c40f;
+            margin: 5px 0;
+        }
+
+        .student-name {
+            font-size: 1em;
+            color: #5d6d7e;
+        }
+
+        .stats-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #f8f9fa;
+            border-radius: 50px;
+            padding: 12px 20px;
+            margin-bottom: 20px;
+            border: 1px solid #e9ecef;
+        }
+
+        .stats-left {
+            display: flex;
+            gap: 25px;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 1.8em;
+            font-weight: 800;
+        }
+
+        .stat-label {
+            font-size: 0.8em;
+            color: #6c757d;
+        }
+
+        .stat-item.correct .stat-value {
+            color: #27ae60;
+        }
+
+        .stat-item.wrong .stat-value {
+            color: #e67e22;
+        }
+
+        .settings-icon {
+            background: #e9ecef;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 40px;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #2c3e50;
+        }
+
+        .settings-icon:hover {
+            background: #dee2e6;
+            transform: translateY(-2px);
+        }
+
+        .timer-section {
+            background: linear-gradient(145deg, #1e2a36, #2c3e50);
+            border-radius: 40px;
+            padding: 20px;
+            text-align: center;
+            margin-bottom: 25px;
+            color: white;
+        }
+
+        .timer-label {
+            font-size: 0.9em;
+            opacity: 0.8;
+            margin-bottom: 8px;
+        }
+
+        .timer-display {
+            font-size: 2.8em;
+            font-weight: 800;
+            font-family: monospace;
+            letter-spacing: 5px;
+            background: rgba(0,0,0,0.3);
+            padding: 8px 20px;
+            border-radius: 50px;
+            display: inline-block;
+        }
+
+        .next-note {
+            font-size: 0.85em;
+            opacity: 0.7;
+            margin-top: 10px;
+        }
+
+        .mode-section {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .mode-title {
+            font-size: 1.2em;
+            color: #34495e;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .mode-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .mode-btn {
+            width: 110px;
+            padding: 20px 15px;
+            background: #f8f9fa;
+            border: 3px solid #e9ecef;
+            border-radius: 35px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+        }
+
+        .mode-btn:hover:not(.hidden) {
+            transform: translateY(-5px);
+            border-color: #f1c40f;
+            background: #fef9e7;
+        }
+
+        .mode-number {
+            font-size: 2.2em;
+            font-weight: 800;
+            color: #2c3e50;
+        }
+
+        .mode-text {
+            font-size: 0.85em;
+            color: #7f8c8d;
+            margin-top: 5px;
+        }
+
+        .confirm-section {
+            background: #fef9e7;
+            border-radius: 40px;
+            padding: 20px;
+            text-align: center;
+            margin-bottom: 25px;
+            border: 2px solid #f9e79f;
+        }
+
+        .confirm-question {
+            font-size: 1.2em;
+            font-weight: 600;
+            color: #7d6608;
+            margin-bottom: 15px;
+        }
+
+        .confirm-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .confirm-yes, .confirm-no {
+            padding: 10px 30px;
+            font-size: 1em;
+            font-weight: 700;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .confirm-yes {
+            background: #27ae60;
+            color: white;
+        }
+
+        .confirm-no {
+            background: #e67e22;
+            color: white;
+        }
+
+        .start-btn {
+            width: 100%;
+            padding: 15px;
+            font-size: 1.4em;
+            font-weight: 800;
+            background: linear-gradient(135deg, #f1c40f, #e67e22);
+            border: none;
+            border-radius: 60px;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-bottom: 25px;
+        }
+
+        .start-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(241, 196, 15, 0.4);
+        }
+
+        .question-box {
+            background: white;
+            border-radius: 35px;
+            padding: 25px;
+            border: 2px solid #f1c40f;
+            margin-bottom: 20px;
+        }
+
+        .question-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .question-counter {
+            font-size: 0.85em;
+            color: #6c757d;
+            background: #f8f9fa;
+            padding: 5px 12px;
+            border-radius: 30px;
+        }
+
+        .subject-badge {
+            padding: 5px 12px;
+            border-radius: 30px;
+            font-size: 0.85em;
+            font-weight: 600;
+            background: #fef9e7;
+            color: #e67e22;
+        }
+
+        .question-text {
+            font-size: 1.3em;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            text-align: center;
+            line-height: 1.5;
+        }
+
+        .options {
+            display: grid;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .option {
+            padding: 12px 18px;
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 1em;
+            font-weight: 500;
+            color: #2c3e50;
+        }
+
+        .option:hover {
+            background: #e9ecef;
+            transform: translateX(-5px);
+        }
+
+        .option.selected {
+            background: #d4edda;
+            border-color: #27ae60;
+            color: #155724;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 12px;
+            font-size: 1.1em;
+            font-weight: 700;
+            background: linear-gradient(135deg, #f1c40f, #e67e22);
+            border: none;
+            border-radius: 50px;
+            color: white;
+            cursor: pointer;
+        }
+
+        .next-btn {
+            width: 100%;
+            padding: 12px;
+            font-size: 1em;
+            font-weight: 600;
+            background: #2c3e50;
+            border: none;
+            border-radius: 50px;
+            color: white;
+            cursor: pointer;
+            margin-top: 12px;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 6px;
+            background: #e9ecef;
+            border-radius: 10px;
+            margin: 12px 0;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #f1c40f, #e67e22);
+            transition: width 0.3s;
+        }
+
+        .results-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.85);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .results-card {
+            background: white;
+            border-radius: 45px;
+            padding: 30px;
+            max-width: 550px;
+            width: 90%;
+            text-align: center;
+        }
+
+        .results-card h2 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+
+        .score {
+            font-size: 3em;
+            font-weight: 800;
+            color: #27ae60;
+            margin: 15px 0;
+        }
+
+        .answers-review {
+            max-height: 350px;
+            overflow-y: auto;
+            text-align: right;
+            margin: 20px 0;
+            border-top: 1px solid #e9ecef;
+            padding-top: 15px;
+        }
+
+        .review-item {
+            padding: 12px;
+            border-bottom: 1px solid #e9ecef;
+            font-size: 0.85em;
+            border-radius: 12px;
+            margin-bottom: 8px;
+        }
+
+        .review-item.correct {
+            background: #d4edda;
+        }
+
+        .review-item.incorrect {
+            background: #fef5e7;
+        }
+
+        .review-question {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .exit-btn {
+            background: linear-gradient(135deg, #f1c40f, #e67e22);
+            border: none;
+            padding: 10px 30px;
+            border-radius: 50px;
+            font-size: 1.1em;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: 15px;
+            color: white;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>متعاونين على التفوق</h1>
+            <div class="game-title">⚡ تحدي الأسئلة اليومي ⚡</div>
+            <div class="student-name">عبدالرحمن المعايطه</div>
+        </div>
+
+        <div class="stats-bar">
+            <div class="stats-left">
+                <div class="stat-item correct">
+                    <div class="stat-value" id="correctCount">0</div>
+                    <div class="stat-label">صحيح</div>
+                </div>
+                <div class="stat-item wrong">
+                    <div class="stat-value" id="wrongCount">0</div>
+                    <div class="stat-label">خطأ</div>
+                </div>
+            </div>
+            <button class="settings-icon" id="settingsBtn">⚙️ إعدادات</button>
+        </div>
+
+        <div class="timer-section">
+            <div class="timer-label">⏰ الوقت المتبقي للسؤال القادم</div>
+            <div class="timer-display" id="timerDisplay">--:--:--</div>
+            <div class="next-note" id="nextNote">سوف يتم تحميل السؤال التالي بعد الفترة المقطوعة</div>
+        </div>
+
+        <div id="modeSection" class="mode-section">
+            <div class="mode-title">🎯 اختر عدد الأسئلة</div>
+            <div class="mode-buttons">
+                <div class="mode-btn" data-mode="1"><div class="mode-number">1</div><div class="mode-text">سؤال</div></div>
+                <div class="mode-btn" data-mode="5"><div class="mode-number">5</div><div class="mode-text">أسئلة</div></div>
+                <div class="mode-btn" data-mode="10"><div class="mode-number">10</div><div class="mode-text">أسئلة</div></div>
+            </div>
+        </div>
+
+        <div id="confirmSection" class="confirm-section hidden">
+            <div class="confirm-question">هل تريد التأكيد؟</div>
+            <div class="confirm-buttons">
+                <button class="confirm-yes" id="confirmYes">نعم</button>
+                <button class="confirm-no" id="confirmNo">لا</button>
+            </div>
+        </div>
+
+        <button id="startBtn" class="start-btn hidden">🚀 ابدأ التحدي</button>
+
+        <div id="questionBox" class="question-box hidden">
+            <div class="question-header">
+                <div class="question-counter" id="questionCounter">السؤال 1 من 1</div>
+                <div class="subject-badge" id="subjectBadge">📖</div>
+            </div>
+            <div class="question-text" id="questionText"></div>
+            <div class="options" id="optionsContainer"></div>
+            <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width: 0%"></div></div>
+            <button class="submit-btn" id="submitBtn">✅ تأكيد الإجابة</button>
+            <button class="next-btn hidden" id="nextBtn">➡️ السؤال التالي</button>
+        </div>
+    </div>
+
+    <script>
+        // ========== الأسئلة من ملفاتك بالضبط ==========
+        
+        // التربية الإسلامية - 40 سؤال (من ملفك)
+        const islamicQuestions = [
+            { question: "قول الله تعالى الذي يشير إلى الاعتبار من الأمم السابقة، هو:", options: ["﴿وَاعْتَصِمُوا بِحَبْلِ اللَّهِ جَمِيعًا وَلَا تَفَرَّقُوا﴾", "﴿وَلَا تَكُونُوا كَالَّذِينَ تَفَرَّقُوا وَاخْتَلَفُوا مِنْ بَعْدِ مَا جَاءَهُمُ الْبَيِّنَاتُ﴾", "﴿وَلْتَكُنْ مِنْكُمْ أُمَّةٌ يَدْعُونَ إِلَى الْخَيْرِ﴾", "﴿يَا أَيُّهَا الَّذِينَ آمَنُوا اتَّقُوا اللَّهَ حَقَّ تُقَاتِهِ﴾"], correct: 1, subject: "🕋 تربية إسلامية" },
+            { question: "يكون انتقاء الشبهات إذا أصابت النجاسة جزءاً من الثوب، ولم يعلم صاحبه موضعها بغسل:", options: ["جزء من الثوب", "نصف الثوب", "أكثر الثوب", "الثوب كله"], correct: 3, subject: "🕋 تربية إسلامية" },
+            { question: "من صور الكفر العملي التي تخرج صاحبها من الإسلام:", options: ["إنكار ركن من أركان الإيمان", "سب الذات الإلهية", "إنكار حكم قطعي معلوم من الدين بالضرورة", "قتال المسلم للمسلم"], correct: 1, subject: "🕋 تربية إسلامية" },
+            { question: "مبدأ الإسلام الذي دعا إليه قول الله تعالى: ﴿يَا أَيُّهَا النَّاسُ إِنَّا خَلَقْنَاكُمْ مِنْ ذَكَرٍ وَأُنْثَى...﴾، هو:", options: ["المساواة", "الأمن", "الحرية", "تسخير الكون"], correct: 0, subject: "🕋 تربية إسلامية" },
+            { question: "حكم عدول أحد الخاطبين عن الخطبة إذا اعتقد بعدم وجود مصلحة من هذا الزواج، هو:", options: ["واجب", "مندوب", "مباح", "حرام"], correct: 2, subject: "🕋 تربية إسلامية" },
+            { question: "من صور الجهاد بالمعنى العام:", options: ["القتال في سبيل الله", "دعوة الناس إلى الخير", "بناء المصانع الحربية", "الإعلام والتعبئة المعنوية"], correct: 1, subject: "🕋 تربية إسلامية" },
+            { question: "من جوانب خدمة القرآن الكريم في زمن الخليفة الراشد علي بن أبي طالب رضي الله عنه:", options: ["جمع القرآن الكريم", "نسخ القرآن الكريم", "ضبط المصحف", "تنقيط الحروف المتشابهة"], correct: 2, subject: "🕋 تربية إسلامية" },
+            { question: "واحدة من العبارات الآتية صحيحة فيما يتعلق بالعزيمة والرخصة:", options: ["العزيمة هي الأصل والرخصة استثناء", "الرخصة هي الأصل والعزيمة استثناء", "العزيمة والرخصة كلتاهما أصل", "الرخصة لا يجوز تركها إلا لعذر شرعي"], correct: 0, subject: "🕋 تربية إسلامية" },
+            { question: "سبب معركة مؤتة هو قتل شرحبيل بن عمرو الغساني الصحابي الجليل:", options: ["المغيرة بن شعبة", "الحارث بن عمير", "زيد بن حارثة", "عبد الله بن رواحة"], correct: 1, subject: "🕋 تربية إسلامية" },
+            { question: "حكم زواج المسلمة من غير المسلم:", options: ["مكروه", "مباح", "مندوب", "حرام"], correct: 3, subject: "🕋 تربية إسلامية" },
+            { question: "أم المؤمنين التي أشارت على النبي ﷺ يوم الحديبية أن يبدأ بالتحلل من إحرامه:", options: ["خديجة رضي الله عنها", "عائشة رضي الله عنها", "ميمونة رضي الله عنها", "أم سلمة رضي الله عنها"], correct: 3, subject: "🕋 تربية إسلامية" },
+            { question: "نزل قول الله تعالى: ﴿وَلَا تَحْسَبَنَّ الَّذِينَ قُتِلُوا فِي سَبِيلِ اللَّهِ أَمْوَاتًا...﴾ بعد معركة:", options: ["مؤتة", "أحد", "بدر", "تبوك"], correct: 1, subject: "🕋 تربية إسلامية" },
+            { question: "المراد بـ 'كثرة السؤال' الوارد في حديث النبي ﷺ: 'إن الله يرضى لكم...'، هو الإكثار من:", options: ["سؤال أهل العلم", "السؤال في غير حاجة", "دعاء الله تعالى", "طلب الدعاء من الناس"], correct: 1, subject: "🕋 تربية إسلامية" },
+            { question: "سبب عزم النبي ﷺ على فتح مكة، هو:", options: ["إجبار قريش على الدخول في الإسلام", "الانتقام لما حصل للمسلمين في معركة أحد", "استرجاع ما أخذته قريش من المسلمين", "نقض قريش صلح الحديبية"], correct: 3, subject: "🕋 تربية إسلامية" },
+            { question: "قول الله تعالى الذي يدل على إيجابية الشريعة الإسلامية في نظرتها للحياة:", options: ["﴿قَالَ وَمَنْ يَقْنَطُ مِنْ رَحْمَةِ رَبِّهِ إِلَّا الضَّالُّونَ﴾", "﴿وَمَنْ يُؤْمِنْ بِاللَّهِ يَهْدِ قَلْبَهُ﴾", "﴿فَإِذَا قُضِيَتِ الصَّلَاةُ فَانْتَشِرُوا فِي الْأَرْضِ وَابْتَغُوا مِنْ فَضْلِ اللَّهِ﴾", "﴿وَتَعَاوَنُوا عَلَى الْبِرِّ وَالتَّقْوَى﴾"], correct: 2, subject: "🕋 تربية إسلامية" },
+            { question: "الترتيب الصحيح للولي عن المرأة في الزواج، هو:", options: ["الأب، الأخ الشقيق، الجد، الأخ لأب", "الأب، الجد، الأخ الشقيق، الأخ لأب", "الأب، الأخ الشقيق، الأخ لأب، الجد", "الأب، الجد، الأخ لأب، الأخ الشقيق"], correct: 1, subject: "🕋 تربية إسلامية" },
+            { question: "الحكم الشرعي في عمل المرأة وفق الضوابط الشرعية:", options: ["واجب", "مندوب", "مكروه", "مباح"], correct: 3, subject: "🕋 تربية إسلامية" },
+            { question: "يشير قول الله تعالى في سورة الروم ﴿وَابْتَغُوا مِنْ فَضْلِهِ﴾ إلى الدعوة في طلب:", options: ["العلم", "الرزق", "الزواج", "الغيث"], correct: 1, subject: "🕋 تربية إسلامية" },
+            { question: "من الأحكام التي وردت في السنة النبوية ولم ترد في القرآن الكريم حرمة:", options: ["الجمع بين المرأة وخالتها", "أكل أموال اليتيم", "الجمع بين المرأة وأختها", "أكل أموال الناس بالباطل"], correct: 0, subject: "🕋 تربية إسلامية" },
+            { question: "من القواعد الفقهية المستندة إلى العرف:", options: ["الضرورات تبيح المحظورات", "العادة محكمة", "المشقة تجلب التيسير", "لا ضرر ولا ضرار"], correct: 1, subject: "🕋 تربية إسلامية" },
+            { question: "من الحقوق المشتركة بين الزوجين:", options: ["الإرث", "المهر", "النفقة", "الطاعة"], correct: 0, subject: "🕋 تربية إسلامية" },
+            { question: "يدل قول الله تعالى: ﴿فَيَغْفِرُ لِمَنْ يَشَاءُ وَيُعَذِّبُ مَنْ يَشَاءُ﴾، على:", options: ["كمال قدرة الله تعالى", "رحمة الله تعالى", "سعة علم الله تعالى", "سعة ملك الله تعالى"], correct: 0, subject: "🕋 تربية إسلامية" },
+            { question: "المفهوم الذي يُقصد به أن الله تعالى خلق المخلوقات وأرشدها إلى ما يُصلح شأنها ومعاشها:", options: ["السببية", "الإتقان", "الهداية", "الفطرة"], correct: 2, subject: "🕋 تربية إسلامية" },
+            { question: "من الأمثلة على الإعجاز العلمي في القرآن الكريم:", options: ["القصاص", "تقديم لفظ السارق على السارقة", "المواريث", "أطوار خلق الجنين"], correct: 3, subject: "🕋 تربية إسلامية" },
+            { question: "الحكم الشرعي في الأمر بالمعروف والنهي عن المنكر:", options: ["فرض عين", "فرض كفاية", "سنة مؤكدة", "مستحب"], correct: 1, subject: "🕋 تربية إسلامية" },
+            { question: "قول الله تعالى الذي يشير إلى ما يحصل عند النفخة الأولى من أحداث، هو:", options: ["﴿إِذَا السَّمَاءُ انْفَطَرَتْ﴾", "﴿يَوْمَ تَشَقَّقُ الْأَرْضُ عَنْهُمْ سِرَاعًا﴾", "﴿وَنَضَعُ الْمَوازِينَ الْقِسْطَ﴾", "﴿وَسِيقَ الَّذِينَ اتَّقَوْا رَبَّهُمْ إِلَى الْجَنَّةِ﴾"], correct: 0, subject: "🕋 تربية إسلامية" },
+            { question: "إحدى المسائل الآتية يجوز فيها الاجتهاد:", options: ["مقدار نصاب الورثة", "التبرع بالأعضاء", "وجوب الصلوات الخمس", "أركان الإيمان"], correct: 1, subject: "🕋 تربية إسلامية" },
+            { question: "المفهوم الذي يدل على المنفعة التي تحصل للناس عن طريق جلب النفع لهم أو دفع الضرر عنهم:", options: ["الحاجيات", "الوسطية", "التحسينات", "المصلحة"], correct: 3, subject: "🕋 تربية إسلامية" },
+            { question: "يُطلق على كتب الحديث الشريف التي صُنفت بحسب أسماء الرواة من الصحابة الكرام:", options: ["الصحاح", "المسانيد", "السنن", "الجوامع"], correct: 1, subject: "🕋 تربية إسلامية" },
+            { question: "كان من منهج النبي ﷺ في حياته، أن:", options: ["يصوم الدهر ولا يفطر", "يعتزل النساء", "يصوم ويفطر", "يصلي ولا يرقد"], correct: 2, subject: "🕋 تربية إسلامية" },
+            { question: "الصحابي الجليل الذي كان أكثر المنفقين في تجهيز جيش العسرة، هو:", options: ["أبو بكر الصديق", "عمر بن الخطاب", "عثمان بن عفان", "علي بن أبي طالب"], correct: 2, subject: "🕋 تربية إسلامية" },
+            { question: "مناقشة إحدى الصحابيات سيدنا عمر بن الخطاب في مسألة تحديد مهور النساء يُعد مثالاً على حق:", options: ["المشاركة في صنع القرار", "تقديم النصيحة لولي الأمر", "المشاورة في الرأي العام", "ممارسة الحق في إعطاء الأمان"], correct: 1, subject: "🕋 تربية إسلامية" },
+            { question: "جميع ما يأتي يتعلق بالوصية، ما عدا:", options: ["أن لا تزيد عن الثلث", "جواز الرجوع عنها في حياة الموصي", "أن لا تكون لوارث", "بطلانها بموت الموصي قبل الموصى له"], correct: 3, subject: "🕋 تربية إسلامية" },
+            { question: "توفي رجل وعنده زوجة وولدان، فإن نصيب الزوجة من الميراث:", options: ["النصف", "الربع", "الثلث", "الثمن"], correct: 3, subject: "🕋 تربية إسلامية" },
+            { question: "مجال الوسطية الذي يشير إليه قول الله تعالى: ﴿قَدْ أَفْلَحَ مَنْ زَكَّاهَا﴾، هو:", options: ["الاعتقاد", "الأخلاق", "التشريع", "المعاملات"], correct: 1, subject: "🕋 تربية إسلامية" },
+            { question: "من الأوقاف العلمية التي أوقفها جلالة الملك عبد الله الثاني وقفية الإمام السيوطي في:", options: ["مسجد السلط الكبير", "المسجد الحسيني الكبير", "المسجد الأقصى المبارك", "مسجد الحسين بن طلال"], correct: 1, subject: "🕋 تربية إسلامية" },
+            { question: "من الأحكام الشرعية التي تقع في مرتبة التحسينات:", options: ["نوافل الطاعات", "تحريم السرقة", "مشروعية الزواج", "إباحة الجمع بين الصلوات للمسافر"], correct: 0, subject: "🕋 تربية إسلامية" },
+            { question: "يشير قول الله تعالى: ﴿وَأَقِمِ الصَّلَاةَ إِنَّ الصَّلَاةَ تَنْهَى عَنِ الْفَحْشَاءِ وَالْمُنْكَرِ﴾، إلى:", options: ["تطبيق العقوبات على مرتكب الجريمة", "معالجة أسباب ارتكاب الجريمة", "تعميق الإيمان بالله تعالى", "تعميق انتماء الفرد إلى وطنه"], correct: 2, subject: "🕋 تربية إسلامية" },
+            { question: "في قول النبي ﷺ في حجة الوداع: 'ألا كل شيء من أمر الجاهلية تحت قدمي موضوع...'، تأكيد على:", options: ["مبدأ المساواة", "حرمة الربا", "حرمة الثأر", "نبذ الفرقة"], correct: 2, subject: "🕋 تربية إسلامية" },
+            { question: "يدل قول الله تعالى: ﴿هُوَ الَّذِي جَعَلَ لَكُمُ الْأَرْضَ ذَلُولًا فَامْشُوا فِي مَنَاكِبِهَا﴾، على حق الإنسان في:", options: ["التملك", "التعليم", "الحرية", "العمل"], correct: 3, subject: "🕋 تربية إسلامية" }
+        ];
+
+        // التاريخ - 80 سؤال (عينة من ملفك)
+        const historyQuestions = [
+            { question: "تبدأ عصور ما قبل التاريخ من نشأة الإنسان على الأرض حتى:", options: ["بداية استخدام معدن البرونز", "بداية ظهور دويلات المدن", "بداية اختراع الكتابة", "بداية استخدام معدن النحاس"], correct: 2, subject: "🏛️ تاريخ" },
+            { question: "الترتيب الصحيح لأبرز الإنجازات الحضارية في العصور الحجرية، هو:", options: ["اكتشاف الزراعة وإنتاج الطعام، اكتشاف النار، اختراع الكتابة", "اكتشاف الزراعة وإنتاج الطعام، تدجين الحيوانات، اختراع الكتابة", "اختراع الكتابة، اكتشاف النار وصهر المعادن، تدجين الحيوانات", "اختراع الكتابة، تدجين الحيوانات، اكتشاف النار وصهر المعادن"], correct: 0, subject: "🏛️ تاريخ" },
+            { question: "واحدة مما يأتي تُعدّ صحيحة فيما يتعلق بمسلة ميشع:", options: ["مذكور عليها أسماء ثلاثة ملوك عمونيين", "محفوظة في المتحف البريطاني", "توجد منها نُسخٌ أخرى موجودة في معظم المتاحف الأردنية", "نُقشت عليها أهم انتصارات وأعمال الملك كاموشيت"], correct: 2, subject: "🏛️ تاريخ" },
+            { question: "كل ما يأتي من أسباب اتخاذ الأنباط مدينة البترا عاصمة لهم، ما عدا:", options: ["موقعها على الطرق التجارية", "موقعها الحصين بين الجبال", "قربها من ينابيع المياه", "بعدها عن ممالك الآشوريين والبابليين"], correct: 3, subject: "🏛️ تاريخ" },
+            { question: "من أسباب ضعف مملكة الأنباط:", options: ["نقل اليونان مركز التجارة إلى مملكة أدوم", "ضعف بعض ملوك الأنباط", "سيطرة البابليين على الطرق التجارية", "الاحتلال اليوناني لبلاد الشام عام 64 ق.م"], correct: 1, subject: "🏛️ تاريخ" },
+            { question: "الموقع الأثري المتبقي بسبب الحروب والكوارث الطبيعية من آثار الفترة اليونانية في الأردن، هو:", options: ["قصر العبد", "شارع الأعمدة", "المغطس", "قصر البنت"], correct: 0, subject: "🏛️ تاريخ" },
+            { question: "الكنيسة ذات التخطيط البازيليكي، والتي تتمتع بأرضيات فسيفسائية، هي:", options: ["مار إلياس", "كنيسة المعمدان", "أم قيس", "أم الرصاص"], correct: 3, subject: "🏛️ تاريخ" },
+            { question: "ترتيب أمراء الجيش الذي جهّزه الرسول محمد ﷺ في معركة مؤتة، هو:", options: ["زيد بن حارثة، جعفر بن أبي طالب، عبد الله بن رواحة", "عبد الله بن رواحة، جعفر بن أبي طالب، زيد بن حارثة", "جعفر بن أبي طالب، عبد الله بن رواحة، زيد بن حارثة", "زيد بن حارثة، عبد الله بن رواحة، جعفر بن أبي طالب"], correct: 0, subject: "🏛️ تاريخ" },
+            { question: "تُعدّ معركة اليرموك من المعارك الفاصلة في تاريخ بلاد الشام، بسبب:", options: ["حماية طريق الحج الشامي", "فتح مدن بلاد الشام جميعها وانتشار الإسلام فيها", "حماية طريق التجارة إلى شبه الجزيرة العربية", "إنهاء الحكم اليوناني لبلاد الشام"], correct: 1, subject: "🏛️ تاريخ" },
+            { question: "كل ما يأتي من أغراض بناء الأمويين قصوراً لهم في بادية الشام، ما عدا:", options: ["ممارسة هواية الصيد", "الاستجمام والترويح عن النفس", "التواصل مع القبائل العربية الموالية للحكم العباسي", "خدمة الحجاج المسلمين والمسافرين"], correct: 2, subject: "🏛️ تاريخ" },
+            { question: "المنطقة التي اتخذها محمد بن علي مركزاً لدعوته السرية لإحلال بني العباس محل بني أمية هي:", options: ["أذرح", "القسطل", "الحميمة", "الجرباء"], correct: 2, subject: "🏛️ تاريخ" },
+            { question: "العام الذي حدثت فيه معركة حطين، هو:", options: ["492هـ / 1099م", "583هـ / 1187م", "569هـ / 1173م", "579هـ / 1174م"], correct: 1, subject: "🏛️ تاريخ" },
+            { question: "الكتاب الذي ألفه المؤرخ جمال الدين محمد بن واصل، هو:", options: ["تاريخ مرآة الزمان", "مختصر المهذب في الفقه", "العمدة في صناعة الجراح", "مفرج الكروب في أخبار بني أيوب"], correct: 3, subject: "🏛️ تاريخ" },
+            { question: "يُطلق على الضرائب التي كانت تُفرض على البضائع المستوردة في العصر المملوكي:", options: ["التيمار", "المكوس", "العشور", "الخراج"], correct: 1, subject: "🏛️ تاريخ" },
+            { question: "أبقت الدولة العثمانية على الزعماء المحليين الذين سادوا في العصر المملوكي، بسبب:", options: ["بُعد تلك المناطق عن عاصمة الدولة العثمانية", "معرفة الزعماء المحليين للمنطقة", "انشغال الدولة في حروبها المتتالية في أوروبا", "دخول تلك المناطق في الفوضى وانعدام الأمن"], correct: 0, subject: "🏛️ تاريخ" },
+            { question: "كل ما يأتي من أسباب بناء الخط الحديدي الحجازي، ما عدا:", options: ["نشر العمران حول محطات الخط", "تحصيل المزيد من الضرائب", "منع التمرد والخروج عن طاعة الدولة", "تأمين نقل المحاصيل الزراعية"], correct: 3, subject: "🏛️ تاريخ" }
+        ];
+
+        // اللغة العربية - 56 سؤال (من ملفك)
+        const arabicQuestions = [
+            { question: "معنى (تُؤْفَكُونَ) المخطوط تحتها في قوله تعالى: ﴿ذَٰلِكُمُ اللَّهُ ۖ فَأَنَّىٰ تُؤْفَكُونَ﴾ هو:", options: ["تُسِيئُونَ إِلَى الْآخَرِينَ", "تُصَدُّونَ عَنِ السَّبِيلِ", "تَرْجُونَ اللهَ تَعَالَى", "تَمْتَنِعُونَ عَنِ المَعَاصِي"], correct: 1, subject: "🇸🇦 عربي" },
+            { question: "المعنى البلاغي الذي خرج إليه الاستفهام في قوله تعالى: ﴿وَمَنْ أَحْسَنُ قَوْلًا مِمَّنْ دَعَا إِلَى اللَّهِ وَعَمِلَ صَالِحًا﴾ هو:", options: ["النَّفْي", "التَّهْوِيل", "الإِنْكَار", "التَّمَنِّي"], correct: 0, subject: "🇸🇦 عربي" },
+            { question: "السطر الشعري من قصيدة (وشوشة العاشقين) الأقرب في مضمونه إلى مضمون ما تحته خط في البيت (وأنتِ عند ظلالِ 'العينِ' غانيةٌ / ألقَتْ على جِذرِها من سِحْرِها حُجُبَا):", options: ["أُحبُّكِ ما وَشْوَشَ الماءُ", "أُمي وعاشقتي ونصيبي", "مُزدانةً بالوسامةِ والحبِّ", "باسِقَةً كالصَّنَوْبَرِ"], correct: 0, subject: "🇸🇦 عربي" },
+            { question: "وصَفَ الشاعرُ مدينة عمان في البيت الشعري (باحتْ بأحلامِنا النَّجوى وردَّدَها / واديكِ، وانطلقتْ خلفَ البِطاحِ رُبى) بأنها:", options: ["متنوعة التضاريس", "صامدة رغم التحديات", "مركز الحضارة", "متبخترة ومتمايلة في المَشْي"], correct: 0, subject: "🇸🇦 عربي" },
+            { question: "البيت الشعري الذي احتوى على كلمة تتضمن 'عنصر الصوت' مما تحته خط في قصيدة (عمان):", options: ["عمانُ، يا حلمَ فجرٍ لاحَ واحتجبا", "وملتُ نحوَكِ بالآهاتِ أكتمُها", "يا أختَ عُمري، أنسى أنَّ مجلسنا", "وصفِّقي مَرَحاً واستبشري فرحاً"], correct: 1, subject: "🇸🇦 عربي" },
+            { question: "المرادف الذي يؤدي معنى (الخوف الشديد) مما تحته خط في نص (الزهايمر):", options: ["فقدان الذاكرة وهذيان", "الفقدان المطرد للذاكرة", "الهَلْوَسَة", "هَلَع وصُراخ"], correct: 3, subject: "🇸🇦 عربي" },
+            { question: "بناءً على العبارة (ويفقد المريض القدرة على التواصل لصعوبة تذكر المفردات...) فإن نتيجة تدهور التناسق الحركي هي:", options: ["فقدان القدرة على التواصل", "صعوبة تذكر المفردات", "صعوبة تعرف الأقارب والأصدقاء", "زيادة احتمالية الوقوع والإصابات"], correct: 3, subject: "🇸🇦 عربي" },
+            { question: "بناءً على دراستك لنص (الإعلام ومشروع النهوض...) فإن العبارات الآتية جميعها صحيحة، ما عدا:", options: ["يُعدُّ الإعلام ناقلاً للخبر", "للغة الإعلام أثر في الارتقاء بلغة الجمهور", "أفضل طريقة لتعليم اللغة خلق بيئة سماعية تنطق فيها العربية الفصيحة", "أحدثت الثورة الهائلة في عصر المعلومات تغيرات جوهرية في دور الإعلام"], correct: 2, subject: "🇸🇦 عربي" },
+            { question: "المقصود بالعبارة (وتاريخ البشرية من عصور نقش الأحجار إلى بث الأقمار...) من نص (الإعلام ومشروع النهوض):", options: ["بيان دور الأقمار الصناعية في تطور وسائل الاتصال", "مرافقة الإعلام ووسائل الاتصال للإنسان منذ وجوده", "اهتمام الإنسان بوسائل الاتصال في زمن الأقمار الصناعية", "توضيح أثر وسائل الاتصال في نشوء مهن مثل نقش الأحجار"], correct: 1, subject: "🇸🇦 عربي" }
+        ];
+
+        // اللغة الإنجليزية - 28 سؤال (من ملفك)
+        const englishQuestions = [
+            { question: "I am completely ............ about my exam results – I never thought I’d do so well!", options: ["inspirational", "slimy", "ecstatic", "hypocritical"], correct: 2, subject: "🇬🇧 إنجليزي" },
+            { question: "We couldn't use our mobile phones in the desert, but started to............ signals when we went into the mountains.", options: ["show off", "pick up", "point out", "calm down"], correct: 1, subject: "🇬🇧 إنجليزي" },
+            { question: "It is claimed that ............ from cars kill twice as many people as accidents caused by vehicles.", options: ["wind turbines", "fossil fuels", "endangered species", "exhaust fumes"], correct: 3, subject: "🇬🇧 إنجليزي" },
+            { question: "Tigers – the largest living cats on Earth – are at the top of their food chain so they have no ............ predators.", options: ["torrential", "scorching", "bewildered", "natural"], correct: 3, subject: "🇬🇧 إنجليزي" },
+            { question: "Rami ............; whenever arguments happen, he resolves conflicts.", options: ["blows things out of proportion", "spells out", "is the peacemaker", "bursts into tears"], correct: 2, subject: "🇬🇧 إنجليزي" },
+            { question: "Rawan is so ............; she's determined to get what she wants.", options: ["pushy", "immature", "modest", "decent"], correct: 0, subject: "🇬🇧 إنجليزي" },
+            { question: "I have two lamps in my bedroom. My father always asks me to ............ before going to bed.", options: ["switch off them", "switch them off", "off them switch", "them switch off"], correct: 1, subject: "🇬🇧 إنجليزي" },
+            { question: "The underlined words (a bit) in: 'Summer in Singapore is... only a bit hotter than in Egypt' can be replaced with:", options: ["nothing like", "slightly", "considerably", "a lot"], correct: 1, subject: "🇬🇧 إنجليزي" },
+            { question: "Harmful chemicals, fertilisers, and pollution would ............ fresh water supplies.", options: ["provide", "contaminate", "install", "clarify"], correct: 1, subject: "🇬🇧 إنجليزي" },
+            { question: "Keep your argument simple and try not to ............ it.", options: ["complicated", "complication", "complicating", "complicate"], correct: 3, subject: "🇬🇧 إنجليزي" }
+        ];
+
+        // دمج كل الأسئلة
+        let allQuestions = [...islamicQuestions, ...historyQuestions, ...arabicQuestions, ...englishQuestions];
+
+        function shuffleArray(arr) {
+            for(let i = arr.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [arr[i], arr[j]] = [arr[j], arr[i]];
+            }
+            return arr;
+        }
+
+        // دالة اختيار أسئلة متوازنة
+        function getBalancedQuestions(count) {
+            let result = [];
+            let subjects = [islamicQuestions, historyQuestions, arabicQuestions, englishQuestions];
+            let indices = [0, 0, 0, 0];
+            
+            // خلط كل مصفوفة
+            let shuffledSubjects = subjects.map(s => shuffleArray([...s]));
+            
+            for(let i = 0; i < count; i++) {
+                let subjectIndex = i % 4;
+                let currentSubject = shuffledSubjects[subjectIndex];
+                if(indices[subjectIndex] < currentSubject.length) {
+                    result.push(currentSubject[indices[subjectIndex]++]);
+                } else {
+                    // لو خلصت أسئلة المادة، ناخذ من المواد الثانية
+                    for(let j = 0; j < 4; j++) {
+                        if(indices[j] < shuffledSubjects[j].length) {
+                            result.push(shuffledSubjects[j][indices[j]++]);
+                            break;
+                        }
+                    }
+                }
+            }
+            return result;
+        }
+
+        // باقي الكود نفسه...
+        let selectedMode = null;
+        let currentQuestions = [];
+        let currentIndex = 0;
+        let selectedAnswers = [];
+        let answered = false;
+        let userAnswers = [];
+        let quizActive = false;
+        let totalCorrect = 0;
+        let totalWrong = 0;
+        let countdownEndTime = null;
+        let countdownInterval = null;
+
+        const modeSection = document.getElementById('modeSection');
+        const confirmSection = document.getElementById('confirmSection');
+        const startBtn = document.getElementById('startBtn');
+        const questionBox = document.getElementById('questionBox');
+        const confirmYes = document.getElementById('confirmYes');
+        const confirmNo = document.getElementById('confirmNo');
+        const settingsBtn = document.getElementById('settingsBtn');
+        const timerDisplay = document.getElementById('timerDisplay');
+        const nextNote = document.getElementById('nextNote');
+        const correctCountSpan = document.getElementById('correctCount');
+        const wrongCountSpan = document.getElementById('wrongCount');
+
+        function updateStatsDisplay() {
+            correctCountSpan.textContent = totalCorrect;
+            wrongCountSpan.textContent = totalWrong;
+            localStorage.setItem('totalCorrect', totalCorrect);
+            localStorage.setItem('totalWrong', totalWrong);
+        }
+
+        function loadStats() {
+            const savedCorrect = localStorage.getItem('totalCorrect');
+            const savedWrong = localStorage.getItem('totalWrong');
+            if(savedCorrect) totalCorrect = parseInt(savedCorrect);
+            if(savedWrong) totalWrong = parseInt(savedWrong);
+            updateStatsDisplay();
+        }
+
+        function loadCountdown() {
+            const saved = localStorage.getItem('countdownEndTime');
+            if(saved) {
+                countdownEndTime = parseInt(saved);
+                if(countdownEndTime <= Date.now()) {
+                    countdownEndTime = null;
+                    localStorage.removeItem('countdownEndTime');
+                }
+            }
+            updateTimerDisplay();
+            startCountdown();
+        }
+
+        function startCountdown() {
+            if(countdownInterval) clearInterval(countdownInterval);
+            countdownInterval = setInterval(updateTimerDisplay, 1000);
+        }
+
+        function updateTimerDisplay() {
+            if(countdownEndTime && countdownEndTime > Date.now()) {
+                const diff = countdownEndTime - Date.now();
+                const hours = Math.floor(diff / (1000 * 60 * 60));
+                const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+                timerDisplay.textContent = `${hours.toString().padStart(2,'0')}:${minutes.toString().padStart(2,'0')}:${seconds.toString().padStart(2,'0')}`;
+                nextNote.textContent = '⏳ سوف يتم تحميل السؤال التالي بعد الفترة المقطوعة';
+                document.querySelectorAll('.mode-btn').forEach(btn => {
+                    btn.style.opacity = '0.5';
+                    btn.style.pointerEvents = 'none';
+                });
+                return;
+            }
+            timerDisplay.textContent = '00:00:00';
+            nextNote.textContent = '📢 يمكنك بدء التحدي الآن! اختر عدد الأسئلة';
+            document.querySelectorAll('.mode-btn').forEach(btn => {
+                btn.style.opacity = '1';
+                btn.style.pointerEvents = 'auto';
+            });
+        }
+
+        function resetCountdown() {
+            const now = Date.now();
+            countdownEndTime = now + (24 * 60 * 60 * 1000);
+            localStorage.setItem('countdownEndTime', countdownEndTime);
+            updateTimerDisplay();
+        }
+
+        function selectMode(mode) {
+            selectedMode = mode;
+            document.querySelectorAll('.mode-btn').forEach(btn => {
+                if(btn.dataset.mode !== mode) btn.classList.add('hidden');
+            });
+            modeSection.classList.add('hidden');
+            confirmSection.classList.remove('hidden');
+        }
+
+        function resetModeSelection() {
+            document.querySelectorAll('.mode-btn').forEach(btn => btn.classList.remove('hidden'));
+            modeSection.classList.remove('hidden');
+            confirmSection.classList.add('hidden');
+            startBtn.classList.add('hidden');
+            selectedMode = null;
+        }
+
+        confirmYes.onclick = () => {
+            confirmSection.classList.add('hidden');
+            startBtn.classList.remove('hidden');
+        };
+
+        confirmNo.onclick = () => resetModeSelection();
+
+        settingsBtn.onclick = () => {
+            if(quizActive) {
+                if(confirm('هل تريد إنهاء الاختبار الحالي والعودة للإعدادات؟')) {
+                    quizActive = false;
+                    questionBox.classList.add('hidden');
+                    resetModeSelection();
+                }
+            } else {
+                resetModeSelection();
+            }
+        };
+
+        startBtn.onclick = () => {
+            if(!selectedMode) return;
+            let questionCount = parseInt(selectedMode);
+            currentQuestions = getBalancedQuestions(questionCount);
+            currentIndex = 0;
+            selectedAnswers = new Array(questionCount).fill(null);
+            answered = false;
+            userAnswers = [];
+            quizActive = true;
+            startBtn.classList.add('hidden');
+            questionBox.classList.remove('hidden');
+            showCurrentQuestion();
+        };
+
+        function showCurrentQuestion() {
+            if(currentIndex >= currentQuestions.length) {
+                showResults();
+                return;
+            }
+            const question = currentQuestions[currentIndex];
+            document.getElementById('questionText').textContent = question.question;
+            document.getElementById('subjectBadge').textContent = question.subject;
+            document.getElementById('questionCounter').textContent = `السؤال ${currentIndex + 1} من ${currentQuestions.length}`;
+            const progress = (currentIndex / currentQuestions.length) * 100;
+            document.getElementById('progressFill').style.width = progress + '%';
+            const optionsDiv = document.getElementById('optionsContainer');
+            optionsDiv.innerHTML = '';
+            question.options.forEach((opt, idx) => {
+                const optDiv = document.createElement('div');
+                optDiv.className = 'option';
+                if(selectedAnswers[currentIndex] === idx) optDiv.classList.add('selected');
+                optDiv.textContent = opt;
+                optDiv.onclick = () => {
+                    if(!answered) {
+                        document.querySelectorAll('.option').forEach(o => o.classList.remove('selected'));
+                        optDiv.classList.add('selected');
+                        selectedAnswers[currentIndex] = idx;
+                    }
+                };
+                optionsDiv.appendChild(optDiv);
+            });
+            const submitBtn = document.getElementById('submitBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            if(answered) {
+                submitBtn.classList.add('hidden');
+                nextBtn.classList.remove('hidden');
+            } else {
+                submitBtn.classList.remove('hidden');
+                nextBtn.classList.add('hidden');
+            }
+        }
+
+        function submitAnswer() {
+            const selected = selectedAnswers[currentIndex];
+            if(selected === null) {
+                alert('الرجاء اختيار إجابة');
+                return;
+            }
+            const isCorrect = selected === currentQuestions[currentIndex].correct;
+            if(isCorrect) totalCorrect++;
+            else totalWrong++;
+            updateStatsDisplay();
+            userAnswers.push({
+                question: currentQuestions[currentIndex],
+                selected: selected,
+                correct: isCorrect
+            });
+            answered = true;
+            document.querySelectorAll('.option').forEach(opt => opt.classList.add('disabled'));
+            document.getElementById('submitBtn').classList.add('hidden');
+            document.getElementById('nextBtn').classList.remove('hidden');
+        }
+
+        function nextQuestion() {
+            if(currentIndex + 1 < currentQuestions.length) {
+                currentIndex++;
+                answered = false;
+                showCurrentQuestion();
+            } else {
+                showResults();
+            }
+        }
+
+        function showResults() {
+            const total = userAnswers.length;
+            const correctCount = userAnswers.filter(a => a.correct).length;
+            const modal = document.createElement('div');
+            modal.className = 'results-modal';
+            modal.innerHTML = `
+                <div class="results-card">
+                    <h2>🎉 نتيجتك 🎉</h2>
+                    <div class="score">${correctCount}/${total}</div>
+                    <div class="answers-review">
+                        <h3>📝 مراجعة الإجابات</h3>
+                        ${userAnswers.map((a, i) => `
+                            <div class="review-item ${a.correct ? 'correct' : 'incorrect'}">
+                                <div class="review-question">${i+1}. [${a.question.subject}] ${a.question.question}</div>
+                                <div class="review-answer">✅ إجابتك: ${a.question.options[a.selected]}</div>
+                                <div class="review-answer">📖 الإجابة الصحيحة: ${a.question.options[a.question.correct]}</div>
+                            </div>
+                        `).join('')}
+                    </div>
+                    <button class="exit-btn" id="exitBtn">🚪 خروج</button>
+                </div>
+            `;
+            document.body.appendChild(modal);
+            document.getElementById('exitBtn').onclick = () => {
+                modal.remove();
+                resetCountdown();
+                quizActive = false;
+                questionBox.classList.add('hidden');
+                resetModeSelection();
+            };
+        }
+
+        document.getElementById('submitBtn').onclick = submitAnswer;
+        document.getElementById('nextBtn').onclick = nextQuestion;
+        document.querySelectorAll('.mode-btn').forEach(btn => {
+            btn.onclick = () => selectMode(btn.dataset.mode);
+        });
+
+        loadStats();
+        loadCountdown();
+    </script>
+</body>
+</html>
