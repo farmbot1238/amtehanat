@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <meta name="google-site-verification" content="NT0SMG2FY2Shk66u_xwqFMBBrWqExgPw9BoD6BYgB4E" />
+    <title>متعاونين على التفوق - تحدي السرعة 2009</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container" id="app">
+        <div class="header">
+            <h1>متعاونين على التفوق</h1>
+            <div class="game-title">⚡ تحدي السرعة الحقيقي 2009 ⚡</div>
+            <div class="student-name">عبدالرحمن المعايطه</div>
+        </div>
+
+        <!-- Setup Screen -->
+        <div id="setupScreen">
+            <div class="setup-section">
+                <h3>🎯 إعدادات التحدي</h3>
+                <div class="input-group">
+                    <label>عدد الأسئلة (1 - 50)</label>
+                    <input type="number" id="questionCount" min="1" max="50" value="10">
+                </div>
+                
+                <div class="note-box">
+                    <p>📚 أسئلة عشوائية من المواد الوزارية الأربعة</p>
+                    <p style="font-size: 0.9em; margin-top: 8px;">🇬🇧 إنجليزي | 🇸🇦 عربي | 🕋 تربية إسلامية | 🏛️ تاريخ</p>
+                </div>
+
+                <button class="start-btn" id="startBtn">ابدأ التحدي</button>
+            </div>
+        </div>
+
+        <!-- Quiz Screen -->
+        <div id="quizScreen" class="hidden">
+            <div class="quiz-area">
+                <div class="question-counter" id="questionCounter">السؤال 1 من 10</div>
+                
+                <div class="progress">
+                    <div class="progress-bar" id="progressBar">0%</div>
+                </div>
+                
+                <div class="timer" id="timer">40</div>
+                
+                <div class="question-box">
+                    <div id="subjectDisplay" class="subject-badge"></div>
+                    <div class="question-text" id="question"></div>
+                    <div class="options" id="options"></div>
+                    
+                    <div class="navigation-buttons">
+                        <button class="nav-btn prev-btn" id="prevBtn" disabled>⬅️ السابق</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results Screen -->
+        <div id="resultsScreen" class="hidden">
+            <div class="results-section">
+                <h2 style="font-size: 2.5em; color: #2c3e50; margin-bottom: 20px;">📊 نتيجتك في التحدي</h2>
+                <div class="result-card">
+                    <div class="score" id="finalScore">0/0</div>
+                    <div class="percentage-circle" id="percentageCircle">0%</div>
+                    <p style="font-size: 1.3em; color: #5d6d7e; margin-top: 20px;">نسبة النجاح: <span id="percentage">0%</span></p>
+                </div>
+                
+                <div class="answers-review" id="answersReview"></div>
+                
+                <button class="start-btn" id="resetBtn" style="margin-top: 20px;">🔄 تحدٍ جديد</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Anti-theft protection: check if running from server -->
+    <script>
+        // حماية ضد السرقة - إذا تم فتح الملف محلياً مباشرة
+        (function antiTheft() {
+            try {
+                // محاولة معرفة إذا كان الملف يعمل من سيرفر أو محلياً
+                const isLocalFile = window.location.protocol === 'file:' || 
+                                   window.location.href.indexOf('file://') === 0 ||
+                                   document.domain === '' ||
+                                   window.location.hostname === '';
+                
+                if (isLocalFile) {
+                    // مسح كل محتوى الصفحة وعرض نص التحذير
+                    document.documentElement.innerHTML = `
+                        <!DOCTYPE html>
+                        <html dir="rtl">
+                        <head><meta charset="UTF-8"><title>⚠️ تحذير</title>
+                        <style>
+                            body {
+                                background: linear-gradient(145deg, #1a1a2e, #16213e);
+                                min-height: 100vh;
+                                display: flex;
+                                justify-content: center;
+                                align-items: center;
+                                font-family: 'Cairo', 'Segoe UI', sans-serif;
+                                margin: 0;
+                                padding: 20px;
+                            }
+                            .warning-box {
+                                background: #0f0f1f;
+                                border-radius: 40px;
+                                padding: 40px;
+                                text-align: center;
+                                border: 3px solid #ff6b6b;
+                                box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+                                max-width: 500px;
+                            }
+                            .warning-text {
+                                font-size: 1.8em;
+                                color: #ff6b6b;
+                                font-weight: bold;
+                                margin-bottom: 20px;
+                            }
+                            .emoji-big {
+                                font-size: 4em;
+                                margin: 20px 0;
+                            }
+                            .message {
+                                font-size: 1.3em;
+                                color: #ffd93d;
+                                line-height: 1.6;
+                            }
+                        </style>
+                        </head>
+                        <body>
+                            <div class="warning-box">
+                                <div class="emoji-big">😂😂😂😂</div>
+                                <div class="warning-text">⚠️ تحذير أمني ⚠️</div>
+                                <div class="message">
+                                    ههههههههههههههههههههههههههههه<br>
+                                    بتحاول تسرق الاسئله اهه<br>
+                                    يلا ابلع حاول مره ثانيه<br>
+                                    احسن ليك ع موقع غيري 😂😂😂😂
+                                </div>
+                            </div>
+                        </body>
+                        </html>
+                    `;
+                    // منع أي تنفيذ إضافي
+                    throw new Error("تم اكتشاف محاولة نسخ الموقع");
+                }
+            } catch(e) {
+                if(e.message === "تم اكتشاف محاولة نسخ الموقع") throw e;
+                // تجاهل الأخطاء الأخرى
+            }
+        })();
+    </script>
+    
+    <script src="questions.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
