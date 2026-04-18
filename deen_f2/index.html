@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>نور الدين - امتحانات تفاعلية</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container" id="app">
+        <div class="header">
+            <h1>📖 <span>نور</span> الدين <span>✨</span></h1>
+            <p>وَ قُلْ رَبِّ زِدْنِي عِلْمًا</p>
+            <div class="islamic-pattern"></div>
+        </div>
+
+        <div id="mainMenu" class="main-menu">
+            <button class="menu-btn" onclick="loadUnit(1)">الوحدة الأولى</button>
+            <button class="menu-btn" onclick="loadUnit(2)">الوحدة الثانية</button>
+            <button class="menu-btn" onclick="loadUnit(3)">الوحدة الثالثة</button>
+            <button class="menu-btn" onclick="loadUnit(4)">الوحدة الرابعة</button>
+            <button class="menu-btn special" onclick="loadFinalExam()">📝 الامتحان الشامل</button>
+        </div>
+
+        <div id="quizArea" class="quiz-area hidden">
+            <div class="question-header">
+                <span id="questionCounter">سؤال 1/20</span>
+                <div class="progress">
+                    <div id="progressBar" class="progress-bar" style="width: 0%"></div>
+                </div>
+            </div>
+            <div id="questionText" class="question-text">جاري تحميل السؤال...</div>
+            <div id="optionsContainer" class="options"></div>
+            <div class="nav-buttons">
+                <button id="prevBtn" class="nav-btn" onclick="previousQuestion()" disabled>⬅️ السابق</button>
+                <button id="nextBtn" class="nav-btn" onclick="nextQuestion()">التالي ➡️</button>
+            </div>
+        </div>
+
+        <div id="resultArea" class="result-area hidden">
+            <div class="score-card">
+                <h2>نتيجتك في الاختبار</h2>
+                <div id="scoreDisplay" class="score">0/0</div>
+                <p id="percentageDisplay">0%</p>
+                <p style="font-size: 1.2em;">﴿ فَمَنْ يَعْمَلْ مِثْقَالَ ذَرَّةٍ خَيْرًا يَرَهُ ﴾</p>
+            </div>
+            <h3 style="margin-bottom: 20px; color: #0f4e3a;">تفاصيل الإجابات:</h3>
+            <div id="detailsContainer"></div>
+            <button class="back-btn" onclick="backToMenu()">العودة للقائمة الرئيسية</button>
+        </div>
+
+        <div class="footer-text">
+            <span>✿</span> بسم الله الرحمن الرحيم <span>✿</span>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
