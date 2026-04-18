@@ -236,6 +236,24 @@ window.ExamApp = {
         this.elements.menuScreen.classList.remove('hidden');
     }
 };
+// ========== دالة حفظ الأسئلة الخاطئة (تصلح لجميع الاختبارات) ==========
+function saveWrongQuestion(questionText, userAnswer, correctAnswer, subjectId) {
+    let key = `wrongQuestions_${subjectId}`;
+    let stored = localStorage.getItem(key);
+    let wrongList = stored ? JSON.parse(stored) : [];
+    // التأكد من عدم تكرار السؤال
+    let exists = wrongList.some(q => q.text === questionText);
+    if (!exists) {
+        wrongList.push({
+            text: questionText,
+            userAnswer: userAnswer,
+            correctAnswer: correctAnswer,
+            date: new Date().toISOString()
+        });
+        localStorage.setItem(key, JSON.stringify(wrongList));
+        console.log(`✅ تم حفظ السؤال الخاطئ في ${subjectId}`);
+    }
+}
 
 // تهيئة التطبيق بعد تحميل الصفحة
 document.addEventListener('DOMContentLoaded', () => {
