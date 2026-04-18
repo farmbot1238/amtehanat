@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>قسم العربي</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>قسم العربي</h1>
+        <div class="decor-line"></div>
+
+        <div id="loadingScreen" class="loading">
+            جاري تحميل الأسئلة...<br>
+            📚
+        </div>
+
+        <div id="mainMenu" class="main-menu hidden">
+            <div class="menu-row">
+                <button class="menu-btn" data-unit="unit1">في رحاب القدس</button>
+                <button class="menu-btn" data-unit="unit2">من الأدب الإفريقي</button>
+                <button class="menu-btn" data-unit="unit3">من القيم الإنسانية</button>
+            </div>
+            <div class="menu-row">
+                <button class="menu-btn" data-unit="unit4">فن المقامات</button>
+                <button class="menu-btn" data-unit="unit5">الذكاء الاصطناعي</button>
+                <button class="menu-btn special" data-unit="final">الامتحان الشامل</button>
+            </div>
+        </div>
+
+        <div id="quizArea" class="quiz-area hidden">
+            <div class="question-header">
+                <span id="unitName" class="unit-badge"></span>
+                <span id="questionCounter" class="progress"></span>
+            </div>
+            <div id="questionText" class="question-text"></div>
+            <div id="optionsContainer" class="options-container"></div>
+            <div class="nav-buttons">
+                <button id="prevBtn" class="nav-btn">السابق</button>
+                <button id="nextBtn" class="nav-btn">التالي</button>
+                <button id="backToMenuBtn" class="nav-btn">القائمة</button>
+            </div>
+        </div>
+
+        <div id="resultScreen" class="result-screen hidden">
+            <div class="result-box">
+                <h2>النتيجة النهائية</h2>
+                <div id="finalScore" class="result-score"></div>
+                <div class="decor-line"></div>
+                <div id="resultDetails" class="result-details"></div>
+                <button id="restartBtn" class="restart-btn">العودة للقائمة</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let allQuestionsData = null;
+        let currentQuestions = [];
+        let currentIndex = 0;
+        let userAnswers = [];
+        let currentUnit = '';
+        let timeoutId = null;
+
+        const loadingScreen = document.getElementById('loadingScreen');
+        const mainMenu = document.getElementById('mainMenu');
+        const quizArea = document.getElementById('quizArea');
+        const resultScreen = document.getElementById('resultScreen');
+        const unitName = document.getElementById('unitName');
+        const questionCounter = document.getElementById('questionCounter');
+        const questionText = document.getElementById('questionText');
+        const optionsContainer = document.getElementById('optionsContainer');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const backToMenuBtn = document.getElementById('backToMenuBtn');
+        const restartBtn = document.getElementById('restartBtn');
+        const finalScore = document.getElementById('finalScore');
+        const resultDetails = document.getElementById('resultDetails');
+
+        const unitNames = {
+            'unit1': 'في رحاب القدس',
+            'unit2': 'من الأدب الإفريقي',
+            'unit3': 'من القيم الإنسانية',
+            'unit4': 'فن المقامات',
+            'unit5': 'الذكاء الاصطناعي',
+            'final': 'الامتحان الشامل'
+        };
+
+        async function loadQuestions() {
+            try {
+                const response = await fetch('questions.json');
+                if (!response.ok) {
+                    throw new Error();
+                }
+                allQuestionsData = await response.json();
+                loadingScreen.classList.add('hidden');
+                mainMenu.classList.remove('hidden');
+            } catch (error) {
+                loadingScreen.innerHTML = `
+                    <div class="error-message">
+                        😂😂😂😂😂😂😂😂😂😂<br><br>
+                        مفكر حالك قوي بتحاول تسرق الموقع؟<br><br>
+                        اقول ارجع وراك 😂<br><br>
+                        😂😂😂😂😂😂😂😂😂😂
+                    </div>
+                `;
+            }
+        }
+
+        function startQuiz(unit) {
+            if (!allQuestionsData) return;
+            if (timeoutId) clearTimeout(timeoutId);
+            currentUnit = unit;
+            currentIndex = 0;
+            if (unit === 'unit1') currentQuestions = [...allQuestionsData.unit1];
+            else if (unit === 'unit2') currentQuestions = [...allQuestionsData.unit2];
+            else if (unit === 'unit3') currentQuestions = [...allQuestionsData.unit3];
+            else if (unit === 'unit4') currentQuestions = [...allQuestionsData.unit4];
+            else if (unit === 'unit5') currentQuestions = [...allQuestionsData.unit5];
+            else if (unit === 'final') {
+                let allQuestions = [...allQuestionsData.unit1, ...allQuestionsData.unit2, ...allQuestionsData.unit3, ...allQuestionsData.unit4, ...allQuestionsData.unit5];
+                for (let i = allQuestions.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [allQuestions[i], allQuestions[j]] = [allQuestions[j], allQuestions[i]];
+                }
+                currentQuestions = allQuestions.slice(0, 50);
+            }
+            userAnswers = new Array(currentQuestions.length).fill(null);
+            mainMenu.classList.add('hidden');
+            resultScreen.classList.add('hidden');
+            quizArea.classList.remove('hidden');
+            unitName.textContent = unitNames[unit];
+            displayQuestion();
+        }
+
+        function displayQuestion() {
+            const q = currentQuestions[currentIndex];
+            questionText.textContent = q.question;
+            questionCounter.textContent = `السؤال ${currentIndex + 1} من ${currentQuestions.length}`;
+            let optionsHtml = '';
+            q.options.forEach((opt, idx) => {
+                let btnClass = 'option-btn';
+                if (userAnswers[currentIndex] !== null && idx === userAnswers[currentIndex].selected) {
+                    btnClass += ' selected';
+                }
+                optionsHtml += `<button class="${btnClass}" onclick="selectAnswer(${idx})">${opt}</button>`;
+            });
+            optionsContainer.innerHTML = optionsHtml;
+            prevBtn.disabled = (currentIndex === 0);
+            nextBtn.disabled = (currentIndex === currentQuestions.length - 1);
+        }
+
+        window.selectAnswer = function(optionIndex) {
+            if (timeoutId) clearTimeout(timeoutId);
+            userAnswers[currentIndex] = {
+                selected: optionIndex,
+                isCorrect: (optionIndex === currentQuestions[currentIndex].correct)
+            };
+            displayQuestion();
+            if (currentIndex < currentQuestions.length - 1) {
+                timeoutId = setTimeout(() => { currentIndex++; displayQuestion(); timeoutId = null; }, 500);
+            } else {
+                timeoutId = setTimeout(() => { showResult(); timeoutId = null; }, 500);
+            }
+        };
+
+        window.prevQuestion = function() {
+            if (timeoutId) clearTimeout(timeoutId);
+            if (currentIndex > 0) { currentIndex--; displayQuestion(); }
+        };
+
+        window.nextQuestion = function() {
+            if (timeoutId) clearTimeout(timeoutId);
+            if (currentIndex < currentQuestions.length - 1) { currentIndex++; displayQuestion(); }
+        };
+
+        function showResult() {
+            quizArea.classList.add('hidden');
+            resultScreen.classList.remove('hidden');
+            let correctCount = userAnswers.filter(a => a && a.isCorrect).length;
+            finalScore.textContent = `${correctCount} / ${currentQuestions.length}`;
+            let detailsHtml = '';
+            currentQuestions.forEach((q, idx) => {
+                const answer = userAnswers[idx];
+                const isCorrect = answer ? answer.isCorrect : false;
+                const userAnswerText = answer ? q.options[answer.selected] : 'لم تجب';
+                const correctText = q.options[q.correct];
+                detailsHtml += `<div class="result-item ${isCorrect ? 'correct' : 'wrong'}"><strong>سؤال ${idx + 1}:</strong> ${q.question}<br><span>✧ إجابتك: ${userAnswerText}</span><br><span>✧ الإجابة الصحيحة: ${correctText}</span></div>`;
+            });
+            resultDetails.innerHTML = detailsHtml;
+        }
+
+        function backToMenu() {
+            if (timeoutId) clearTimeout(timeoutId);
+            mainMenu.classList.remove('hidden');
+            quizArea.classList.add('hidden');
+            resultScreen.classList.add('hidden');
+        }
+
+        prevBtn.onclick = prevQuestion;
+        nextBtn.onclick = nextQuestion;
+        backToMenuBtn.onclick = backToMenu;
+        restartBtn.onclick = backToMenu;
+        document.querySelectorAll('.menu-btn').forEach(btn => { btn.onclick = () => startQuiz(btn.dataset.unit); });
+        loadQuestions();
+    </script>
+</body>
+</html>
