@@ -968,7 +968,37 @@
             const container = document.getElementById('iframeContainer');
             if (!container) return;
             const q = getRandomQuote();
-            container.innerHTML = `<div style="background:linear-gradient(145deg,#1e3c5c,#0f2a3f);color:white;padding:40px 30px;min-height:100%;overflow-y:auto;"><div style="text-align:center;max-width:700px;margin:0 auto;"><i class="fas fa-graduation-cap" style="font-size:4rem;color:#f9b81b;margin-bottom:20px;"></i><h2>مرحباً بك في منصة ${SITE_CONFIG.siteName}</h2><p style="margin:15px 0;">✨ منصة التعليم الذكية ✨</p><div style="margin:30px auto;padding:25px;background:rgba(255,255,255,0.1);border-radius:30px;border-right:4px solid #f9b81b;"><i class="fas fa-quote-right"></i><p style="margin:15px 0;line-height:1.8;">${q.split('\n').join('<br>')}</p></div><div style="margin:30px auto;padding:25px;background:#5865F2;border-radius:30px;"><i class="fab fa-discord" style="font-size:2.5rem;"></i><h3>✨ ادخل عالم الدراسة الذكي ✨</h3><p>شارك، اسأل، وتحدى نفسك مع زملائك</p><button onclick="window.open('${SITE_CONFIG.discord}','_blank')" style="background:white;color:#5865F2;padding:10px 25px;border-radius:40px;margin-top:10px;">انضم الآن</button></div></div></div>`;
+            container.innerHTML = `
+                <div style="background:linear-gradient(145deg,#1e3c5c,#0f2a3f);color:white;padding:40px 30px;min-height:100%;overflow-y:auto;">
+                    <div style="text-align:center;max-width:700px;margin:0 auto;">
+                        <i class="fas fa-graduation-cap" style="font-size:4rem;color:#f9b81b;margin-bottom:20px;"></i>
+                        <h2>مرحباً بك في منصة ${SITE_CONFIG.siteName}</h2>
+                        <p style="margin:15px 0;">✨ منصة التعليم الذكية ✨</p>
+                        <div style="margin:30px auto;padding:25px;background:rgba(255,255,255,0.1);border-radius:30px;border-right:4px solid #f9b81b;">
+                            <i class="fas fa-quote-right"></i>
+                            <p style="margin:15px 0;line-height:1.8;">${q.split('\n').join('<br>')}</p>
+                        </div>
+                        <div style="margin:30px auto;padding:25px;background:#5865F2;border-radius:30px;">
+                            <i class="fab fa-discord" style="font-size:2.5rem;"></i>
+                            <h3>✨ ادخل عالم الدراسة الذكي ✨</h3>
+                            <p>شارك، اسأل، وتحدى نفسك مع زملائك</p>
+                            <button onclick="window.open('${SITE_CONFIG.discord}','_blank')" style="background:white;color:#5865F2;padding:10px 25px;border-radius:40px;margin-top:10px;">انضم الآن</button>
+                        </div>
+                        <!-- قسم تحميل التطبيق APK -->
+                        <div style="margin:30px auto;padding:25px;background:linear-gradient(135deg,#2a4a6e,#1e3c5c);border-radius:30px;border:2px solid #f9b81b;">
+                            <i class="fab fa-android" style="font-size:2.5rem;color:#f9b81b;"></i>
+                            <i class="fab fa-apple" style="font-size:2.5rem;color:#f9b81b;margin-right:15px;"></i>
+                            <i class="fab fa-windows" style="font-size:2.5rem;color:#f9b81b;margin-right:15px;"></i>
+                            <h3 style="margin:15px 0;">📱 حمل تطبيق مدارك جو</h3>
+                            <p style="margin-bottom:15px;opacity:0.9;">⚡ تجربة أسرع وأفضل<br>📌 اختبارات مباشرة بدون متصفح<br>🔔 اشعارات التحديثات</p>
+                            <a href="MadarikJo.apk" download style="display:inline-block;background:#f9b81b;color:#1e3c5c;padding:12px 35px;border-radius:50px;text-decoration:none;font-weight:bold;margin-top:5px;">
+                                <i class="fas fa-download"></i> تحميل التطبيق (APK)
+                            </a>
+                            <p style="font-size:0.7rem;margin-top:12px;opacity:0.6;">* يناسب أندرويد فقط. لأجهزة Apple أضف الموقع للشاشة الرئيسية من Safari</p>
+                        </div>
+                    </div>
+                </div>
+            `;
         }
         function buildMenu() {
             const cont = document.getElementById('menuContainer');
