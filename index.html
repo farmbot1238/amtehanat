@@ -157,31 +157,6 @@
             display: block;
         }
 
-        /* زر تبديل السنة (يظهر داخل التطبيق) */
-        .year-switch-btn {
-            position: fixed;
-            top: 20px;
-            left: 90px;
-            background: linear-gradient(135deg, #f9b81b, #e5a00d);
-            color: #1e3c5c;
-            border: none;
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
-            font-size: 1.2rem;
-            cursor: pointer;
-            z-index: 300;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .year-switch-btn:hover {
-            transform: scale(1.08);
-        }
-
         /* شعار 2009 الذهبي */
         .golden-logo {
             text-align: center;
@@ -229,7 +204,7 @@
             50% { transform: translateY(-10px) rotate(20deg); opacity: 0.7; }
         }
 
-        /* باقي أنماط القائمة الجانبية */
+        /* القائمة الجانبية */
         .sidebar {
             position: fixed;
             right: -300px;
@@ -441,12 +416,6 @@
                 top: 15px;
                 right: 15px;
             }
-            .year-switch-btn {
-                left: 70px;
-                width: 40px;
-                height: 40px;
-                font-size: 1rem;
-            }
             .golden-logo h1 {
                 font-size: 3rem;
             }
@@ -494,9 +463,6 @@
 
     <!-- التطبيق الرئيسي (نسخة 2009) -->
     <div id="mainApp" class="main-app">
-        <button class="year-switch-btn" id="yearSwitchBtn">
-            <i class="fas fa-calendar-alt"></i>
-        </button>
         <button class="mobile-menu-btn" onclick="toggleSidebar()">
             <i class="fas fa-bars"></i>
         </button>
@@ -594,6 +560,9 @@
                 { icon: "fas fa-bell", text: "📧 اشترك في تحديثات الموقع", action: "subscribe", url: "" },
                 { icon: "fas fa-envelope", text: "📧 البريد الإلكتروني", action: "email", url: SITE_CONFIG.email },
                 { icon: "fas fa-pray", text: "دعاء للطالب / اقتراح", action: "iframe", url: SITE_CONFIG.suggestionForm }
+            ]},
+            { title: "🔄 تبديل السنة", items: [
+                { icon: "fas fa-calendar-alt", text: "التبديل إلى إصدار آخر", action: "switchYear", url: "" }
             ]}
         ];
 
@@ -623,7 +592,6 @@
             if (year === 2009) {
                 hideYearSelector();
                 localStorage.setItem('selectedYear', '2009');
-                // عرض الصفحة الرئيسية مع شعار 2009
                 showWelcome2009();
             } else if (year === 2010) {
                 showMessage("📢 منصة 2010 لا تزال قيد الإعداد والتطوير. ستكون جاهزة قريباً! 🚧", "info");
@@ -634,7 +602,7 @@
             showYearSelector();
         }
 
-        // صفحة الترحيب لنسخة 2009 (بشعار 2009 فقط)
+        // صفحة الترحيب لنسخة 2009
         function showWelcome2009() {
             const container = document.getElementById('iframeContainer');
             container.innerHTML = `
@@ -652,7 +620,6 @@
             `;
         }
 
-        // باقي دوال القائمة
         function buildMenu() {
             const cont = document.getElementById('menuContainer');
             if (!cont) return;
@@ -667,6 +634,7 @@
                     else if (item.action === 'home') act = `showWelcome2009()`;
                     else if (item.action === 'subscribe') act = `showSubscribeModal()`;
                     else if (item.action === 'email') act = `window.location.href = 'mailto:${item.url}'`;
+                    else if (item.action === 'switchYear') act = `switchYear()`;
                     const btn = document.createElement('button'); btn.className = 'menu-btn';
                     const newBadge = item.isNew ? '<span class="new-badge">جديد</span>' : '';
                     btn.innerHTML = `<i class="${item.icon}"></i><span>${item.text}${newBadge}</span>`;
@@ -708,7 +676,7 @@
             }
         }
 
-        // دوال الاشتراك المبسطة
+        // دوال الاشتراك
         function loadSubscribedEmails() { const st = localStorage.getItem('subscribedEmails'); if (st) subscribedEmails = JSON.parse(st); }
         function saveSubscribedEmails() { localStorage.setItem('subscribedEmails', JSON.stringify(subscribedEmails)); }
         function submitSubscription() {
@@ -737,9 +705,7 @@
         // الأحداث
         document.getElementById('year2009Btn').addEventListener('click', () => selectYear(2009));
         document.getElementById('year2010Btn').addEventListener('click', () => selectYear(2010));
-        document.getElementById('yearSwitchBtn').addEventListener('click', switchYear);
 
-        // التحقق من السنة المختارة مسبقاً
         const savedYear = localStorage.getItem('selectedYear');
         if (savedYear === '2009') {
             hideYearSelector();
